@@ -1,0 +1,47 @@
+<div id="map"></div>
+<script>
+	$(function() {
+	    map = new GMaps({
+		  div: '#map',
+		  lat: 46.119944,
+		  lng:  14.815333,
+		  zoom: 8
+		});
+		
+		var restaurants = <%= @restaurants.to_json.html_safe %>,
+			restaurant,
+			content;
+	
+		for (var i = 0; i < restaurants.length; i++) {
+			restaurant = restaurants[i];
+			content = '<h4>' + restaurant['name'] + '</h4>';
+			content += '<address>' + restaurant['address'] + '</address>';
+			content += '<p>' + restaurant['price'] + '</p>';
+			map.addMarker({
+			  lat: restaurant['coordinates'][0],
+			  lng: restaurant['coordinates'][1],
+			  title: restaurant['name'],
+			  infoWindow: {
+			    content: content
+			  }
+			});
+		};
+    });
+	
+	if (navigator.geolocation) {
+	  navigator.geolocation.getCurrentPosition(success, error);
+	} else {
+	  alert('geolocation not supported');
+	}
+
+	function success(position) {
+		map.setZoom(15);
+		var center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+		map.panTo(center);
+	  //alert(position.coords.latitude + ', ' + position.coords.longitude);
+	}
+
+	function error(msg) {
+	  alert('error: ' + msg);
+	}
+</script>
