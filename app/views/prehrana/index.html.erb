@@ -9,8 +9,15 @@
 		});
 		
 		var restaurants = <%= @restaurants.to_json.html_safe %>,
-			restaurant,
-			content;
+        marker = [],  
+			  restaurant,
+			  content;
+        
+    marker[0] = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|ffe7c8", new google.maps.Size(21, 34), new google.maps.Point(0,0), new google.maps.Point(10, 34));
+    marker[1] = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|ffcc95", new google.maps.Size(21, 34), new google.maps.Point(0,0), new google.maps.Point(10, 34));
+    marker[2] = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|ffad60", new google.maps.Size(21, 34), new google.maps.Point(0,0), new google.maps.Point(10, 34));
+    marker[3] = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|ff8c1f", new google.maps.Size(21, 34), new google.maps.Point(0,0), new google.maps.Point(10, 34));
+    marker[4] = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|e04f00", new google.maps.Size(21, 34), new google.maps.Point(0,0), new google.maps.Point(10, 34));
 	
 		for (var i = 0; i < restaurants.length; i++) {
 			restaurant = restaurants[i];
@@ -21,6 +28,7 @@
 			  lat: restaurant['coordinates'][0],
 			  lng: restaurant['coordinates'][1],
 			  title: restaurant['name'],
+        icon: marker[restaurant['price'][0]],
 			  infoWindow: {
 			    content: content
 			  }
@@ -38,7 +46,6 @@
 		map.setZoom(15);
 		var center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 		map.panTo(center);
-	  //alert(position.coords.latitude + ', ' + position.coords.longitude);
 	}
 
 	function error(msg) {
