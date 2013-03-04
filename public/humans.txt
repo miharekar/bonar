@@ -1,0 +1,4 @@
+/* TEAM */
+	Developer: Miha Rekar
+	Site: http://mr.si/
+	Twitter: @mr_foto

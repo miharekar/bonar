@@ -1,10 +1,7 @@
-<% content_for :head do %>
-  <%= javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=true' %>
-  <%= javascript_include_tag 'https://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/src/geolocationmarker-compiled.js' %>
-  <%= javascript_include_tag 'gmapsjs' %>
-  <%= javascript_include_tag 'prehrana' %>
-<% end %>
+<%= javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=true' %>
+<%= javascript_include_tag 'https://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/src/geolocationmarker-compiled.js' %>
+<%= javascript_include_tag 'prehrana' %>
 <div id='map'></div>
 <script>
-var restaurants = <%= @restaurants.to_json.html_safe %>;
+  var restaurants = <%= @restaurants.to_json.html_safe %>;
 </script>
