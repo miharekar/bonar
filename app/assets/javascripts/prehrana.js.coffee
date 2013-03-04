@@ -18,7 +18,7 @@ jQuery ->
     bounds = new google.maps.LatLngBounds() 
     while i < restaurants.length
       restaurant = restaurants[i]
-      content = '<h4><a href="' + restaurant['link'] + '">' + restaurant['name'] + '</a></h4>'
+      content = '<h4><a href="' + restaurant['link'] + '" target="_blank">' + restaurant['name'] + '</a></h4>'
       content += '<address>' + restaurant['address'] + '</address>'
       content += '<p>' + restaurant['price'] + '</p>'
       marker = map.addMarker
