@@ -1,4 +1,4 @@
-<input id="restaurantSearch" type="search"></input>
+<input id="restaurantSearch" type="search" placeholder="Išči"></input>
 <div id='map'></div>
 <script>var restaurants = <%= @restaurants.to_json.html_safe %>;</script>
 <%= javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=true' %>
