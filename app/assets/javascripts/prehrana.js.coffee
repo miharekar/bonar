@@ -33,9 +33,6 @@ jQuery ->
   
   map = new GMaps(
     div: '#map'
-    lat: 46.119944
-    lng: 14.815333
-    zoom: 8
     disableDefaultUI: true
   )
   
@@ -43,7 +40,9 @@ jQuery ->
   displayRestaurants()
   
   if navigator.geolocation
-    navigator.geolocation.getCurrentPosition successLocation, errorLocation, {enableHighAccuracy:true, maximumAge:10000}
+    navigator.geolocation.getCurrentPosition successLocation, errorLocation,
+      enableHighAccuracy: true
+      maximumAge: 10000
     GeoMarker = new GeolocationMarker map.map
   else
     alert 'Geolocation is not supported.'
