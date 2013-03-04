@@ -8,3 +8,12 @@ html, body, .container, #map {
   width: 100%;
   height: 100%;
 }
+
+#restaurantSearch {
+  font-size: 20px;
+  position: absolute;
+  width: 60%;
+  bottom: 5%;
+  margin: 0 20%;
+  z-index: 10;
+}
