@@ -15,7 +15,6 @@ jQuery ->
   
   displayRestaurants = ->    
     i = 0
-    bounds = new google.maps.LatLngBounds() 
     while i < restaurants.length
       restaurant = restaurants[i]
       content = '<h4><a href="' + restaurant['link'] + '" target="_blank">' + restaurant['name'] + '</a></h4>'
@@ -28,9 +27,7 @@ jQuery ->
         icon: scaleMarkers[restaurant['price'][0]]
         content: content
       oms.addMarker(marker);
-      bounds.extend marker.getPosition()
       i++
-    map.fitBounds bounds
   
   map = new GMaps(
     div: '#map'
