@@ -1,4 +1,5 @@
 //= require gmapsjs
+//= require oms
 
 jQuery ->
   successLocation = (position) ->
@@ -25,8 +26,8 @@ jQuery ->
         lng: restaurant['coordinates'][1]
         title: restaurant['name']
         icon: scaleMarkers[restaurant['price'][0]]
-        infoWindow:
-          content: content
+        content: content
+      oms.addMarker(marker);
       bounds.extend marker.getPosition()
       i++
     map.fitBounds bounds
@@ -38,9 +39,15 @@ jQuery ->
     zoom: 8
     disableDefaultUI: true
   )
+  oms = new OverlappingMarkerSpiderfier map.map
   
   scaleMarkers = [getMarkerIcon('ffe7c8'), getMarkerIcon('ffcc95'), getMarkerIcon('ffad60'), getMarkerIcon('ff8c1f'), getMarkerIcon('e04f00')]
   displayRestaurants()
+  
+  iw = new google.maps.InfoWindow()
+  oms.addListener "click", (marker) ->
+    iw.setContent marker.content
+    iw.open map.map, marker
   
   if navigator.geolocation
     navigator.geolocation.getCurrentPosition successLocation, errorLocation,
