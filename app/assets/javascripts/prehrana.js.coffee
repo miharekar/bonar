@@ -33,6 +33,9 @@ jQuery ->
   
   map = new GMaps(
     div: '#map'
+    lat: 46.119944
+    lng: 14.815333
+    zoom: 8
     disableDefaultUI: true
   )
   
