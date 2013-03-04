@@ -5,7 +5,7 @@ class PrehranaController < ApplicationController
   
   def search_restaurants
     if params[:search]
-      render :json => Restaurant.find(:all, :conditions => ['name LIKE ?', "%#{params[:search]}%"])
+      render :json => Restaurant.find(:all, :conditions => ['lower(name) like ?', "%#{params[:search].downcase}%"])
     end
   end
 end
