@@ -7,6 +7,7 @@ gem 'rails', '3.2.12'
 
 group :production do
   gem 'pg'
+  gem 'thin'
 end
 group :development, :test do
   gem 'sqlite3'
@@ -30,7 +31,6 @@ gem 'geocoder'
 gem 'gmapsjs'
 gem 'yui_reset_rails'
 gem 'newrelic_rpm'
-gem 'thin'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
