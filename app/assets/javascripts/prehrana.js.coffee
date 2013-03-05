@@ -43,7 +43,7 @@ jQuery ->
   displayRestaurants()
   
   iw = new google.maps.InfoWindow()
-  oms.addListener "click", (marker) ->
+  oms.addListener 'click', (marker) ->
     iw.setContent marker.content
     iw.open map.map, marker
   
@@ -55,13 +55,20 @@ jQuery ->
   else
     alert 'Geolocation is not supported.'
   
+  performSearch = (search) ->
+    $.post '/search',
+      search: search
+    , ((data) ->
+      map.removeMarkers()
+      if data.length
+        window.restaurants = data
+        displayRestaurants()
+    ), 'json'
+  
+  timer = null
   $('#restaurantSearch').on 'keyup', ->
-    if $(this).val().length != 1
-      $.post "/search",
-        search: $(this).val()
-      , ((data) ->
-        map.removeMarkers()
-        if data.length
-          window.restaurants = data
-          displayRestaurants()
-      ), "json"
+    clearTimeout timer
+    search = $(this).val()
+    timer = setTimeout(->
+        performSearch search
+      , 500)
