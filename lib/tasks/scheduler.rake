@@ -21,16 +21,18 @@ task :loadRestaurants => :environment do
   restaurantItems = doc.css('.holderRestaurant ul li ul li:not(.blocked)')
   puts restaurantItems.count
   if restaurantItems.count > 0
-    Restaurant.destroy_all
-    restaurantItems.each do |div|
-      restaurant = Restaurant.new
-      restaurant.name = div.css('h1 a').first.content
-      restaurant.link = div.css('h1 a').first["href"]
-      restaurant.address = div.css('h2').first.content.gsub(/[()]/, "")
-      restaurant.price = div.css('.prices strong').first.content      
-      restaurant.coordinates = get_coordinate_for_address restaurant.address
-      puts 'Saving ' + restaurant.name + restaurant.link 
-      restaurant.save
+    Restaurant.transaction do
+      Restaurant.destroy_all
+      restaurantItems.each do |div|
+        restaurant = Restaurant.new
+        restaurant.name = div.css('h1 a').first.content
+        restaurant.link = div.css('h1 a').first["href"]
+        restaurant.address = div.css('h2').first.content.gsub(/[()]/, "")
+        restaurant.price = div.css('.prices strong').first.content      
+        restaurant.coordinates = get_coordinate_for_address restaurant.address
+        puts 'Saving ' + restaurant.name + restaurant.link 
+        restaurant.save
+      end
     end
   else
     puts 'No restaurants!'
