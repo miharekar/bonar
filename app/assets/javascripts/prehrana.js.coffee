@@ -8,7 +8,7 @@ jQuery ->
     map.panTo currentLocation
   
   errorLocation = (msg) ->    
-    alert 'Error: ' + msg
+    alert 'NAPAKA: Ne morem pridobiti lokacije'
   
   getMarkerIcon = (color) ->
     new google.maps.MarkerImage('http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + color, new google.maps.Size(21, 34), new google.maps.Point(0, 0), new google.maps.Point(10, 34))
