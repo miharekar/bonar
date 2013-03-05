@@ -18,7 +18,8 @@ end
 task :loadRestaurants => :environment do
   puts 'Updating restaurants...'
   doc = Nokogiri::HTML(open('http://www.studentska-prehrana.si/Pages/Directory.aspx'))
-  restaurantItems = doc.css('.restaurantItem')
+  restaurantItems = doc.css('.holderRestaurant ul li ul li:not(.blocked)')
+  puts restaurantItems.count
   if restaurantItems.count > 0
     Restaurant.destroy_all
     restaurantItems.each do |div|
