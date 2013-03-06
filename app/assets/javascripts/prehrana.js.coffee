@@ -28,6 +28,16 @@ jQuery ->
         content: content
       oms.addMarker(marker);
       i++
+      
+  searchRestaurants = (search) ->
+    $.post '/search',
+      search: search
+    , ((data) ->
+      map.removeMarkers()
+      if data.length
+        window.restaurants = data
+        displayRestaurants()
+    ), 'json'
   
   map = new GMaps(
     div: '#map'
@@ -40,7 +50,7 @@ jQuery ->
   oms = new OverlappingMarkerSpiderfier(map.map, keepSpiderfied: true)
   
   scaleMarkers = [getMarkerIcon('ffe7c8'), getMarkerIcon('ffcc95'), getMarkerIcon('ffad60'), getMarkerIcon('ff8c1f'), getMarkerIcon('e04f00')]
-  displayRestaurants()
+  searchRestaurants ''
   
   iw = new google.maps.InfoWindow()
   oms.addListener 'click', (marker) ->
@@ -55,20 +65,10 @@ jQuery ->
   else
     alert 'Geolocation is not supported.'
   
-  performSearch = (search) ->
-    $.post '/search',
-      search: search
-    , ((data) ->
-      map.removeMarkers()
-      if data.length
-        window.restaurants = data
-        displayRestaurants()
-    ), 'json'
-  
   timer = null
   $('#restaurantSearch').on 'keyup', ->
     clearTimeout timer
     search = $(this).val()
     timer = setTimeout(->
-        performSearch search
+        searchRestaurants search
       , 500)

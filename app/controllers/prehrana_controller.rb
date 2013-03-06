@@ -1,6 +1,5 @@
 class PrehranaController < ApplicationController  
   def index
-    @restaurants = Restaurant.all
   end
   
   def search_restaurants
