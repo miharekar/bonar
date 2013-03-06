@@ -31,6 +31,7 @@ gem 'geocoder'
 gem 'gmapsjs'
 gem 'yui_reset_rails'
 gem 'newrelic_rpm'
+gem 'rest-client'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -19,7 +19,6 @@ task :loadRestaurants => :environment do
   puts 'Updating restaurants...'
   doc = Nokogiri::HTML(open('http://www.studentska-prehrana.si/Pages/Directory.aspx'))
   restaurant_items = doc.css('.holderRestaurant ul li ul li:not(.blocked)')
-  puts restaurant_items.count
   if restaurant_items.count > 0
     Restaurant.transaction do
       Restaurant.destroy_all
@@ -34,8 +33,20 @@ task :loadRestaurants => :environment do
         restaurant.save
       end
     end
+    mail_content = 'Updated ' + restaurant_items.count + ' restaurants.'
   else
-    puts 'No restaurants!'
+    mail_content = 'Restaurant update failed!'
   end
+  
+  puts 'sending email'
+  API_KEY = ENV['MAILGUN_API_KEY']
+  API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/app12738544.mailgun.org"
+
+  RestClient.post API_URL+"/messages", 
+      :from => "Boni<info@mr.si>",
+      :to => "info@mr.si",
+      :subject => "Restaurants update",
+      :text => mail_content
+      
   puts 'done.'
 end
