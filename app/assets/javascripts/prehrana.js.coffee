@@ -47,7 +47,11 @@ jQuery ->
     disableDefaultUI: true
   )
   
-  oms = new OverlappingMarkerSpiderfier(map.map, keepSpiderfied: true)
+  oms = new OverlappingMarkerSpiderfier(map.map,
+    keepSpiderfied: true
+    markersWontMove: true
+    markersWontHide: true
+  )
   
   scaleMarkers = [getMarkerIcon('ffe7c8'), getMarkerIcon('ffcc95'), getMarkerIcon('ffad60'), getMarkerIcon('ff8c1f'), getMarkerIcon('e04f00')]
   searchRestaurants ''
