@@ -15,7 +15,7 @@ def get_coordinate_for_address address
   end
 end
 
-task :loadRestaurants => :environment do
+task :load_restaurants => :environment do
   puts 'Updating restaurants...'
   doc = Nokogiri::HTML(open('http://www.studentska-prehrana.si/Pages/Directory.aspx'))
   restaurant_items = doc.css('.holderRestaurant ul li ul li:not(.blocked)')
@@ -33,7 +33,7 @@ task :loadRestaurants => :environment do
         restaurant.save
       end
     end
-    mail_content = 'Updated ' + restaurant_items.count + ' restaurants.'
+    mail_content = 'Updated ' + restaurant_items.count.to_s + ' restaurants.'
   else
     mail_content = 'Restaurant update failed!'
   end
