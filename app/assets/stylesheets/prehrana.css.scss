@@ -16,3 +16,14 @@ html, body, .container, #map {
   margin: 0 20%;
   z-index: 10;
 }
+
+#map {
+  .prehrana_info {
+    overflow: hidden;
+  }
+  
+  address, p   {
+    margin-top: 5px;
+    font-style: normal;
+  }
+}
