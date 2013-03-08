@@ -20,6 +20,7 @@ html, body, .container, #map {
 #map {
   .prehrana_info {
     overflow: hidden;
+    max-width: 250px;
   }
   
   address, p   {

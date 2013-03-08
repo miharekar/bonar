@@ -193,7 +193,8 @@ html, body, .container, #map {
   z-index: 10; }
 
 #map .prehrana_info {
-  overflow: hidden; }
+  overflow: hidden;
+  max-width: 250px; }
 #map address, #map p {
   margin-top: 5px;
   font-style: normal; }

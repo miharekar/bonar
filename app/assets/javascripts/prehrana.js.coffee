@@ -2,6 +2,9 @@
 //= require oms
 
 jQuery ->
+  latestSearch = null
+  timer = null
+  
   getMarkerIcon = (color) ->
     new google.maps.MarkerImage('http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + color, new google.maps.Size(21, 34), new google.maps.Point(0, 0), new google.maps.Point(10, 34))
   
@@ -22,14 +25,23 @@ jQuery ->
       i++
       
   searchForRestaurants = (search) ->
-    $.post '/search',
-      search: search
-    , ((data) ->
-      map.removeMarkers()
-      if data.length
-        window.restaurants = data
-        displayRestaurants()
-    ), 'json'
+    if latestSearch isnt search
+      latestSearch = search
+      $.post '/search',
+        search: search
+      , ((data) ->
+        map.removeMarkers()
+        if data.length
+          window.restaurants = data
+          displayRestaurants()
+      ), 'json'
+
+  showGeoMarker = ->
+    GeoMarker = new GeolocationMarker map.map
+    GeoMarker.setMinimumAccuracy 100
+    google.maps.event.addListenerOnce GeoMarker, 'position_changed', ->
+      map.setZoom 15
+      map.panTo @getPosition()
   
   map = new GMaps(
     div: '#map'
@@ -54,13 +66,8 @@ jQuery ->
   searchForRestaurants ''
 
   if navigator.geolocation
-    GeoMarker = new GeolocationMarker map.map
-    GeoMarker.setMinimumAccuracy 100
-    google.maps.event.addListenerOnce GeoMarker, 'position_changed', ->
-      map.setZoom 15
-      map.panTo @getPosition()
+    showGeoMarker()
   
-  timer = null
   $('#restaurantSearch').on 'keyup', ->
     clearTimeout timer
     search = $(this).val()
