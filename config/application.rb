@@ -55,5 +55,9 @@ module Prehrana
     
     # Heroku requires this to be false
     config.assets.initialize_on_precompile = false
+    
+    # Precompile additional assets.
+    # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
+    config.assets.precompile += %w( prehrana.js )
   end
 end
