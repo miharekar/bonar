@@ -55,7 +55,7 @@ jQuery ->
 
   if navigator.geolocation
     GeoMarker = new GeolocationMarker map.map
-    GeoMarker.setMinimumAccuracy 50
+    GeoMarker.setMinimumAccuracy 100
     google.maps.event.addListenerOnce GeoMarker, 'position_changed', ->
       map.setZoom 15
       map.panTo @getPosition()
