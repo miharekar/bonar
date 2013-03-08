@@ -5,10 +5,9 @@ class PrehranaController < ApplicationController
   def search_restaurants
     if params[:search]
       if params[:search].empty?
-        puts 'aaa'
-        render :json => Restaurant.all
+        render json: Restaurant.all.as_json(only:[:name, :address, :coordinates, :link, :price])
       else
-        render :json => Restaurant.all(:conditions => ['lower(name) like ? OR lower(address) like ? ', "%#{params[:search].downcase}%", "%#{params[:search].downcase}%"])
+        render json: Restaurant.all(:conditions => ['lower(name) like ? OR lower(address) like ? ', "%#{params[:search].downcase}%", "%#{params[:search].downcase}%"]).as_json(only:[:name, :address, :coordinates, :link, :price])
       end
     end
   end
