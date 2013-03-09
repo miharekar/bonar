@@ -2347,14 +2347,16 @@ Note: The Google Maps API v3 must be included *before* this code
 (function() {
 
   jQuery(function() {
-    var displayRestaurants, getMarkerIcon, iw, latestSearch, map, oms, scaleMarkers, searchForRestaurants, showGeoMarker, timer;
+    var allRestaurants, displayRestaurants, getMarkerIcon, iw, latestSearch, map, oms, scaleMarkers, searchForRestaurants, showGeoMarker, timer;
     latestSearch = null;
     timer = null;
+    allRestaurants = null;
     getMarkerIcon = function(color) {
       return new google.maps.MarkerImage('http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + color, new google.maps.Size(21, 34), new google.maps.Point(0, 0), new google.maps.Point(10, 34));
     };
     displayRestaurants = function() {
       var content, i, marker, restaurant, _results;
+      map.removeMarkers();
       i = 0;
       _results = [];
       while (i < restaurants.length) {
@@ -2377,15 +2379,20 @@ Note: The Google Maps API v3 must be included *before* this code
     searchForRestaurants = function(search) {
       if (latestSearch !== search) {
         latestSearch = search;
-        return $.post('/search', {
-          search: search
-        }, (function(data) {
-          map.removeMarkers();
-          if (data.length) {
+        if (search === '' && (allRestaurants != null)) {
+          window.restaurants = allRestaurants;
+          return displayRestaurants();
+        } else {
+          return $.post('/search', {
+            search: search
+          }, (function(data) {
             window.restaurants = data;
-            return displayRestaurants();
-          }
-        }), 'json');
+            displayRestaurants();
+            if (search === '') {
+              return allRestaurants = data;
+            }
+          }), 'json');
+        }
       }
     };
     showGeoMarker = function() {

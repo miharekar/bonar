@@ -4,11 +4,13 @@
 jQuery ->
   latestSearch = null
   timer = null
+  allRestaurants = null
   
   getMarkerIcon = (color) ->
     new google.maps.MarkerImage('http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + color, new google.maps.Size(21, 34), new google.maps.Point(0, 0), new google.maps.Point(10, 34))
   
-  displayRestaurants = ->    
+  displayRestaurants = ->
+    map.removeMarkers()
     i = 0
     while i < restaurants.length
       restaurant = restaurants[i]
@@ -27,14 +29,18 @@ jQuery ->
   searchForRestaurants = (search) ->
     if latestSearch isnt search
       latestSearch = search
-      $.post '/search',
-        search: search
-      , ((data) ->
-        map.removeMarkers()
-        if data.length
+      if search == '' and allRestaurants?        
+        window.restaurants = allRestaurants
+        displayRestaurants()
+      else
+        $.post '/search',
+          search: search
+        , ((data) ->
           window.restaurants = data
           displayRestaurants()
-      ), 'json'
+          if search == ''
+            allRestaurants = data
+        ), 'json'
 
   showGeoMarker = ->
     GeoMarker = new GeolocationMarker map.map
