@@ -23,6 +23,15 @@ html, body, .container, #map {
     max-width: 250px;
   }
   
+  a {
+    color: #ff8c1f;
+  }
+  
+  a:hover {
+    color: #ffad60;
+    text-decoration: none;
+  }
+
   address, p   {
     margin-top: 5px;
     font-style: normal;

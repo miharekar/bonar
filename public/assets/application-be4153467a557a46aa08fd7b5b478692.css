@@ -195,6 +195,11 @@ html, body, .container, #map {
 #map .prehrana_info {
   overflow: hidden;
   max-width: 250px; }
+#map a {
+  color: #ff8c1f; }
+#map a:hover {
+  color: #ffad60;
+  text-decoration: none; }
 #map address, #map p {
   margin-top: 5px;
   font-style: normal; }
