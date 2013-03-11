@@ -3,7 +3,7 @@ class Restaurant < ActiveRecord::Base
   
   def self.search(search)
     if search.empty?
-      self.all
+      all
     else
       where('name ILIKE ? OR address ILIKE ?', "%#{search}%", "%#{search}%")
     end
