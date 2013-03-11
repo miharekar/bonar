@@ -25,11 +25,11 @@ task :load_restaurants => :environment do
       restaurant_items.each do |div|
         restaurant = Restaurant.new
         restaurant.name = div.css('h1 a').first.content
-        restaurant.link = div.css('h1 a').first["href"]
+        restaurant.link = div.css('h1 a').first["href"][0...-1] + '1'
         restaurant.address = div.css('h2').first.content.gsub(/[()]/, "")
         restaurant.price = div.css('.prices strong').first.content      
         restaurant.coordinates = get_coordinate_for_address restaurant.address
-        puts 'Saving ' + restaurant.name + restaurant.link 
+        puts 'Saving ' + restaurant.name
         restaurant.save
       end
     end
