@@ -1,3 +1,11 @@
 class Restaurant < ActiveRecord::Base
   serialize :coordinates, Array
+  
+  def self.search(search)
+    if search.empty?
+      self.all
+    else
+      where('name ILIKE ? OR address ILIKE ?', "%#{search}%", "%#{search}%")
+    end
+  end
 end
