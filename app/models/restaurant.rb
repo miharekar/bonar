@@ -5,7 +5,7 @@ class Restaurant < ActiveRecord::Base
     if search.empty?
       all
     else
-      where('name ILIKE ? OR address ILIKE ?', "%#{search}%", "%#{search}%")
+      where('name ILIKE :search OR address ILIKE :search', search: '%' + search + '%')
     end
   end
 end
