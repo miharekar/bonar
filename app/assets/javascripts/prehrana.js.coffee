@@ -1,5 +1,6 @@
 //= require gmapsjs
 //= require oms
+//= require geolocationmarker
 
 jQuery ->
   latestSearch = null

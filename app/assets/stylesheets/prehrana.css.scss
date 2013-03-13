@@ -2,10 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-html, body, .container, #map {
-  margin: 0;
+body {
   padding: 0;
-  width: 100%;
+  margin: 0;
+}
+
+html, body, .container, #map {
   height: 100%;
 }
 

@@ -179,10 +179,11 @@
 
 
  */
-html, body, .container, #map {
-  margin: 0;
+body {
   padding: 0;
-  width: 100%;
+  margin: 0; }
+
+html, body, .container, #map {
   height: 100%; }
 
 #restaurantSearch {
