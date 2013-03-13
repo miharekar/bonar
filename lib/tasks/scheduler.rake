@@ -46,15 +46,13 @@ task :load_restaurants => :environment do
           restaurant.save!
         end
       end
-      mail_content << 'Deleting restaurants ' + Restaurant.select(:name).find(restaurants_to_delete).to_s
+      mail_content << 'Deleting restaurants: ' + Restaurant.select(:name).find(restaurants_to_delete).to_s
       Restaurant.delete(restaurants_to_delete)
     end
-    mail_content << 'Updated ' + restaurant_items.count.to_s + ' restaurants.'
+    mail_content << 'Total: ' + restaurant_items.count.to_s + ' restaurants.'
   else
     mail_content << 'Restaurant update failed!'
   end
-  
-  puts mail_content.join("\n")
   
   puts 'sending email'
   API_KEY = ENV['MAILGUN_API_KEY']
