@@ -14,29 +14,47 @@ def get_coordinate_for_address address
   end
 end
 
+def get_restaurant_id restaurant_div
+  link = restaurant_div.css('h1 a').first["href"]
+  uri = URI.parse(link)
+  parameters = CGI.parse(URI.parse(link).query)
+  parameters['e_restaurant'][0]  
+end
+
 task :load_restaurants => :environment do
   puts 'Updating restaurants...'
+  mail_content = ['Restaurant update report']
   doc = Nokogiri::HTML(open('http://www.studentska-prehrana.si/Pages/Directory.aspx'))
   restaurant_items = doc.css('.holderRestaurant ul li ul li:not(.blocked)')
   if restaurant_items.count > 0
+    restaurants_to_delete = Restaurant.pluck(:id)    
     Restaurant.transaction do
-      Restaurant.delete_all
       restaurant_items.each do |div|
-        restaurant = Restaurant.new
-        restaurant.name = div.css('h1 a').first.content
-        restaurant.link = div.css('h1 a').first["href"][0...-1]
-        restaurant.address = div.css('h2').first.content.gsub(/[()]/, "")
-        restaurant.price = div.css('.prices strong').first.content      
-        restaurant.coordinates = get_coordinate_for_address restaurant.address
-        puts 'Saving ' + restaurant.name
-        restaurant.save!
+        restaurant_id = get_restaurant_id div
+        restaurant = Restaurant.find_by_restaurant_id(restaurant_id)        
+        if restaurant
+          restaurants_to_delete.delete(restaurant.id)
+        else
+          restaurant = Restaurant.new
+          restaurant.name = div.css('h1 a').first.content
+          restaurant.link = div.css('h1 a').first["href"][0...-1]
+          restaurant.restaurant_id = restaurant_id
+          restaurant.address = div.css('h2').first.content.gsub(/[()]/, "")
+          restaurant.price = div.css('.prices strong').first.content      
+          restaurant.coordinates = get_coordinate_for_address restaurant.address
+          mail_content << 'Adding new restaurant ' + restaurant.name + ' | ' + restaurant.restaurant_id
+          restaurant.save!
+        end
       end
+      mail_content << 'Deleting restaurants ' + Restaurant.select(:name).find(restaurants_to_delete).to_s
+      Restaurant.delete(restaurants_to_delete)
     end
-    mail_content = 'Updated ' + restaurant_items.count.to_s + ' restaurants.'
+    mail_content << 'Updated ' + restaurant_items.count.to_s + ' restaurants.'
   else
-    mail_content = 'Restaurant update failed!'
+    mail_content << 'Restaurant update failed!'
   end
-  puts mail_content
+  
+  puts mail_content.join("\n")
   
   puts 'sending email'
   API_KEY = ENV['MAILGUN_API_KEY']
@@ -45,7 +63,7 @@ task :load_restaurants => :environment do
       :from => "Boni<info@mr.si>",
       :to => "info@mr.si",
       :subject => "Restaurants update",
-      :text => mail_content
+      :text => mail_content.join("\n") 
       
   puts 'done.'
 end
