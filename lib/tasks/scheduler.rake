@@ -1,4 +1,3 @@
-require 'nokogiri'
 require 'open-uri'
 
 desc "This task is called by the Heroku scheduler add-on"
@@ -21,27 +20,27 @@ task :load_restaurants => :environment do
   restaurant_items = doc.css('.holderRestaurant ul li ul li:not(.blocked)')
   if restaurant_items.count > 0
     Restaurant.transaction do
-      Restaurant.destroy_all
+      Restaurant.delete_all
       restaurant_items.each do |div|
         restaurant = Restaurant.new
         restaurant.name = div.css('h1 a').first.content
-        restaurant.link = div.css('h1 a').first["href"][0...-1] + '1'
+        restaurant.link = div.css('h1 a').first["href"][0...-1]
         restaurant.address = div.css('h2').first.content.gsub(/[()]/, "")
         restaurant.price = div.css('.prices strong').first.content      
         restaurant.coordinates = get_coordinate_for_address restaurant.address
         puts 'Saving ' + restaurant.name
-        restaurant.save
+        restaurant.save!
       end
     end
     mail_content = 'Updated ' + restaurant_items.count.to_s + ' restaurants.'
   else
     mail_content = 'Restaurant update failed!'
   end
+  puts mail_content
   
   puts 'sending email'
   API_KEY = ENV['MAILGUN_API_KEY']
   API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/app12738544.mailgun.org"
-
   RestClient.post API_URL+"/messages", 
       :from => "Boni<info@mr.si>",
       :to => "info@mr.si",
