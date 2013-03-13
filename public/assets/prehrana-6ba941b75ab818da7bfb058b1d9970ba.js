@@ -2361,9 +2361,10 @@ Note: The Google Maps API v3 must be included *before* this code
       _results = [];
       while (i < restaurants.length) {
         restaurant = restaurants[i];
-        content = '<div class="prehrana_info"><h4><a href="' + restaurant['link'] + '" target="_blank">' + restaurant['name'] + '</a></h4>';
+        content = '<div class="prehrana_info"><h4><a href="' + restaurant['link'] + '0" target="_blank">' + restaurant['name'] + '</a></h4>';
         content += '<address>' + restaurant['address'] + '</address>';
-        content += '<p>' + restaurant['price'] + '</p></div>';
+        content += '<p><strong>' + restaurant['price'] + '</strong></p>';
+        content += '<p><a href="' + restaurant['link'] + '0">Jedilnik</a> | <a href="' + restaurant['link'] + '1">Odpiralni čas</a></p></div>';
         marker = map.addMarker({
           lat: restaurant['coordinates'][0],
           lng: restaurant['coordinates'][1],
