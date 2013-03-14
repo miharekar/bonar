@@ -2,29 +2,35 @@ require 'open-uri'
 
 desc "This task is called by the Heroku scheduler add-on"
 
-def get_geopedia_coordinates address
-  puts 'Getting geopedia coords for ' + address
+def get_geopedia_coordinates_for address
+  puts 'Getting Geopedia coords for ' + address
   coordinates = Nokogiri::XML(open(URI.escape('http://services.geopedia.si/geocoding?q=' + address)))
-  if(!coordinates)
-    puts 'Sleeping...'
-    sleep(1)
-    get_coordinate_for_address address
-  else
+  if(coordinates)
     coordinates = coordinates.xpath("//xmlns:coordinates").first
     if coordinates
-      coordinates.content.split(/,/).reverse
+      return coordinates.content.split(/,/).reverse
     end
   end
+  return nil
 end
 
-def get_coordinate_for_address address
-  puts 'Getting coords for ' + address
+def get_google_coordinates_for address
+  puts 'Getting Google coords for ' + address
   coordinates =  Geocoder.coordinates(address + ', Slovenia')
   if(!coordinates)
     puts 'Sleeping...'
     sleep(1)
-    get_coordinate_for_address address
+    get_google_coordinates_for address
   end
+  return coordinates.map(&:to_s)
+end
+
+def get_coordinates_for address
+  coordinates = get_geopedia_coordinates_for address
+  if !coordinates
+    coordinates =  get_google_coordinates_for address 
+  end
+  return coordinates
 end
 
 def get_restaurant_id restaurant_div
@@ -34,7 +40,7 @@ def get_restaurant_id restaurant_div
   parameters['e_restaurant'][0]  
 end
 
-task :load_restaurants => :environment do  
+task :load_restaurants => :environment do
   puts 'Updating restaurants...'
   mail_content = ['Restaurant update report']
   doc = Nokogiri::HTML(open('http://www.studentska-prehrana.si/Pages/Directory.aspx'))
@@ -46,13 +52,6 @@ task :load_restaurants => :environment do
         restaurant_id = get_restaurant_id div
         restaurant = Restaurant.find_by_restaurant_id(restaurant_id)        
         if restaurant
-          geopedia = get_geopedia_coordinates restaurant.address
-          if geopedia
-            restaurant.coordinates = geopedia
-            restaurant.save!
-          else
-            puts 'failed'
-          end
           restaurants_to_delete.delete(restaurant.id)
         else
           restaurant = Restaurant.new
@@ -61,7 +60,7 @@ task :load_restaurants => :environment do
           restaurant.restaurant_id = restaurant_id
           restaurant.address = div.css('h2').first.content.gsub(/[()]/, "")
           restaurant.price = div.css('.prices strong').first.content      
-          restaurant.coordinates = get_coordinate_for_address restaurant.address
+          restaurant.coordinates = get_coordinates_for restaurant.address
           mail_content << 'Adding new restaurant ' + restaurant.name + ' | ' + restaurant.restaurant_id
           restaurant.save!
         end
