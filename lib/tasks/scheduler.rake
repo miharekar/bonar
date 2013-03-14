@@ -2,6 +2,21 @@ require 'open-uri'
 
 desc "This task is called by the Heroku scheduler add-on"
 
+def get_geopedia_coordinates address
+  puts 'Getting geopedia coords for ' + address
+  coordinates = Nokogiri::XML(open(URI.escape('http://services.geopedia.si/geocoding?q=' + address)))
+  if(!coordinates)
+    puts 'Sleeping...'
+    sleep(1)
+    get_coordinate_for_address address
+  else
+    coordinates = coordinates.xpath("//xmlns:coordinates").first
+    if coordinates
+      coordinates.content.split(/,/).reverse
+    end
+  end
+end
+
 def get_coordinate_for_address address
   puts 'Getting coords for ' + address
   coordinates =  Geocoder.coordinates(address + ', Slovenia')
@@ -9,8 +24,6 @@ def get_coordinate_for_address address
     puts 'Sleeping...'
     sleep(1)
     get_coordinate_for_address address
-  else
-    coordinates
   end
 end
 
@@ -21,7 +34,7 @@ def get_restaurant_id restaurant_div
   parameters['e_restaurant'][0]  
 end
 
-task :load_restaurants => :environment do
+task :load_restaurants => :environment do  
   puts 'Updating restaurants...'
   mail_content = ['Restaurant update report']
   doc = Nokogiri::HTML(open('http://www.studentska-prehrana.si/Pages/Directory.aspx'))
@@ -33,6 +46,13 @@ task :load_restaurants => :environment do
         restaurant_id = get_restaurant_id div
         restaurant = Restaurant.find_by_restaurant_id(restaurant_id)        
         if restaurant
+          geopedia = get_geopedia_coordinates restaurant.address
+          if geopedia
+            restaurant.coordinates = geopedia
+            restaurant.save!
+          else
+            puts 'failed'
+          end
           restaurants_to_delete.delete(restaurant.id)
         else
           restaurant = Restaurant.new
