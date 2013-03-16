@@ -186,12 +186,21 @@ body {
 html, body, .container, #map {
   height: 100%; }
 
-#restaurantSearch {
+#searchBar {
   position: absolute;
   width: 60%;
   bottom: 5%;
   margin: 0 20%;
   z-index: 10; }
+
+#restaurantSearch {
+  width: 85%; }
+
+#geolocateIcon {
+  display: none;
+  margin-left: 10px; }
+  #geolocateIcon img {
+    vertical-align: middle; }
 
 #map .prehrana_info {
   overflow: hidden;

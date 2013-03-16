@@ -2,10 +2,11 @@
 //= require oms
 //= require geolocationmarker
 
-jQuery ->
+$ ->
   latestSearch = null
   timer = null
   allRestaurants = null
+  GeoMarker = null
   
   getMarkerIcon = (color) ->
     new google.maps.MarkerImage('http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + color, new google.maps.Size(21, 34), new google.maps.Point(0, 0), new google.maps.Point(10, 34))
@@ -50,6 +51,7 @@ jQuery ->
     google.maps.event.addListenerOnce GeoMarker, 'position_changed', ->
       map.setZoom 15
       map.panTo @getPosition()
+      $('#geolocateIcon').show()
   
   map = new GMaps(
     div: '#map'
@@ -75,6 +77,10 @@ jQuery ->
 
   if navigator.geolocation
     showGeoMarker()
+    
+  $('#geolocateIcon').on 'click', (event) ->
+    event.preventDefault()
+    map.panTo GeoMarker.getPosition()
   
   $('#restaurantSearch').on 'keyup', ->
     clearTimeout timer

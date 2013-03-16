@@ -2628,11 +2628,12 @@ GeolocationMarker.DISALLOWED_OPTIONS = {
 };
 (function() {
 
-  jQuery(function() {
-    var allRestaurants, displayRestaurants, getMarkerIcon, iw, latestSearch, map, oms, scaleMarkers, searchForRestaurants, showGeoMarker, timer;
+  $(function() {
+    var GeoMarker, allRestaurants, displayRestaurants, getMarkerIcon, iw, latestSearch, map, oms, scaleMarkers, searchForRestaurants, showGeoMarker, timer;
     latestSearch = null;
     timer = null;
     allRestaurants = null;
+    GeoMarker = null;
     getMarkerIcon = function(color) {
       return new google.maps.MarkerImage('http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + color, new google.maps.Size(21, 34), new google.maps.Point(0, 0), new google.maps.Point(10, 34));
     };
@@ -2679,12 +2680,12 @@ GeolocationMarker.DISALLOWED_OPTIONS = {
       }
     };
     showGeoMarker = function() {
-      var GeoMarker;
       GeoMarker = new GeolocationMarker(map.map);
       GeoMarker.setMinimumAccuracy(100);
       return google.maps.event.addListenerOnce(GeoMarker, 'position_changed', function() {
         map.setZoom(15);
-        return map.panTo(this.getPosition());
+        map.panTo(this.getPosition());
+        return $('#geolocateIcon').show();
       });
     };
     map = new GMaps({
@@ -2709,6 +2710,10 @@ GeolocationMarker.DISALLOWED_OPTIONS = {
     if (navigator.geolocation) {
       showGeoMarker();
     }
+    $('#geolocateIcon').on('click', function(event) {
+      event.preventDefault();
+      return map.panTo(GeoMarker.getPosition());
+    });
     return $('#restaurantSearch').on('keyup', function() {
       var search;
       clearTimeout(timer);
