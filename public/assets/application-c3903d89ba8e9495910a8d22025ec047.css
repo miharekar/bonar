@@ -194,7 +194,7 @@ html, body, .container, #map {
   z-index: 10; }
 
 #restaurantSearch {
-  width: 85%; }
+  width: 80%; }
 
 #geolocateIcon {
   display: none;
