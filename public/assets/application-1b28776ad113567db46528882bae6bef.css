@@ -204,15 +204,18 @@ html, body, .container, #map {
 
 #map .prehrana_info {
   overflow: hidden;
-  max-width: 250px; }
+  max-width: 250px;
+  padding-bottom: 5px; }
 #map a {
   color: #ff8c1f; }
 #map a:hover {
   color: #ffad60;
   text-decoration: none; }
-#map address, #map p {
+#map address, #map p, #map ul {
   margin-top: 6px;
   font-style: normal; }
+#map li {
+  font-size: 14px; }
 /* 
 html5doctor.com Reset Stylesheet
 v1.6.1

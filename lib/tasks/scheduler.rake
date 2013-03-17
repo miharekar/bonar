@@ -84,3 +84,41 @@ task :load_restaurants => :environment do
       
   puts 'done.'
 end
+
+task :get_opening_times => :environment do
+  puts 'Getting opening times...'
+  
+  Restaurant.all.each do |restaurant|
+    doc = Nokogiri::HTML(open(restaurant.link + '1'))
+    opening_times = {}
+    opening_times_ul = doc.at_css('#ContentHolderMain_ContentHolderMainContent_ContentHolderMainContent_riInfo_liWeek').parent.css('li')
+    opening_times_ul.each do |li|
+      opening_id = li.attribute('id').content.gsub(/ContentHolderMain_ContentHolderMainContent_ContentHolderMainContent_riInfo_li/, '')
+      
+      case opening_id
+      when 'Week', 'Saturday', 'Sunday'
+        if li.content.strip.scan(/\d{2}:\d{2}/).length == 2
+          opening_times[opening_id] = li.content.strip.scan(/\d{2}:\d{2}/)
+        else
+          puts li.content #this need to be mailed!
+        end
+      when 'Notes'
+        opening_times['Notes'] = li.content.gsub('Opombe:', '').strip.squish
+      when 'ClosedWeekends'
+        opening_times['Saturday'] = false
+        opening_times['Sunday'] = false
+      when 'ClosedSunday'
+        opening_times['Sunday'] = false
+      when 'ClosedSaturday'
+        opening_times['Saturday'] = false
+      else
+        puts opening_id #this need to be mailed!
+      end
+      
+    end
+    restaurant.opening = opening_times
+    restaurant.save
+  end
+
+  puts 'done.'
+end

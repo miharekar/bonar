@@ -36,6 +36,7 @@ html, body, .container, #map {
   .prehrana_info {
     overflow: hidden;
     max-width: 250px;
+    padding-bottom: 5px;
   }
   
   a {
@@ -47,8 +48,12 @@ html, body, .container, #map {
     text-decoration: none;
   }
 
-  address, p   {
+  address, p, ul   {
     margin-top: 6px;
     font-style: normal;
+  }
+  
+  li {
+    font-size: 14px;
   }
 }

@@ -3,6 +3,7 @@ class PrehranaController < ApplicationController
   end
   
   def search_restaurants
-    @restaurants = Restaurant.search(params[:search]).as_json(only:[:name, :address, :coordinates, :link, :price])
+    @restaurants = Restaurant.search(params[:search])
+    render :json => @restaurants.to_json
   end
 end

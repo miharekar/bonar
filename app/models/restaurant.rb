@@ -1,5 +1,6 @@
 class Restaurant < ActiveRecord::Base
   serialize :coordinates, Array
+  serialize :opening, Hash
   
   def self.search(search)
     if search.empty?
