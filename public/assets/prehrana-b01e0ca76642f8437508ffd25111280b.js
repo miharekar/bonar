@@ -2638,37 +2638,17 @@ GeolocationMarker.DISALLOWED_OPTIONS = {
       return new google.maps.MarkerImage('http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + color, new google.maps.Size(21, 34), new google.maps.Point(0, 0), new google.maps.Point(10, 34));
     };
     displayRestaurants = function() {
-      var content, i, marker, restaurant, _results;
+      var i, marker, restaurant, _results;
       map.removeMarkers();
       i = 0;
       _results = [];
       while (i < restaurants.length) {
         restaurant = restaurants[i];
-        content = '<div class="prehrana_info"><h4><a href="' + restaurant['link'] + '0" target="_blank">' + restaurant['name'] + '</a></h4>';
-        content += '<address>' + restaurant['address'] + '</address>';
-        content += '<p><strong>' + restaurant['price'] + '</strong></p>';
-        content += '<ul>';
-        content += '<li>Teden: ' + restaurant['opening']['Week'][0] + ' - ' + restaurant['opening']['Week'][1] + '</li>';
-        if (restaurant['opening']['Saturday']) {
-          content += '<li>Sobota: ' + restaurant['opening']['Saturday'][0] + ' - ' + restaurant['opening']['Saturday'][1] + '</li>';
-        } else {
-          content += '<li>Sobota: zaprto</li>';
-        }
-        if (restaurant['opening']['Sunday']) {
-          content += '<li>Nedelja: ' + restaurant['opening']['Sunday'][0] + ' - ' + restaurant['opening']['Sunday'][1] + '</li>';
-        } else {
-          content += '<li>Nedelja: zaprto</li>';
-        }
-        if (restaurant['opening']['Notes']) {
-          content += '<li>Opombe: ' + restaurant['opening']['Notes'] + '</li>';
-        }
-        content += '</ul></div>';
         marker = map.addMarker({
           lat: restaurant['coordinates'][0],
           lng: restaurant['coordinates'][1],
-          title: restaurant['name'],
-          icon: scaleMarkers[restaurant['price'][0]],
-          content: content
+          icon: scaleMarkers[restaurant['price']],
+          content: restaurant['content']
         });
         oms.addMarker(marker);
         _results.push(i++);

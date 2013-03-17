@@ -16,28 +16,11 @@ $ ->
     i = 0
     while i < restaurants.length
       restaurant = restaurants[i]
-      content = '<div class="prehrana_info"><h4><a href="' + restaurant['link'] + '0" target="_blank">' + restaurant['name'] + '</a></h4>'
-      content += '<address>' + restaurant['address'] + '</address>'
-      content += '<p><strong>' + restaurant['price'] + '</strong></p>'
-      content += '<ul>'
-      content += '<li>Teden: ' + restaurant['opening']['Week'][0] + ' - ' + restaurant['opening']['Week'][1] + '</li>'
-      if restaurant['opening']['Saturday']
-        content += '<li>Sobota: ' + restaurant['opening']['Saturday'][0] + ' - ' + restaurant['opening']['Saturday'][1] + '</li>'
-      else
-        content += '<li>Sobota: zaprto</li>'
-      if restaurant['opening']['Sunday']
-        content += '<li>Nedelja: ' + restaurant['opening']['Sunday'][0] + ' - ' + restaurant['opening']['Sunday'][1] + '</li>'
-      else
-        content += '<li>Nedelja: zaprto</li>'
-      if restaurant['opening']['Notes']
-        content += '<li>Opombe: ' + restaurant['opening']['Notes'] + '</li>'
-      content += '</ul></div>'
       marker = map.addMarker
         lat: restaurant['coordinates'][0]
         lng: restaurant['coordinates'][1]
-        title: restaurant['name']
-        icon: scaleMarkers[restaurant['price'][0]]
-        content: content
+        icon: scaleMarkers[restaurant['price']]
+        content: restaurant['content']
       oms.addMarker(marker);
       i++
       
