@@ -1,4 +1,10 @@
 /* TEAM */
-	Developer: Miha Rekar
-	Site: http://mr.si/
-	Twitter: @mr_foto
+  Developer: Miha Rekar
+  Site: http://mr.si/
+  Twitter: @mr_foto
+  Location: Slovenia
+
+/* SITE */
+  Language: Slovenian
+  Software: Ruby on Rails, Google Maps
+  Source: https://github.com/mrfoto/studentska-prehrana
