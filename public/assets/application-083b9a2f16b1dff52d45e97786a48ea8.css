@@ -198,7 +198,7 @@ html, body, .container, #map {
 
 #geolocateIcon {
   display: none;
-  margin-left: 10px; }
+  margin-left: 5px; }
   #geolocateIcon img {
     vertical-align: middle; }
 
