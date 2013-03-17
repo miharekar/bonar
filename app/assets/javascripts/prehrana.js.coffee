@@ -19,7 +19,7 @@ $ ->
       marker = map.addMarker
         lat: restaurant['coordinates'][0]
         lng: restaurant['coordinates'][1]
-        icon: scaleMarkers[restaurant['price']]
+        icon: scaleMarkers[restaurant['price'][0]]
         content: restaurant['content']
       oms.addMarker(marker);
       i++
