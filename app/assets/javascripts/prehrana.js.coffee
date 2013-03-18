@@ -24,7 +24,7 @@ $ ->
       oms.addMarker(marker);
       i++
       
-    if restaurants.length == 1 or restaurants.length == 2
+    if restaurants.length == 1 or (restaurants.length == 2 and restaurants[0]['coordinates'][0] == restaurants[1]['coordinates'][0] and restaurants[0]['coordinates'][1] == restaurants[1]['coordinates'][1])
       map.setZoom 15
       map.panTo marker.position
       google.maps.event.trigger(marker, 'click')
