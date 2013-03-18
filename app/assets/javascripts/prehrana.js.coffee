@@ -88,3 +88,5 @@ $ ->
     timer = setTimeout(->
         searchForRestaurants search
       , 500)
+      
+window.console and window.console.info('Te zanima kako dela, kaj? API je na voljo na http://boni.mr.si/api/restaurants, source pa na https://github.com/mrfoto/studentska-prehrana.')  
