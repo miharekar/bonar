@@ -2,9 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+html, body, div, h1, h2, h3, h4, h5, h6, p, address, ul, li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+}
+
 body {
-  padding: 0;
-  margin: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 1;
 }
 
 html, body, .container, #map {
@@ -32,7 +43,7 @@ html, body, .container, #map {
   }
 }
 
-#map {
+#map {  
   .prehrana_info {
     overflow: hidden;
     max-width: 250px;
@@ -41,6 +52,7 @@ html, body, .container, #map {
   
   a {
     color: #ff8c1f;
+    font-weight: bold;
   }
   
   a:hover {
@@ -49,11 +61,7 @@ html, body, .container, #map {
   }
 
   address, p, ul   {
-    margin-top: 6px;
+    margin-top: 5px;
     font-style: normal;
-  }
-  
-  li {
-    font-size: 14px;
   }
 }

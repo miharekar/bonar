@@ -24,6 +24,11 @@ $ ->
       oms.addMarker(marker);
       i++
       
+    if restaurants.length == 1 or restaurants.length == 2
+      map.setZoom 15
+      map.panTo marker.position
+      google.maps.event.trigger(marker, 'click')
+      
   searchForRestaurants = (search) ->
     if latestSearch isnt search
       latestSearch = search
