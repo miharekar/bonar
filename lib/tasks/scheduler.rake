@@ -81,11 +81,11 @@ task :load_restaurants => :environment do
           restaurant.link = div.css('h1 a').first["href"][0...-1]
           restaurant.restaurant_id = restaurant_id
           restaurant.address = div.css('h2').first.content.gsub(/[()]/, "")
-          restaurant.price = div.css('.prices strong').first.content      
           restaurant.coordinates = get_coordinates_for restaurant.address
           mail_content << 'Adding new restaurant ' + restaurant.name + ' | ' + restaurant.restaurant_id
-          restaurant.save!
         end
+        restaurant.price = div.css('.prices strong').first.content
+        restaurant.save!
       end
       mail_content << 'Deleting restaurants: ' + Restaurant.select(:name).find(restaurants_to_delete).to_s
       Restaurant.delete(restaurants_to_delete)
