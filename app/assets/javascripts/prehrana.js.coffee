@@ -3,10 +3,7 @@
 //= require geolocationmarker
 
 $ ->
-  latestSearch = null
-  timer = null
-  allRestaurants = null
-  GeoMarker = null
+  allRestaurants = latestSearch = latestMarker = timer = GeoMarker = null
   
   getMarkerIcon = (color) ->
     new google.maps.MarkerImage('http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + color, new google.maps.Size(21, 34), new google.maps.Point(0, 0), new google.maps.Point(10, 34))
@@ -70,7 +67,8 @@ $ ->
   iw = new google.maps.InfoWindow()
   oms.addListener 'click', (marker) ->
     iw.setContent marker.content
-    iw.open map.map, marker
+    latestMarker = marker
+    iw.open map.map, latestMarker
   
   scaleMarkers = [getMarkerIcon('ffe7c8'), getMarkerIcon('ffcc95'), getMarkerIcon('ffad60'), getMarkerIcon('ff8c1f'), getMarkerIcon('e04f00')]
   searchForRestaurants ''
@@ -89,4 +87,15 @@ $ ->
         searchForRestaurants search
       , 500)
       
-window.console and window.console.info('Te zanima kako dela, kaj? API je na voljo na http://boni.mr.si/api/restaurants, source pa na https://github.com/mrfoto/studentska-prehrana.')  
+  $('#map').on 'click', '.loadMenu', (event) ->
+    $this = $(this)
+    event.preventDefault()
+    $.post '/menu',
+      restaurant: $this.data('restaurant')
+    , ((data) ->
+      $this.replaceWith data
+      iw.setContent $('.prehrana_info').parent()[0]
+      iw.open map.map, latestMarker
+    ), 'html'
+      
+window.console and window.console.info('O, živjo, kaj pa ti tukaj? API je na voljo na http://boni.mr.si/api/restaurants, source pa na https://github.com/mrfoto/studentska-prehrana ;)')  

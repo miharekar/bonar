@@ -3,7 +3,7 @@ require 'open-uri'
 desc "This task is called by the Heroku scheduler add-on"
 
 def get_geopedia_coordinates_for address
-  puts 'Getting Geopedia coords for ' + address
+  p 'Getting Geopedia coords for ' + address
   coordinates = Nokogiri::XML(open(URI.escape('http://services.geopedia.si/geocoding?q=' + address)))
   if(coordinates)
     coordinates = coordinates.xpath("//xmlns:coordinates").first
@@ -15,10 +15,10 @@ def get_geopedia_coordinates_for address
 end
 
 def get_google_coordinates_for address
-  puts 'Getting Google coords for ' + address
+  p 'Getting Google coords for ' + address
   coordinates =  Geocoder.coordinates(address + ', Slovenia')
   if(!coordinates)
-    puts 'Sleeping...'
+    p 'Sleeping...'
     sleep(1)
     get_google_coordinates_for address
   end
@@ -37,11 +37,53 @@ def get_restaurant_id restaurant_div
   link = restaurant_div.css('h1 a').first["href"]
   uri = URI.parse(link)
   parameters = CGI.parse(URI.parse(link).query)
-  parameters['e_restaurant'][0]  
+  return parameters['e_restaurant'][0]  
+end
+
+def get_opening_times_for restaurant
+  doc = Nokogiri::HTML(open(restaurant.link + '1'))
+  opening_times = {}
+  opening_times_ul = doc.at_css('#ContentHolderMain_ContentHolderMainContent_ContentHolderMainContent_riInfo_liWeek').parent.css('li')
+  opening_times_ul.each do |li|
+    opening_id = li.attribute('id').content.gsub(/ContentHolderMain_ContentHolderMainContent_ContentHolderMainContent_riInfo_li/, '')
+    case opening_id
+    when 'Week', 'Saturday', 'Sunday'
+      if li.content.strip.scan(/\d{2}:\d{2}/).length == 2
+        opening_times[opening_id] = li.content.strip.scan(/\d{2}:\d{2}/)
+      else
+        @mail_content << 'WTF week opening time' + li.content
+      end
+    when 'Notes'
+      opening_times['Notes'] = li.content.gsub('Opombe:', '').squish
+    when 'ClosedWeekends'
+      opening_times['Saturday'] = false
+      opening_times['Sunday'] = false
+    when 'ClosedSunday'
+      opening_times['Sunday'] = false
+    when 'ClosedSaturday'
+      opening_times['Saturday'] = false
+    else
+      @mail_content << 'WTF ID' + opening_id
+    end
+  end
+  return opening_times
+end
+
+def get_menu_for restaurant
+  doc = Nokogiri::HTML(open(restaurant.link + '0'))
+  menu = []
+  doc.css('.holderRestaurantInfo>ol>li').each do |li|
+    menu_item = []
+    li.css('li').each do |course|
+      menu_item << course.content.squish
+    end
+    menu << menu_item
+  end
+  return menu
 end
 
 def get_content_for restaurant
-  content = '<div class="prehrana_info"><h4><a href="' + restaurant['link'] + '0" target="_blank">' + restaurant['name'] + '</a></h4>'
+  content = '<div class="prehrana_info"><h4>' + restaurant['name'] + '</h4>'
   content += '<address>' + restaurant['address'] + '</address>'
   content += '<p><strong>' + restaurant['price'] + '</strong></p>'
   content += '<ul>'
@@ -60,18 +102,15 @@ def get_content_for restaurant
     content += '<li>Opombe: ' + restaurant['opening']['Notes'] + '</li>'
   end
   content += '</ul>'
-  if restaurant.menu
-    content += '<ul class="menu">'
-    restaurant.menu.each do |menu_item|
-      content += '<li>' + menu_item.join(', ') + '</li>'
-    end
-    content += '</ul></div>'
+  if restaurant.menu.any?
+    content += '<p><a href="#" class="loadMenu" data-restaurant="' + restaurant['id'].to_s + '">' + 'Jedilnik</a></p>'
   end
+  return content
 end
 
-task :load_restaurants => :environment do
-  puts 'Updating restaurants...'
-  mail_content = ['Restaurant update report']
+task :update_restaurants => :environment do
+  p 'Updating restaurants...'
+  @mail_content = ['Restaurant update report']
   doc = Nokogiri::HTML(open('http://www.studentska-prehrana.si/Pages/Directory.aspx'))
   restaurant_items = doc.css('.holderRestaurant ul li ul li:not(.blocked)')
   if restaurant_items.count > 0
@@ -89,83 +128,41 @@ task :load_restaurants => :environment do
           restaurant.restaurant_id = restaurant_id
           restaurant.address = div.css('h2').first.content.gsub(/[()]/, "")
           restaurant.coordinates = get_coordinates_for restaurant.address
-          mail_content << 'Adding new restaurant ' + restaurant.name + ' | ' + restaurant.restaurant_id
+          @mail_content << 'Adding new restaurant ' + restaurant.name + ' | ' + restaurant.restaurant_id
         end
         restaurant.price = div.css('.prices strong').first.content
+        
+        p 'Saving ' + restaurant.name + ' - ID: ' + restaurant.restaurant_id
         restaurant.save!
       end
-      mail_content << 'Deleting restaurants: ' + Restaurant.select(:name).find(restaurants_to_delete).to_s
+      @mail_content << 'Deleting restaurants: ' + Restaurant.select(:name).find(restaurants_to_delete).to_s
       Restaurant.delete(restaurants_to_delete)
     end
-    mail_content << 'Total: ' + restaurant_items.count.to_s + ' restaurants.'
+    @mail_content << 'Total: ' + restaurant_items.count.to_s + ' restaurants.'
     
-    puts 'Getting opening times...'
+    p 'Getting opening times, menu and content...'
     Restaurant.all.each do |restaurant|
-      doc = Nokogiri::HTML(open(restaurant.link + '1'))
-      opening_times = {}
-      opening_times_ul = doc.at_css('#ContentHolderMain_ContentHolderMainContent_ContentHolderMainContent_riInfo_liWeek').parent.css('li')
-      opening_times_ul.each do |li|
-        opening_id = li.attribute('id').content.gsub(/ContentHolderMain_ContentHolderMainContent_ContentHolderMainContent_riInfo_li/, '')
-        case opening_id
-        when 'Week', 'Saturday', 'Sunday'
-          if li.content.strip.scan(/\d{2}:\d{2}/).length == 2
-            opening_times[opening_id] = li.content.strip.scan(/\d{2}:\d{2}/)
-          else
-            mail_content << 'WTF week opening time' + li.content
-          end
-        when 'Notes'
-          opening_times['Notes'] = li.content.gsub('Opombe:', '').strip.squish
-        when 'ClosedWeekends'
-          opening_times['Saturday'] = false
-          opening_times['Sunday'] = false
-        when 'ClosedSunday'
-          opening_times['Sunday'] = false
-        when 'ClosedSaturday'
-          opening_times['Saturday'] = false
-        else
-          mail_content << 'WTF ID' + opening_id
-        end
-      end
-      restaurant.opening = opening_times
+      restaurant.opening = get_opening_times_for restaurant
+      restaurant.menu = get_menu_for restaurant
       restaurant.content = get_content_for restaurant
+      
+      p 'Saving ' + restaurant.name + ' - ID: ' + restaurant.restaurant_id
       restaurant.save!
     end
   else
-    mail_content << 'Restaurant update failed!'
+    @mail_content << 'Restaurant update failed!'
   end
   
-  puts 'sending email'
-  API_KEY = ENV['MAILGUN_API_KEY']
-  API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/app12738544.mailgun.org"
-  RestClient.post API_URL+"/messages", 
-      :from => "Boni<info@mr.si>",
-      :to => "info@mr.si",
-      :subject => "Restaurants update",
-      :text => mail_content.join("\n") 
-      
-  puts 'done.'
-end
-
-task :refresh_content => :environment do
-  Restaurant.all.each do |restaurant|
-    restaurant.content = get_content_for restaurant
-    restaurant.save
+  if ENV['MAILGUN_API_KEY']
+    p 'Sending email...'
+    API_KEY = ENV['MAILGUN_API_KEY']
+    API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/app12738544.mailgun.org"
+    RestClient.post API_URL+"/messages", 
+        :from => "Boni<info@mr.si>",
+        :to => "info@mr.si",
+        :subject => "Restaurants update",
+        :text => @mail_content.join("\n") 
   end
-end
-
-task :load_menus => :environment do
-  puts 'Getting menus...'
-  Restaurant.all.each do |restaurant|
-    doc = Nokogiri::HTML(open(restaurant.link + '0'))
-    menu = []
-    doc.css('.holderRestaurantInfo>ol>li').each do |li|
-      menu_item = []
-      li.css('li').each do |course|
-        menu_item << course.content
-      end
-      menu << menu_item
-    end
-    restaurant.menu = menu
-    restaurant.save!
-  end
+  
+  p 'done.'
 end

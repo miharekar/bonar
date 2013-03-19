@@ -43,17 +43,26 @@ html, body, .container, #map {
   }
 }
 
-#map {  
+#map {
+  ul {
+    list-style: none;
+  }
+  
+  .menu li {
+    padding-left: 1px;
+    list-style: disc inside;
+  }
+  
   .prehrana_info {
-    max-width: 250px;
-    padding-bottom: 2px;
+    max-width: 260px;
+    margin-bottom: 2px;
   }
   
   .menu {
     list-style: disc inside;
   }
   
-  a {
+  h4, a {
     color: #ff8c1f;
     font-weight: bold;
   }
