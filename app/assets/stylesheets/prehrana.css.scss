@@ -45,9 +45,12 @@ html, body, .container, #map {
 
 #map {  
   .prehrana_info {
-    overflow: hidden;
     max-width: 250px;
     padding-bottom: 2px;
+  }
+  
+  .menu {
+    list-style: disc inside;
   }
   
   a {

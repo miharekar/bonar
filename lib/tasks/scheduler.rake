@@ -59,7 +59,14 @@ def get_content_for restaurant
   if restaurant['opening']['Notes']
     content += '<li>Opombe: ' + restaurant['opening']['Notes'] + '</li>'
   end
-  content += '</ul></div>'
+  content += '</ul>'
+  if restaurant.menu
+    content += '<ul class="menu">'
+    restaurant.menu.each do |menu_item|
+      content += '<li>' + menu_item.join(', ') + '</li>'
+    end
+    content += '</ul></div>'
+  end
 end
 
 task :load_restaurants => :environment do
@@ -121,7 +128,7 @@ task :load_restaurants => :environment do
       end
       restaurant.opening = opening_times
       restaurant.content = get_content_for restaurant
-      restaurant.save
+      restaurant.save!
     end
   else
     mail_content << 'Restaurant update failed!'
@@ -137,4 +144,28 @@ task :load_restaurants => :environment do
       :text => mail_content.join("\n") 
       
   puts 'done.'
+end
+
+task :refresh_content => :environment do
+  Restaurant.all.each do |restaurant|
+    restaurant.content = get_content_for restaurant
+    restaurant.save
+  end
+end
+
+task :load_menus => :environment do
+  puts 'Getting menus...'
+  Restaurant.all.each do |restaurant|
+    doc = Nokogiri::HTML(open(restaurant.link + '0'))
+    menu = []
+    doc.css('.holderRestaurantInfo>ol>li').each do |li|
+      menu_item = []
+      li.css('li').each do |course|
+        menu_item << course.content
+      end
+      menu << menu_item
+    end
+    restaurant.menu = menu
+    restaurant.save!
+  end
 end

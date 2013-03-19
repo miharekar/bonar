@@ -1,5 +1,6 @@
 class Restaurant < ActiveRecord::Base
   serialize :coordinates, Array
+  serialize :menu, Array
   serialize :opening, Hash
   
   def self.search(search)
