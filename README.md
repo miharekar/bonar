@@ -64,22 +64,22 @@ Successfully running Ruby 2.0.0 and Rails 4.0.0.
         "sladica,sok"
       ]
     ],
-    features: [
+    "features": [
       {
-        title: "Solatni bar",
-        feature_id: 7
+        "title": "kosila",
+        "feature_id": 10
       },
       {
-        title: "Stalen arhitektonsko prilagojen dostop za invalide in dostop do mize v notranjosti lokala ter do toalete prilagojene za invalide",
-        feature_id: 8
+        "title": "solatni bar",
+        "feature_id": 7
       },
       {
-        title: "kosila",
-        feature_id: 10
+        "title": "dostop za invalide (WC)",
+        "feature_id": 8
       },
       {
-        title: "Vegetarijanska prehrana",
-        feature_id: 1
+        "title": "vegetarijanska prehrana",
+        "feature_id": 1
       }
     ]
   },
@@ -104,26 +104,26 @@ Successfully running Ruby 2.0.0 and Rails 4.0.0.
       "Sunday": false
     },
     "menu": [],
-    features: [
+    "features": [
       {
-        title: "Celiakiji prijazni obroki",
-        feature_id: 2
+        "title": "kosila",
+        "feature_id": 10
       },
       {
-        title: "kosila",
-        feature_id: 10
+        "title": "odprto ob vikendih",
+        "feature_id": 9
       },
       {
-        title: "Vegetarijanska prehrana",
-        feature_id: 1
+        "title": "celiakiji prijazni obroki",
+        "feature_id": 2
       },
       {
-        title: "odprto ob vikendih",
-        feature_id: 9
+        "title": "vegetarijanska prehrana",
+        "feature_id": 1
       },
       {
-        title: "Stalen arhitektonsko prilagojen dostop za invalide in dostop do mize v notranjosti lokala",
-        feature_id: 3
+        "title": "dostop za invalide",
+        "feature_id": 3
       }
     ]
   },…
