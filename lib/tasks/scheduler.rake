@@ -95,27 +95,28 @@ def get_menu_for restaurant
 end
 
 def get_content_for restaurant
-  content = '<div class="prehrana_info"><h4>' + restaurant['name'] + '</h4>'
-  content += '<address>' + restaurant['address'] + '</address>'
-  content += '<p><strong>' + restaurant['price'] + '</strong></p>'
+  content = '<div class="prehrana_info"><h4>' + restaurant.name + '</h4>'
+  content += '<address>' + restaurant.address + '</address>'
+  content += '<p><strong>' + restaurant.price + '</strong></p>'
   content += '<ul>'
-  content += '<li>Delavnik: ' + restaurant['opening']['Week'][0] + ' - ' + restaurant['opening']['Week'][1] + '</li>'
-  if restaurant['opening']['Saturday']
-    content += '<li>Sobota: ' + restaurant['opening']['Saturday'][0] + ' - ' + restaurant['opening']['Saturday'][1] + '</li>'
+  content += '<li>Delavnik: ' + restaurant.opening['Week'][0] + ' - ' + restaurant.opening['Week'][1] + '</li>'
+  if restaurant.opening['Saturday']
+    content += '<li>Sobota: ' + restaurant.opening['Saturday'][0] + ' - ' + restaurant.opening['Saturday'][1] + '</li>'
   else
     content += '<li>Sobota: zaprto</li>'
   end
-  if restaurant['opening']['Sunday']
-    content += '<li>Nedelja: ' + restaurant['opening']['Sunday'][0] + ' - ' + restaurant['opening']['Sunday'][1] + '</li>'
+  if restaurant.opening['Sunday']
+    content += '<li>Nedelja: ' + restaurant.opening['Sunday'][0] + ' - ' + restaurant.opening['Sunday'][1] + '</li>'
   else
     content += '<li>Nedelja: zaprto</li>'
   end
-  if restaurant['opening']['Notes']
-    content += '<li>Opombe: ' + restaurant['opening']['Notes'] + '</li>'
+  if restaurant.opening['Notes']
+    content += '<li>Opombe: ' + restaurant.opening['Notes'] + '</li>'
   end
   content += '</ul>'
+  content += '<p>Storitve: ' + restaurant.features.map(&:title).join(', ') + '</p>'
   if restaurant.menu.any?
-    content += '<p><a href="#" class="loadMenu" data-restaurant="' + restaurant['id'].to_s + '">' + 'Jedilnik</a></p>'
+    content += '<p><a href="#" class="loadMenu" data-restaurant="' + restaurant.id.to_s + '">' + 'Jedilnik</a></p>'
   end
   return content
 end

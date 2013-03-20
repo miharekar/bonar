@@ -12,7 +12,6 @@ class PrehranaController < ApplicationController
       content = '<ul class="menu">'
       menu[:menu].each do |menu_item|
         content += '<li>' + menu_item.join(', ') + '</li>'
-        p menu_item
       end
       content += '</ul>'
       render :text => content
