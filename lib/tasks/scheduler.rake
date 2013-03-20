@@ -187,3 +187,11 @@ task :update_restaurants => :environment do
   
   p 'done.'
 end
+
+task :update_content => :environment do
+  Restaurant.all.each do |restaurant|
+    restaurant.content = get_content_for restaurant
+    p 'Saving ' + restaurant.name + ' - ID: ' + restaurant.restaurant_id
+    restaurant.save!
+  end
+end
