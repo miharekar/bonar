@@ -63,6 +63,24 @@ Successfully running Ruby 2.0.0 and Rails 4.0.0.
         "solatni bar 8 - solat",
         "sladica,sok"
       ]
+    ],
+    features: [
+      {
+        title: "Solatni bar",
+        feature_id: 7
+      },
+      {
+        title: "Stalen arhitektonsko prilagojen dostop za invalide in dostop do mize v notranjosti lokala ter do toalete prilagojene za invalide",
+        feature_id: 8
+      },
+      {
+        title: "kosila",
+        feature_id: 10
+      },
+      {
+        title: "Vegetarijanska prehrana",
+        feature_id: 1
+      }
     ]
   },
   {
@@ -85,7 +103,29 @@ Successfully running Ruby 2.0.0 and Rails 4.0.0.
       ],
       "Sunday": false
     },
-    "menu": []
+    "menu": [],
+    features: [
+      {
+        title: "Celiakiji prijazni obroki",
+        feature_id: 2
+      },
+      {
+        title: "kosila",
+        feature_id: 10
+      },
+      {
+        title: "Vegetarijanska prehrana",
+        feature_id: 1
+      },
+      {
+        title: "odprto ob vikendih",
+        feature_id: 9
+      },
+      {
+        title: "Stalen arhitektonsko prilagojen dostop za invalide in dostop do mize v notranjosti lokala",
+        feature_id: 3
+      }
+    ]
   },…
 ]
 ```

@@ -11,18 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130319154438) do
+ActiveRecord::Schema.define(version: 20130320143623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "features", force: true do |t|
+    t.string   "title"
+    t.integer  "feature_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "features_restaurants", id: false, force: true do |t|
+    t.integer "feature_id",    null: false
+    t.integer "restaurant_id", null: false
+  end
+
+  add_index "features_restaurants", ["restaurant_id", "feature_id"], name: "index_features_restaurants_on_restaurant_id_and_feature_id", unique: true
 
   create_table "restaurants", force: true do |t|
     t.string   "name"
     t.string   "address"
     t.string   "price"
     t.text     "coordinates"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "link"
     t.string   "restaurant_id"
     t.text     "opening"

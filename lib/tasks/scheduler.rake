@@ -40,6 +40,18 @@ def get_restaurant_id restaurant_div
   return parameters['e_restaurant'][0]  
 end
 
+def create_feature(feature_id, doc)
+  title = doc.at_css('#rService' + feature_id).parent['title']
+  if title
+    @mail_content << 'Creating feature ' + title
+    feature = Feature.new
+    feature.feature_id = feature_id
+    feature.title = doc.at_css('#rService' + feature_id).parent['title']
+    return feature
+  end
+  return nil
+end
+
 def get_opening_times_for restaurant
   doc = Nokogiri::HTML(open(restaurant.link + '1'))
   opening_times = {}
@@ -124,13 +136,21 @@ task :update_restaurants => :environment do
         else
           restaurant = Restaurant.new
           restaurant.name = div.css('h1 a').first.content
-          restaurant.link = div.css('h1 a').first["href"][0...-1]
+          restaurant.link = div.css('h1 a').first['href'][0...-1]
           restaurant.restaurant_id = restaurant_id
           restaurant.address = div.css('h2').first.content.gsub(/[()]/, "")
           restaurant.coordinates = get_coordinates_for restaurant.address
           @mail_content << 'Adding new restaurant ' + restaurant.name + ' | ' + restaurant.restaurant_id
         end
         restaurant.price = div.css('.prices strong').first.content
+        
+        div.attribute('sssp:rs').value.split(';').each do |feature_id|
+          feature = Feature.find_by_feature_id(feature_id)
+          if !feature
+            feature = create_feature(feature_id, doc)
+          end
+          restaurant.features << feature
+        end
         
         p 'Saving ' + restaurant.name + ' - ID: ' + restaurant.restaurant_id
         restaurant.save!

@@ -6,6 +6,6 @@ class ApiController < ApplicationController
       restaurants = Restaurant.all
     end
     
-    render :json => restaurants.each{|r| r[:link] += '0'}.to_json(only:[:name, :address, :price, :coordinates, :opening, :link, :menu])
+    render :json => restaurants.each{|r| r[:link] += '0'}.to_json(only:[:name, :address, :price, :coordinates, :opening, :link, :menu], include:{:features => {:only => [:feature_id, :title]}})
   end
 end
