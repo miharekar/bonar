@@ -8,9 +8,9 @@ class PrehranaController < ApplicationController
   
   def menu
     if params[:restaurant]
-      menu = Restaurant.select(:menu).find(params[:restaurant])
+      menu = Restaurant.select(:menu).find(params[:restaurant])[:menu]
       content = '<ul class="menu">'
-      menu[:menu].each do |menu_item|
+      menu.each do |menu_item|
         content += '<li>' + menu_item.join(', ') + '</li>'
       end
       content += '</ul>'
