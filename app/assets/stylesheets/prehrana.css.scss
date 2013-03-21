@@ -24,9 +24,9 @@ html, body, .container, #map {
 
 #searchBar {
   position: absolute;
-  width: 60%;
-  bottom: 5%;
-  margin: 0 20%;
+  width: 80%;
+  bottom: 8%;
+  margin: 0 10%;
   z-index: 10;
 }
 
@@ -41,6 +41,10 @@ html, body, .container, #map {
   img {
     vertical-align: middle;
   }
+}
+
+#switches {
+  float: left;
 }
 
 #map {
@@ -71,4 +75,72 @@ html, body, .container, #map {
     margin-top: 5px;
     font-style: normal;
   }
+}
+
+.onoffswitch {
+  margin-top: 2px;
+  margin-right: 2px;
+  float: left;
+    position: relative; width: 50px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+
+.onoffswitch-image {
+  float: left;
+  width: 20px;
+  height: 24px;
+  margin-top: 2px;
+  margin-right: 2px;
+  vertical-align: middle;
+}
+
+.onoffswitch-checkbox {
+    display: none;
+}
+
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+
+.onoffswitch-inner {
+    width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+}
+
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    float: left; width: 50%; height: 20px; padding: 0; line-height: 20px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+.onoffswitch-inner:before {
+    content: "I";
+    padding-left: 10px;
+    background-color: #FF8C1F; color: #FFFFFF;
+}
+
+.onoffswitch-inner:after {
+    content: "O";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+
+.onoffswitch-switch {
+    width: 20px; margin: 0px;
+    background: #FFFFFF;
+    border: 2px solid #999999; border-radius: 20px;
+    position: absolute; top: 0; bottom: 0; right: 26px;
+    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
 }

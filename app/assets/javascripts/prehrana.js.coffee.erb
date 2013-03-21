@@ -98,5 +98,8 @@ $ ->
       iw.setContent $('.prehrana_info').parent()[0]
       iw.open map.map, latestMarker
     ), 'html'
+  
+  $('#delivery_switch').on 'change', () ->
+    console.log 'aaa'
       
 window.console and window.console.info('O, živjo, kaj pa ti tukaj? API je na voljo na http://boni.mr.si/api/restaurants, source pa na https://github.com/mrfoto/studentska-prehrana ;)')  
