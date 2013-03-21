@@ -145,6 +145,7 @@ task :update_restaurants => :environment do
         end
         restaurant.price = div.css('.prices strong').first.content
         
+        restaurant.features.delete_all
         div.attribute('sssp:rs').value.split(';').each do |feature_id|
           feature = Feature.find_by_feature_id(feature_id)
           if !feature
