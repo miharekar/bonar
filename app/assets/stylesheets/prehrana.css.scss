@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-html, body, div, h1, h2, h3, h4, h5, h6, p, address, ul, li {
+html, body, div, h1, h2, h3, h4, h5, h6, p, address, ul, ol, li {
     margin: 0;
     padding: 0;
     border: 0;
@@ -44,22 +44,18 @@ html, body, .container, #map {
 }
 
 #map {
-  ul {
+  ul li {
     list-style: none;
   }
   
-  .menu li {
+  ol li {
     padding-left: 1px;
-    list-style: disc inside;
+    list-style: decimal inside;
   }
   
   .prehrana_info {
     max-width: 260px;
     margin-bottom: 2px;
-  }
-  
-  .menu {
-    list-style: disc inside;
   }
   
   h4, a {
@@ -72,7 +68,7 @@ html, body, .container, #map {
     text-decoration: none;
   }
 
-  address, p, ul   {
+  address, p, ul, ol {
     margin-top: 5px;
     font-style: normal;
   }
