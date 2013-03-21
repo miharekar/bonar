@@ -12,3 +12,4 @@
 //
 //= require jquery_ujs
 //= require add2home
+//= require prefixfree

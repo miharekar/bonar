@@ -1,33 +1,47 @@
-<div id="searchBar">
-  <input type="text" id="restaurantSearch" placeholder="Išči"></input><a href="#" id="geolocateIcon"><img height="20px" width="20px" src="<%= path_to_image 'locate.svg' %>"></a>
-  <div id="switches">
-    <img class="onoffswitch-image" height="20px" width="20px" src="<%= path_to_image 'car.svg' %>">
-    <div class="onoffswitch">
-        <input type="checkbox" name="delivery" class="onoffswitch-checkbox" id="delivery_switch">
-        <label class="onoffswitch-label" for="delivery_switch">
-            <div class="onoffswitch-inner"></div>
-            <div class="onoffswitch-switch"></div>
-        </label>
-    </div>
-    <img class="onoffswitch-image" height="20px" width="17.444px" src="<%= path_to_image 'wheelchair.svg' %>">
-    <div class="onoffswitch">
-        <input type="checkbox" name="wheelchair" class="onoffswitch-checkbox" id="wheelchair_switch">
-        <label class="onoffswitch-label" for="wheelchair_switch">
-            <div class="onoffswitch-inner"></div>
-            <div class="onoffswitch-switch"></div>
-        </label>
-    </div>
-    <img class="onoffswitch-image" height="20px" width="20px" src="<%= path_to_image 'celiac.svg' %>">
-    <div class="onoffswitch">
-        <input type="checkbox" name="celiac" class="onoffswitch-checkbox" id="celiac_switch">
-        <label class="onoffswitch-label" for="celiac_switch">
-            <div class="onoffswitch-inner"></div>
-            <div class="onoffswitch-switch"></div>
-        </label>
-    </div>
-  </div>
+<div class="search" id="search">
+  <a href="#" class="close-menu">Close</a>
+  <a href="#" id="geolocateIcon" class="hidden"><img height="20px" width="20px" src="<%= path_to_image 'locate.svg' %>">Center on me</a>
+  <ul>
+    <li><input type="search" id="restaurantSearch" placeholder="Išči"></input></li>
+    <li>
+      <img class="onoffswitch-image" height="20px" width="20px" src="<%= path_to_image 'car.svg' %>">
+      <div class="onoffswitch">
+          <input type="checkbox" name="delivery" class="onoffswitch-checkbox" id="delivery_switch">
+          <label class="onoffswitch-label" for="delivery_switch">
+              <div class="onoffswitch-inner"></div>
+              <div class="onoffswitch-switch"></div>
+          </label>
+      </div>
+    </li>
+    <li>
+      <img class="onoffswitch-image" height="20px" width="17.444px" src="<%= path_to_image 'wheelchair.svg' %>">
+      <div class="onoffswitch">
+          <input type="checkbox" name="wheelchair" class="onoffswitch-checkbox" id="wheelchair_switch">
+          <label class="onoffswitch-label" for="wheelchair_switch">
+              <div class="onoffswitch-inner"></div>
+              <div class="onoffswitch-switch"></div>
+          </label>
+      </div>
+    </li>
+    <li>
+      <img class="onoffswitch-image" height="20px" width="20px" src="<%= path_to_image 'celiac.svg' %>">
+      <div class="onoffswitch">
+          <input type="checkbox" name="celiac" class="onoffswitch-checkbox" id="celiac_switch">
+          <label class="onoffswitch-label" for="celiac_switch">
+              <div class="onoffswitch-inner"></div>
+              <div class="onoffswitch-switch"></div>
+          </label>
+      </div>
+    </li>
+  </ul>
+</div>  
+<div  class="page-wrap">
+  <header class="main-header">
+    <a href="#search" class="open-menu">
+      Search
+    </a>
+  </header>
+  <div id='map'></div>
 </div>
-
-<div id='map'></div>
 <%= javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=true' %>
 <%= javascript_include_tag 'prehrana' %>
