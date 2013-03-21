@@ -143,7 +143,6 @@ task :update_restaurants => :environment do
           restaurant.coordinates = get_coordinates_for restaurant.address
           @mail_content << 'Adding new restaurant ' + restaurant.name + ' | ' + restaurant.restaurant_id
         end
-        restaurant.price = div.css('.prices strong').first.content
         
         restaurant.features.delete_all
         div.attribute('sssp:rs').value.split(';').each do |feature_id|
@@ -154,6 +153,11 @@ task :update_restaurants => :environment do
           restaurant.features << feature
         end
         
+        restaurant.price = div.css('.prices strong').first.content
+        restaurant.opening = get_opening_times_for restaurant
+        restaurant.menu = get_menu_for restaurant
+        restaurant.content = get_content_for restaurant
+        
         p 'Saving ' + restaurant.name + ' - ID: ' + restaurant.restaurant_id
         restaurant.save!
       end
@@ -161,16 +165,6 @@ task :update_restaurants => :environment do
       Restaurant.delete(restaurants_to_delete)
     end
     @mail_content << 'Total: ' + restaurant_items.count.to_s + ' restaurants.'
-    
-    p 'Getting opening times, menu and content...'
-    Restaurant.all.each do |restaurant|
-      restaurant.opening = get_opening_times_for restaurant
-      restaurant.menu = get_menu_for restaurant
-      restaurant.content = get_content_for restaurant
-      
-      p 'Saving ' + restaurant.name + ' - ID: ' + restaurant.restaurant_id
-      restaurant.save!
-    end
   else
     @mail_content << 'Restaurant update failed!'
   end
