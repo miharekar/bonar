@@ -26,10 +26,16 @@ html, body, .container, #map {
   display: none!important;
 }
 
-#geolocateIcon {
-  img {
-    vertical-align: middle;
-  }
+#geolocateIcon img {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+#restaurantSearch {
+  margin: 0 auto;
+  display: block;
 }
 
 #map {
@@ -88,13 +94,14 @@ html, body, .container, #map {
   transition: width 0.3s ease;
 }
 
-.search {
+.filter {
   position: fixed;
   top: 0;
   width: 0;
   height: 100%;
   background: #3B3B3B;
   overflow: hidden;
+  overflow-y: auto;
   transition: width 0.3s ease;
   a, li {
     display: block;
@@ -126,10 +133,11 @@ html, body, .container, #map {
   display: none;
 }
 
-#search:target {
+#filter:target {
   width: 20%;
 }
-#search:target + .page-wrap {
+
+#filter:target + .page-wrap {
   width: 80%;
   .open-menu {
      display: none; 

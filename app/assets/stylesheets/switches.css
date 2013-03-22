@@ -1,9 +1,10 @@
 .onoffswitch {
-  margin-top: 2px;
-  margin-right: 2px;
-  float: left;
-  position: relative; width: 50px;
-  user-select:none;
+  display: inline;
+  margin-top: -18px;
+  float: right;
+  position: relative;
+  width: 50px;
+  user-select: none;
 }
 
 .onoffswitch-image {

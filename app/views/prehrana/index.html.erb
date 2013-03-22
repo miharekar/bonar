@@ -1,10 +1,29 @@
-<div class="search" id="search">
+<div class="filter" id="filter">
   <a href="#" class="close-menu">Close</a>
-  <a href="#" id="geolocateIcon" class="hidden"><img height="20px" width="20px" src="<%= path_to_image 'locate.svg' %>">Center on me</a>
   <ul>
     <li><input type="search" id="restaurantSearch" placeholder="Išči"></input></li>
     <li>
-      <img class="onoffswitch-image" height="20px" width="20px" src="<%= path_to_image 'car.svg' %>">
+      vse
+      <div class="onoffswitch">
+        <input type="checkbox" name="all" class="onoffswitch-checkbox" id="all_switch" checked="checked">
+        <label class="onoffswitch-label" for="all_switch">
+          <div class="onoffswitch-inner"></div>
+          <div class="onoffswitch-switch"></div>
+        </label>
+      </div>
+    </li>
+    <li>
+      celiakiji prijazni obroki
+      <div class="onoffswitch">
+          <input type="checkbox" name="celiac" class="onoffswitch-checkbox" id="celiac_switch">
+          <label class="onoffswitch-label" for="celiac_switch">
+              <div class="onoffswitch-inner"></div>
+              <div class="onoffswitch-switch"></div>
+          </label>
+      </div>
+    </li>
+    <li>
+      dostava
       <div class="onoffswitch">
           <input type="checkbox" name="delivery" class="onoffswitch-checkbox" id="delivery_switch">
           <label class="onoffswitch-label" for="delivery_switch">
@@ -14,7 +33,7 @@
       </div>
     </li>
     <li>
-      <img class="onoffswitch-image" height="20px" width="17.444px" src="<%= path_to_image 'wheelchair.svg' %>">
+      dostop za invalide
       <div class="onoffswitch">
           <input type="checkbox" name="wheelchair" class="onoffswitch-checkbox" id="wheelchair_switch">
           <label class="onoffswitch-label" for="wheelchair_switch">
@@ -24,10 +43,70 @@
       </div>
     </li>
     <li>
-      <img class="onoffswitch-image" height="20px" width="20px" src="<%= path_to_image 'celiac.svg' %>">
+      dostop za invalide (WC)
       <div class="onoffswitch">
-          <input type="checkbox" name="celiac" class="onoffswitch-checkbox" id="celiac_switch">
-          <label class="onoffswitch-label" for="celiac_switch">
+          <input type="checkbox" name="wheelchair" class="onoffswitch-checkbox" id="wheelchair_wc_switch">
+          <label class="onoffswitch-label" for="wheelchair_wc_switch">
+              <div class="onoffswitch-inner"></div>
+              <div class="onoffswitch-switch"></div>
+          </label>
+      </div>
+    </li>
+    <li>
+      vegetarijanska prehrana 
+      <div class="onoffswitch">
+          <input type="checkbox" name="wheelchair" class="onoffswitch-checkbox" id="vegeterian_switch">
+          <label class="onoffswitch-label" for="vegeterian_switch">
+              <div class="onoffswitch-inner"></div>
+              <div class="onoffswitch-switch"></div>
+          </label>
+      </div>
+    </li>
+    <li>
+      odprto ob vikendih
+      <div class="onoffswitch">
+          <input type="checkbox" name="wheelchair" class="onoffswitch-checkbox" id="weekend_switch">
+          <label class="onoffswitch-label" for="weekend_switch">
+              <div class="onoffswitch-inner"></div>
+              <div class="onoffswitch-switch"></div>
+          </label>
+      </div>
+    </li>
+    <li>
+      kosila
+      <div class="onoffswitch">
+          <input type="checkbox" name="wheelchair" class="onoffswitch-checkbox" id="lunch_switch">
+          <label class="onoffswitch-label" for="lunch_switch">
+              <div class="onoffswitch-inner"></div>
+              <div class="onoffswitch-switch"></div>
+          </label>
+      </div>
+    </li>
+    <li>
+      pizze
+      <div class="onoffswitch">
+          <input type="checkbox" name="wheelchair" class="onoffswitch-checkbox" id="pizza_switch">
+          <label class="onoffswitch-label" for="pizza_switch">
+              <div class="onoffswitch-inner"></div>
+              <div class="onoffswitch-switch"></div>
+          </label>
+      </div>
+    </li>
+    <li>
+      hitra hrana
+      <div class="onoffswitch">
+          <input type="checkbox" name="wheelchair" class="onoffswitch-checkbox" id="fast_food_switch">
+          <label class="onoffswitch-label" for="fast_food_switch">
+              <div class="onoffswitch-inner"></div>
+              <div class="onoffswitch-switch"></div>
+          </label>
+      </div>
+    </li>
+    <li>
+      sendviči
+      <div class="onoffswitch">
+          <input type="checkbox" name="wheelchair" class="onoffswitch-checkbox" id="sandwich_switch">
+          <label class="onoffswitch-label" for="sandwich_switch">
               <div class="onoffswitch-inner"></div>
               <div class="onoffswitch-switch"></div>
           </label>
@@ -37,10 +116,11 @@
 </div>  
 <div  class="page-wrap">
   <header class="main-header">
-    <a href="#search" class="open-menu">
+    <a href="#filter" class="open-menu">
       Search
     </a>
   </header>
+  <a href="#" id="geolocateIcon" class="hidden"><img height="20px" width="20px" src="<%= path_to_image 'locate.svg' %>"></a>
   <div id='map'></div>
 </div>
 <%= javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=true' %>
