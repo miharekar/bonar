@@ -5,8 +5,8 @@ Prehrana::Application.routes.draw do
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
-  post 'search' => 'prehrana#search_restaurants'
-  post 'menu' => 'prehrana#menu'
+  get 'all_restaurants' => 'prehrana#all_restaurants'
+  get 'menu' => 'prehrana#menu'
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:

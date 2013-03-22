@@ -3,7 +3,7 @@
 //= require geolocationmarker
 
 $ ->
-  allRestaurants = latestSearch = latestMarker = timer = GeoMarker = null
+  latestMarker = timer = GeoMarker = null
   
   getMarkerIcon = (image) ->
     new google.maps.MarkerImage(image, null, null, null, new google.maps.Size(18,31));  
@@ -26,22 +26,15 @@ $ ->
       map.setZoom 15
       map.panTo marker.position
       google.maps.event.trigger(marker, 'click')
-      
+  
+  displayAllRestaurants = ->
+    $.getJSON '/all', (data) ->
+      window.restaurants = data
+      displayRestaurants()
+
   searchForRestaurants = (search) ->
-    if latestSearch isnt search
-      latestSearch = search
-      if search == '' and allRestaurants?        
-        window.restaurants = allRestaurants
-        displayRestaurants()
-      else
-        $.post '/search',
-          search: search
-        , ((data) ->
-          window.restaurants = data
-          displayRestaurants()
-          if search == ''
-            allRestaurants = data
-        ), 'json'
+    console.log 'todo'
+    #TODO: search and filter
 
   showGeoMarker = ->
     GeoMarker = new GeolocationMarker map.map
@@ -70,9 +63,12 @@ $ ->
     iw.setContent marker.content
     latestMarker = marker
     iw.open map.map, latestMarker
-  
+    
   scaleMarkers = [getMarkerIcon('<%= asset_path("markers/ffe7c8.png") %>'), getMarkerIcon('<%= asset_path("markers/ffcc95.png") %>'), getMarkerIcon('<%= asset_path("markers/ffad60.png") %>'), getMarkerIcon('<%= asset_path("markers/ff8c1f.png") %>'), getMarkerIcon('<%= asset_path("markers/e04f00.png") %>')]
-  searchForRestaurants ''
+  
+  $.getJSON '/all_restaurants', (data) ->
+    window.restaurants = data
+    displayRestaurants()
 
   if navigator.geolocation
     showGeoMarker()
@@ -91,7 +87,7 @@ $ ->
   $('#map').on 'click', '.loadMenu', (event) ->
     $this = $(this)
     event.preventDefault()
-    $.post '/menu',
+    $.get '/menu',
       restaurant: $this.data('restaurant')
     , ((data) ->
       $this.replaceWith data

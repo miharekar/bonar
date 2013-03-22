@@ -2,8 +2,8 @@ class PrehranaController < ApplicationController
   def index
   end
   
-  def search_restaurants
-    render :json => Restaurant.search(params[:search]).to_json(only:[:coordinates, :price], methods:[:content, :feature_ids])
+  def all_restaurants
+    render :json => Restaurant.all.to_json(only:[:id, :coordinates, :price], methods:[:content, :feature_ids])
   end
   
   def menu
