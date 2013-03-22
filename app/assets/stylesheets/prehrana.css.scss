@@ -134,7 +134,9 @@ html, body, .container, #map {
 }
 
 #filter:target {
-  width: 20%;
+  width: 300px;
+  min-width: 20%;
+  z-index: 10;
 }
 
 #filter:target + .page-wrap {

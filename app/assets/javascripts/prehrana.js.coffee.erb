@@ -81,12 +81,10 @@ $ ->
     event.preventDefault()
     map.panTo GeoMarker.getPosition()
   
-  $('#restaurantSearch').on 'keyup', ->
+  $('#restaurantSearch').on 'search', ->
     clearTimeout timer
     search = $(this).val()
-    timer = setTimeout(->
-        searchForRestaurants()
-      , 300)
+    searchForRestaurants()
       
   $('#map').on 'click', '.loadMenu', (event) ->
     $this = $(this)
@@ -105,6 +103,17 @@ $ ->
       $this = $(this)
       if $this.is(':checked')
         features.push $(this).data('feature-id')
+    if features.length
+      $('#all_switch').prop('checked', false)
+    else
+      $('#all_switch').prop('checked', true)
+    searchForRestaurants()
+    
+  $('#all_switch').on 'change', () ->
+    if $(this).is(':checked')
+      features = []
+      $('.feature-filter').each ->
+        $(this).prop('checked', false)
     searchForRestaurants()
       
 window.console and window.console.info('O, živjo, kaj pa ti tukaj? API je na voljo na http://boni.mr.si/api/restaurants, source pa na https://github.com/mrfoto/studentska-prehrana ;)')  

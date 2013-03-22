@@ -4,6 +4,9 @@
   Twitter: @mr_foto
   Location: Slovenia
 
+/* THANKS */
+	Mladen Prajdić: @MladenPrajdic
+
 /* SITE */
   Language: Slovenian
   Software: Ruby on Rails, Google Maps
