@@ -94,33 +94,6 @@ def get_menu_for restaurant
   return menu
 end
 
-def get_content_for restaurant
-  content = '<div class="prehrana_info"><h4>' + restaurant.name + '</h4>'
-  content += '<address>' + restaurant.address + '</address>'
-  content += '<p><strong>' + restaurant.price + '</strong></p>'
-  content += '<ul>'
-  content += '<li>Delavnik: ' + restaurant.opening['Week'][0] + ' - ' + restaurant.opening['Week'][1] + '</li>'
-  if restaurant.opening['Saturday']
-    content += '<li>Sobota: ' + restaurant.opening['Saturday'][0] + ' - ' + restaurant.opening['Saturday'][1] + '</li>'
-  else
-    content += '<li>Sobota: zaprto</li>'
-  end
-  if restaurant.opening['Sunday']
-    content += '<li>Nedelja: ' + restaurant.opening['Sunday'][0] + ' - ' + restaurant.opening['Sunday'][1] + '</li>'
-  else
-    content += '<li>Nedelja: zaprto</li>'
-  end
-  if restaurant.opening['Notes']
-    content += '<li>Opombe: ' + restaurant.opening['Notes'] + '</li>'
-  end
-  content += '</ul>'
-  content += '<p>Storitve: ' + restaurant.features.map(&:title).join(', ') + '</p>'
-  if restaurant.menu.any?
-    content += '<p><a href="#" class="loadMenu" data-restaurant="' + restaurant.id.to_s + '">' + 'Jedilnik</a></p>'
-  end
-  return content
-end
-
 task :update_restaurants => :environment do
   p 'Updating restaurants...'
   @mail_content = ['Restaurant update report']
@@ -156,7 +129,6 @@ task :update_restaurants => :environment do
         restaurant.price = div.css('.prices strong').first.content
         restaurant.opening = get_opening_times_for restaurant
         restaurant.menu = get_menu_for restaurant
-        restaurant.content = get_content_for restaurant
         
         p 'Saving ' + restaurant.name + ' - ID: ' + restaurant.restaurant_id
         restaurant.save!
@@ -181,12 +153,4 @@ task :update_restaurants => :environment do
   end
   
   p 'done.'
-end
-
-task :update_content => :environment do
-  Restaurant.all.each do |restaurant|
-    restaurant.content = get_content_for restaurant
-    p 'Saving ' + restaurant.name + ' - ID: ' + restaurant.restaurant_id
-    restaurant.save!
-  end
 end
