@@ -1,11 +1,12 @@
 Prehrana::Application.routes.draw do
-  get "api/restaurants"
+  get 'api/restaurants'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   get 'all_restaurants' => 'prehrana#all_restaurants'
+  get 'search' => 'prehrana#search'
   get 'menu' => 'prehrana#menu'
   # Keep in mind you can assign values other than :controller and :action
 

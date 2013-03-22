@@ -3,38 +3,42 @@
 //= require geolocationmarker
 
 $ ->
-  latestMarker = timer = GeoMarker = null
+  restaurants = filteredIDs = features = search = latestMarker = timer = GeoMarker = null
   
   getMarkerIcon = (image) ->
     new google.maps.MarkerImage(image, null, null, null, new google.maps.Size(18,31));  
   
   displayRestaurants = ->
     map.removeMarkers()
-    i = 0
-    while i < restaurants.length
-      restaurant = restaurants[i]
+    filteredRestaurants = if filteredIDs then restaurants.filter (restaurant) -> restaurant['id'] in filteredIDs else restaurants
+    
+    for restaurant in filteredRestaurants  
       marker = map.addMarker
         lat: restaurant['coordinates'][0]
         lng: restaurant['coordinates'][1]
         icon: scaleMarkers[restaurant['price'][0]]
         shadow: new google.maps.MarkerImage('<%= asset_path("markers/shadow.png") %>', null, null, new google.maps.Point(9,34), new google.maps.Size(31,34))
         content: restaurant['content']
-      oms.addMarker(marker);
-      i++
+      oms.addMarker(marker);   
       
-    if restaurants.length == 1 or (restaurants.length == 2 and restaurants[0]['coordinates'][0] == restaurants[1]['coordinates'][0] and restaurants[0]['coordinates'][1] == restaurants[1]['coordinates'][1])
+    if filteredRestaurants.length == 1 or (filteredRestaurants.length == 2 and filteredRestaurants[0]['coordinates'][0] == filteredRestaurants[1]['coordinates'][0] and filteredRestaurants[0]['coordinates'][1] == filteredRestaurants[1]['coordinates'][1])
       map.setZoom 15
       map.panTo marker.position
       google.maps.event.trigger(marker, 'click')
-  
-  displayAllRestaurants = ->
-    $.getJSON '/all', (data) ->
-      window.restaurants = data
-      displayRestaurants()
 
-  searchForRestaurants = (search) ->
-    console.log 'todo'
-    #TODO: search and filter
+  searchForRestaurants = ->
+    if search or features
+      $.getJSON '/search',
+        search: search
+        features: features
+      , (data) ->
+        filteredIDs = data
+        if restaurants
+          displayRestaurants()
+    else
+      filteredIDs = null
+      if restaurants
+        displayRestaurants()
 
   showGeoMarker = ->
     GeoMarker = new GeolocationMarker map.map
@@ -67,7 +71,7 @@ $ ->
   scaleMarkers = [getMarkerIcon('<%= asset_path("markers/ffe7c8.png") %>'), getMarkerIcon('<%= asset_path("markers/ffcc95.png") %>'), getMarkerIcon('<%= asset_path("markers/ffad60.png") %>'), getMarkerIcon('<%= asset_path("markers/ff8c1f.png") %>'), getMarkerIcon('<%= asset_path("markers/e04f00.png") %>')]
   
   $.getJSON '/all_restaurants', (data) ->
-    window.restaurants = data
+    restaurants = data
     displayRestaurants()
 
   if navigator.geolocation
@@ -81,8 +85,8 @@ $ ->
     clearTimeout timer
     search = $(this).val()
     timer = setTimeout(->
-        searchForRestaurants search
-      , 500)
+        searchForRestaurants()
+      , 300)
       
   $('#map').on 'click', '.loadMenu', (event) ->
     $this = $(this)
@@ -95,7 +99,12 @@ $ ->
       iw.open map.map, latestMarker
     ), 'html'
   
-  $('#delivery_switch').on 'change', () ->
-    console.log 'aaa'
+  $('.feature-filter').on 'change', () ->
+    features = []
+    $('.feature-filter').each ->
+      $this = $(this)
+      if $this.is(':checked')
+        features.push $(this).data('feature-id')
+    searchForRestaurants()
       
 window.console and window.console.info('O, živjo, kaj pa ti tukaj? API je na voljo na http://boni.mr.si/api/restaurants, source pa na https://github.com/mrfoto/studentska-prehrana ;)')  

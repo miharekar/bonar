@@ -4,14 +4,6 @@ class Restaurant < ActiveRecord::Base
   serialize :menu, Array
   serialize :opening, Hash
   
-  def self.search(search)
-    if search.empty?
-      all
-    else
-      where('name ILIKE :search OR address ILIKE :search', search: '%' + search + '%')
-    end
-  end
-  
   def content
     content = '<div class="prehrana_info"><h4>' + name + '</h4>'
     content += '<address>' + address + '</address>'
