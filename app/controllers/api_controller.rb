@@ -6,6 +6,18 @@ class ApiController < ApplicationController
       restaurants = Restaurant.where('name ILIKE :search OR address ILIKE :search', search: '%' + params[:search] + '%')
     end
 
-    render :json => restaurants.each{|r| r[:link] += '0'}.to_json(only:[:name, :address, :price, :coordinates, :opening, :link, :menu], include:{:features => {:only => [:feature_id, :title]}})
+    render :json => restaurants.to_json(only:[:id, :name, :address, :price, :coordinates, :opening])
+  end
+
+  def menu
+    if !params[:restaurant].blank?
+      render :json => Restaurant.select(:menu).find(params[:restaurant])[:menu]
+    end
+  end
+
+  def features
+    if !params[:restaurant].blank?
+      render :json => Restaurant.find(params[:restaurant]).features
+    end
   end
 end
