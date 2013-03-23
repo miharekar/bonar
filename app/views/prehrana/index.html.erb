@@ -1,36 +1,16 @@
 <div class="filter" id="filter">
-  <a href="#" class="close-menu">Close</a>
+  <a href="#" class="close-menu">zapri</a>
   <ul>
     <li><input type="search" id="restaurantSearch" placeholder="Išči" incremental="incremental"></input></li>
-    <li>
-      vse
-      <div class="onoffswitch">
-        <input type="checkbox" name="all" class="onoffswitch-checkbox" id="all_switch" checked="checked" disabled="disabled">
-        <label class="onoffswitch-label" for="all_switch">
-          <div class="onoffswitch-inner"></div>
-          <div class="onoffswitch-switch"></div>
-        </label>
-      </div>
-    </li>
+    <li><input type="checkbox" name="all" id="all_switch" checked="checked" disabled="disabled"><label for="all_switch">vse</label></li>
     <% @features.each do |feature| %>
-    <li>
-      <%= feature.title %>
-      <div class="onoffswitch">
-          <input type="checkbox" name="celiac" class="onoffswitch-checkbox feature-filter" id="<%= feature.title.gsub(' ', '') %>_switch"  data-feature-id="<%= feature.id %>">
-          <label class="onoffswitch-label" for="<%= feature.title.gsub(' ', '') %>_switch">
-              <div class="onoffswitch-inner"></div>
-              <div class="onoffswitch-switch"></div>
-          </label>
-      </div>
-    </li>
+    <li><input type="checkbox" name="celiac" class="feature-filter" id="<%= feature.title.gsub(' ', '') %>_switch"  data-feature-id="<%= feature.id %>"><label for="<%= feature.title.gsub(' ', '') %>_switch"><%= feature.title %></label></li>
     <% end %>
   </ul>
-</div>  
+</div>
 <div  class="page-wrap">
   <header class="main-header">
-    <a href="#filter" class="open-menu">
-      Search
-    </a>
+    <a href="#filter" class="open-menu button black">več</a>
   </header>
   <a href="#" id="geolocateIcon" class="hidden"><img height="20px" width="20px" src="<%= path_to_image 'locate.svg' %>"></a>
   <div id='map'></div>

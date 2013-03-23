@@ -42,21 +42,21 @@ html, body, .container, #map {
   ul li {
     list-style: none;
   }
-  
+
   ol li {
     list-style: decimal inside;
   }
-  
+
   .prehrana_info {
     max-width: 260px;
     margin-bottom: 2px;
   }
-  
+
   h4, a {
     color: #ff8c1f;
     font-weight: bold;
   }
-  
+
   a:hover {
     color: #ffad60;
     text-decoration: none;
@@ -68,11 +68,6 @@ html, body, .container, #map {
   }
 }
 
-
-
-
-
-
 .main-header {
   position: fixed;
   width: 100%;
@@ -81,9 +76,8 @@ html, body, .container, #map {
   transition: all 0.3s ease;
   a {
     position: absolute;
-    left: 20px;
-    top: 20px;
-    color: black;
+    left: 10px;
+    top: 10px;
   }
 }
 
@@ -100,16 +94,16 @@ html, body, .container, #map {
   width: 0;
   height: 100%;
   background: #3B3B3B;
-  overflow: hidden;
+  overflow-x: hidden;
   overflow-y: auto;
-  transition: width 0.3s ease;
-  a, li {
+  transition: 0.3s ease;
+  a,li {
     display: block;
     background: linear-gradient(#3E3E3E, #383838);
     border-top: 1px solid #484848;
     border-bottom: 1px solid #2E2E2E;
     color: white;
-    padding: 15px;
+    padding: 6px;
     &:hover, &:focus {
       background: linear-gradient(#484848, #383838);
     }
@@ -130,6 +124,7 @@ html, body, .container, #map {
 }
 
 .close-menu {
+  text-align: center;
   display: none;
 }
 
@@ -142,7 +137,7 @@ html, body, .container, #map {
 #filter:target + .page-wrap {
   width: 80%;
   .open-menu {
-     display: none; 
+     display: none;
   }
   .close-menu {
      display: block;
