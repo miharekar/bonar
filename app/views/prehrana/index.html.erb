@@ -1,10 +1,11 @@
 <div class="filter" id="filter">
   <a href="#" class="close-menu">zapri</a>
   <ul>
-    <li><input type="search" id="restaurantSearch" placeholder="Išči" incremental="incremental"></input></li>
-    <li><input type="checkbox" name="all" id="all_switch" checked="checked" disabled="disabled"><label for="all_switch">vse</label></li>
+    <li><input type="search" id="restaurant-search" placeholder="Išči" incremental="incremental"></li>
+    <li><input type="checkbox" name="all" id="adapt-bounds" checked="checked"><label for="adapt-bounds">Prilagajaj zemljevid</label></li>
+    <li><input type="checkbox" name="all" id="all-switch" checked="checked" disabled="disabled"><label for="all-switch">vse</label></li>
     <% @features.each do |feature| %>
-    <li><input type="checkbox" name="celiac" class="feature-filter" id="<%= feature.title.gsub(' ', '') %>_switch"  data-feature-id="<%= feature.id %>"><label for="<%= feature.title.gsub(' ', '') %>_switch"><%= feature.title %></label></li>
+    <li><input type="checkbox" name="<%= feature.title.gsub(' ', '') %>" class="feature-filter" id="<%= feature.title.gsub(' ', '') %>-switch" data-feature-id="<%= feature.id %>"><label for="<%= feature.title.gsub(' ', '') %>-switch"><%= feature.title %></label></li>
     <% end %>
   </ul>
 </div>

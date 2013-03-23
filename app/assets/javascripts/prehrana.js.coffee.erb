@@ -20,9 +20,9 @@ $ ->
         icon: scaleMarkers[restaurant['price'][0]]
         shadow: new google.maps.MarkerImage('<%= asset_path("markers/shadow.png") %>', null, null, new google.maps.Point(9,34), new google.maps.Size(31,34))
         content: restaurant['content']
-      oms.addMarker(marker);
+      oms.addMarker marker
       bounds.extend marker.getPosition()
-    if filteredRestaurants.length then map.fitBounds(bounds)
+    if filteredRestaurants.length and $('#adapt-bounds').is(':checked') then map.fitBounds(bounds)
     if filteredRestaurants.length == 1 then google.maps.event.trigger(marker, 'click')
 
   searchForRestaurants = ->
@@ -72,7 +72,7 @@ $ ->
     displayRestaurants()
     if navigator.geolocation then showGeoMarker()
 
-  $('#restaurantSearch').on 'search', ->
+  $('#restaurant-search').on 'search', ->
     search = $(this).val()
     searchForRestaurants()
 
