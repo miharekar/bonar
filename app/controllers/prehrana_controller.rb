@@ -4,7 +4,12 @@ class PrehranaController < ApplicationController
   end
 
   def all_restaurants
-    render :json => Restaurant.all.to_json(only:[:id, :coordinates, :price], methods:[:content, :feature_ids])
+    restaurants = Rails.cache.read('map_restaurants')
+    if restaurants.blank?
+      restaurants = Restaurant.all.to_json(only:[:id, :coordinates, :price], methods:[:content])
+      Rails.cache.write('map_restaurants', restaurants)
+    end
+    render :json => restaurants
   end
 
   def search

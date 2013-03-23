@@ -28,7 +28,7 @@ end
 def get_coordinates_for address
   coordinates = get_geopedia_coordinates_for address
   if !coordinates
-    coordinates =  get_google_coordinates_for address 
+    coordinates =  get_google_coordinates_for address
   end
   return coordinates
 end
@@ -37,7 +37,7 @@ def get_restaurant_id restaurant_div
   link = restaurant_div.css('h1 a').first["href"]
   uri = URI.parse(link)
   parameters = CGI.parse(URI.parse(link).query)
-  return parameters['e_restaurant'][0]  
+  return parameters['e_restaurant'][0]
 end
 
 def create_feature(feature_id, doc)
@@ -100,11 +100,11 @@ task :update_restaurants => :environment do
   doc = Nokogiri::HTML(open('http://www.studentska-prehrana.si/Pages/Directory.aspx'))
   restaurant_items = doc.css('.holderRestaurant ul li ul li:not(.blocked)')
   if restaurant_items.count > 0
-    restaurants_to_delete = Restaurant.pluck(:id)    
+    restaurants_to_delete = Restaurant.pluck(:id)
     Restaurant.transaction do
       restaurant_items.each do |div|
         restaurant_id = get_restaurant_id div
-        restaurant = Restaurant.find_by_restaurant_id(restaurant_id)        
+        restaurant = Restaurant.find_by_restaurant_id(restaurant_id)
         if restaurant
           restaurants_to_delete.delete(restaurant.id)
         else
@@ -116,7 +116,7 @@ task :update_restaurants => :environment do
           restaurant.coordinates = get_coordinates_for restaurant.address
           @mail_content << 'Adding new restaurant ' + restaurant.name + ' | ' + restaurant.restaurant_id
         end
-        
+
         restaurant.features.delete_all
         div.attribute('sssp:rs').value.split(';').each do |feature_id|
           feature = Feature.find_by_feature_id(feature_id)
@@ -125,32 +125,33 @@ task :update_restaurants => :environment do
           end
           restaurant.features << feature
         end
-        
+
         restaurant.price = div.css('.prices strong').first.content
         restaurant.opening = get_opening_times_for restaurant
         restaurant.menu = get_menu_for restaurant
-        
+
         p 'Saving ' + restaurant.name + ' - ID: ' + restaurant.restaurant_id
         restaurant.save!
       end
       @mail_content << 'Deleting restaurants: ' + Restaurant.select(:name).find(restaurants_to_delete).to_s
       Restaurant.delete(restaurants_to_delete)
     end
+    Rails.cache.delete('map_restaurants')
     @mail_content << 'Total: ' + restaurant_items.count.to_s + ' restaurants.'
   else
     @mail_content << 'Restaurant update failed!'
   end
-  
+
   if ENV['MAILGUN_API_KEY']
     p 'Sending email...'
     API_KEY = ENV['MAILGUN_API_KEY']
     API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/app12738544.mailgun.org"
-    RestClient.post API_URL+"/messages", 
+    RestClient.post API_URL+"/messages",
         :from => "Boni<info@mr.si>",
         :to => "info@mr.si",
         :subject => "Restaurants update",
-        :text => @mail_content.join("\n") 
+        :text => @mail_content.join("\n")
   end
-  
+
   p 'done.'
 end

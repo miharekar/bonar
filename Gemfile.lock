@@ -36,6 +36,7 @@ GEM
       execjs
     coffee-script-source (1.6.1)
     daemons (1.1.9)
+    dalli (2.6.2)
     erubis (2.7.0)
     eventmachine (1.0.1)
     execjs (1.4.0)
@@ -52,6 +53,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcachier (0.0.2)
     mime-types (1.21)
     minitest (4.6.2)
     multi_json (1.6.1)
@@ -117,9 +119,11 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0.beta1)
+  dalli
   geocoder
   gmapsjs
   jquery-rails
+  memcachier
   newrelic_rpm
   nokogiri
   pg
