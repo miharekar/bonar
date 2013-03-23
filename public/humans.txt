@@ -5,7 +5,9 @@
   Location: Slovenia
 
 /* THANKS */
-	Mladen Prajdić: @MladenPrajdic
+	Mladen Prajdić: @MladenPrajdic - for his sql expertise
+  Domen Savič: (savicdomen) - for countless RTs
+  All other Facebook friends and Twitter followers for spreading the love
 
 /* SITE */
   Language: Slovenian

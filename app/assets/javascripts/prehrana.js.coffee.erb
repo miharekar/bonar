@@ -1,44 +1,41 @@
 //= require gmapsjs
 //= require oms
 //= require geolocationmarker
-
+window.console and window.console.info('O, živjo, kaj pa ti tukaj? API je na voljo na http://boni.mr.si/api/restaurants, source pa na https://github.com/mrfoto/studentska-prehrana ;)')
 $ ->
   restaurants = filteredIDs = features = search = latestMarker = timer = GeoMarker = null
-  
+
   getMarkerIcon = (image) ->
-    new google.maps.MarkerImage(image, null, null, null, new google.maps.Size(18,31));  
-  
+    new google.maps.MarkerImage(image, null, null, null, new google.maps.Size(18,31));
+
   displayRestaurants = ->
+    if !restaurants?.length then return
     map.removeMarkers()
     filteredRestaurants = if filteredIDs then restaurants.filter (restaurant) -> restaurant['id'] in filteredIDs else restaurants
-    
-    for restaurant in filteredRestaurants  
+    bounds = new google.maps.LatLngBounds()
+    for restaurant in filteredRestaurants
       marker = map.addMarker
         lat: restaurant['coordinates'][0]
         lng: restaurant['coordinates'][1]
         icon: scaleMarkers[restaurant['price'][0]]
         shadow: new google.maps.MarkerImage('<%= asset_path("markers/shadow.png") %>', null, null, new google.maps.Point(9,34), new google.maps.Size(31,34))
         content: restaurant['content']
-      oms.addMarker(marker);   
-      
-    if filteredRestaurants.length == 1 or (filteredRestaurants.length == 2 and filteredRestaurants[0]['coordinates'][0] == filteredRestaurants[1]['coordinates'][0] and filteredRestaurants[0]['coordinates'][1] == filteredRestaurants[1]['coordinates'][1])
-      map.setZoom 15
-      map.panTo marker.position
-      google.maps.event.trigger(marker, 'click')
+      oms.addMarker(marker);
+      bounds.extend marker.getPosition()
+    if filteredRestaurants.length then map.fitBounds(bounds)
+    if filteredRestaurants.length == 1 then google.maps.event.trigger(marker, 'click')
 
   searchForRestaurants = ->
-    if search or features
+    if search?.length or features?.length
       $.getJSON '/search',
         search: search
         features: features
       , (data) ->
         filteredIDs = data
-        if restaurants
-          displayRestaurants()
+        displayRestaurants()
     else
       filteredIDs = null
-      if restaurants
-        displayRestaurants()
+      displayRestaurants()
 
   showGeoMarker = ->
     GeoMarker = new GeolocationMarker map.map
@@ -47,7 +44,7 @@ $ ->
       map.setZoom 15
       map.panTo @getPosition()
       $('#geolocateIcon').removeClass('hidden')
-  
+
   map = new GMaps(
     div: '#map'
     lat: 46.119944
@@ -55,40 +52,52 @@ $ ->
     zoom: 8
     disableDefaultUI: true
   )
-  
+
   oms = new OverlappingMarkerSpiderfier(map.map,
     keepSpiderfied: true
     markersWontMove: true
     markersWontHide: true
   )
-  
+
   iw = new google.maps.InfoWindow()
   oms.addListener 'click', (marker) ->
     iw.setContent marker.content
     latestMarker = marker
-    iw.open map.map, latestMarker
-    
+    iw.open map.map, marker
+
   scaleMarkers = [getMarkerIcon('<%= asset_path("markers/ffe7c8.png") %>'), getMarkerIcon('<%= asset_path("markers/ffcc95.png") %>'), getMarkerIcon('<%= asset_path("markers/ffad60.png") %>'), getMarkerIcon('<%= asset_path("markers/ff8c1f.png") %>'), getMarkerIcon('<%= asset_path("markers/e04f00.png") %>')]
-  
+
   $.getJSON '/all_restaurants', (data) ->
     restaurants = data
     displayRestaurants()
+    if navigator.geolocation then showGeoMarker()
 
-  if navigator.geolocation
-    showGeoMarker()
-    
-  $('#geolocateIcon').on 'click', (event) ->
-    event.preventDefault()
-    map.panTo GeoMarker.getPosition()
-  
   $('#restaurantSearch').on 'search', ->
-    clearTimeout timer
     search = $(this).val()
     searchForRestaurants()
-      
-  $('#map').on 'click', '.loadMenu', (event) ->
+
+  $('.feature-filter').on 'change', () ->
+    features = []
+    $('.feature-filter').each ->
+      if $(this).is(':checked') then features.push $(this).data('feature-id')
+    if features.length
+      $('#all_switch').prop('checked', false).prop('disabled', false)
+    else
+      $('#all_switch').prop('checked', true).prop('disabled', true)
+    searchForRestaurants()
+
+  $('#all_switch').on 'change', () ->
     $this = $(this)
+    if $this.is(':checked')
+      features = []
+      $this.prop('disabled', true)
+      $('.feature-filter').each ->
+        $(this).prop('checked', false)
+    searchForRestaurants()
+
+  $('#map').on 'click', '.loadMenu', (event) ->
     event.preventDefault()
+    $this = $(this)
     $.get '/menu',
       restaurant: $this.data('restaurant')
     , ((data) ->
@@ -96,26 +105,7 @@ $ ->
       iw.setContent $('.prehrana_info').parent()[0]
       iw.open map.map, latestMarker
     ), 'html'
-  
-  $('.feature-filter').on 'change', () ->
-    features = []
-    $('.feature-filter').each ->
-      $this = $(this)
-      if $this.is(':checked')
-        features.push $(this).data('feature-id')
-    if features.length
-      $('#all_switch').prop('checked', false)
-      $('#all_switch').prop('disabled', false)
-    else
-      $('#all_switch').prop('checked', true)
-    searchForRestaurants()
-    
-  $('#all_switch').on 'change', () ->
-    if $(this).is(':checked')
-      features = []
-      $(this).prop('disabled', true)
-      $('.feature-filter').each ->
-        $(this).prop('checked', false)
-    searchForRestaurants()
-      
-window.console and window.console.info('O, živjo, kaj pa ti tukaj? API je na voljo na http://boni.mr.si/api/restaurants, source pa na https://github.com/mrfoto/studentska-prehrana ;)')  
+
+  $('#geolocateIcon').on 'click', (event) ->
+    event.preventDefault()
+    map.panTo GeoMarker.getPosition()
