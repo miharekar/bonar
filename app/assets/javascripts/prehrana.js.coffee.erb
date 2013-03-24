@@ -1,9 +1,10 @@
 //= require gmapsjs
 //= require oms
 //= require geolocationmarker
+//= require jquery.typewatch
 window.console and window.console.info('O, živjo, kaj pa ti tukaj? API je na voljo na http://boni.mr.si/api/restaurants, source pa na https://github.com/mrfoto/studentska-prehrana ;)')
 $ ->
-  restaurants = filteredIDs = features = search = latestMarker = timer = GeoMarker = null
+  restaurants = filteredIDs = features = search = latestMarker = request = GeoMarker = null
 
   getMarkerIcon = (image) ->
     new google.maps.MarkerImage(image, null, null, null, new google.maps.Size(18,31));
@@ -26,8 +27,9 @@ $ ->
     if filteredRestaurants.length == 1 then google.maps.event.trigger(marker, 'click')
 
   searchForRestaurants = ->
+    if request? then request.abort()
     if search?.length or features?.length
-      $.getJSON '/search',
+      request = $.getJSON '/search',
         search: search
         features: features
       , (data) ->
@@ -72,9 +74,12 @@ $ ->
     displayRestaurants()
     if navigator.geolocation then showGeoMarker()
 
-  $('#restaurant-search').on 'search', ->
-    search = $(this).val()
-    searchForRestaurants()
+  $("#restaurant-search").typeWatch
+    callback: (val) ->
+      search = val
+      searchForRestaurants()
+    wait: 500
+    captureLength: 0
 
   $('.feature-filter').on 'change', () ->
     features = []

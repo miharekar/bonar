@@ -4,6 +4,7 @@ class PrehranaController < ApplicationController
   end
 
   def all_restaurants
+    #Rails.cache.delete('map_restaurants') #debug
     restaurants = Rails.cache.read('map_restaurants')
     if restaurants.blank?
       restaurants = Restaurant.all.to_json(only:[:id, :coordinates, :price], methods:[:content])
