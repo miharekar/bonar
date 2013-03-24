@@ -81,12 +81,12 @@ $ ->
     $('.feature-filter').each ->
       if $(this).is(':checked') then features.push $(this).data('feature-id')
     if features.length
-      $('#all_switch').prop('checked', false).prop('disabled', false)
+      $('#all-switch').prop('checked', false).prop('disabled', false)
     else
-      $('#all_switch').prop('checked', true).prop('disabled', true)
+      $('#all-switch').prop('checked', true).prop('disabled', true)
     searchForRestaurants()
 
-  $('#all_switch').on 'change', () ->
+  $('#all-switch').on 'change', () ->
     $this = $(this)
     if $this.is(':checked')
       features = []
