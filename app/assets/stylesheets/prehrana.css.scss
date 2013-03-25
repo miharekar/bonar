@@ -64,6 +64,18 @@ html, body, #map, #filter, #main {
 	}		
 }
 
+#filter li {
+  display: block;
+  background: linear-gradient(#3E3E3E, #383838);
+  border-top: 1px solid #484848;
+  border-bottom: 1px solid #2E2E2E;
+  color: white;
+  padding: 5px;
+  &:hover, &:focus {
+    background: linear-gradient(#484848, #383838);
+  }
+}
+
 #restaurant-search {
   width: 90%;
   margin: 0 5%;
@@ -97,17 +109,5 @@ html, body, #map, #filter, #main {
   address, p, ul, ol {
     margin-top: 5px;
     font-style: normal;
-  }
-}
-
-#filter li {
-  display: block;
-  background: linear-gradient(#3E3E3E, #383838);
-  border-top: 1px solid #484848;
-  border-bottom: 1px solid #2E2E2E;
-  color: white;
-  padding: 5px;
-  &:hover, &:focus {
-    background: linear-gradient(#484848, #383838);
   }
 }

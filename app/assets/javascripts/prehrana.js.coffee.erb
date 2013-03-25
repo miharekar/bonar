@@ -20,7 +20,6 @@ $ ->
         icon: scaleMarkers[restaurant['price'][0]]
         shadow: new google.maps.MarkerImage('<%= asset_path("markers/shadow.png") %>', null, null, new google.maps.Point(9,34), new google.maps.Size(31,34))
         content: restaurant['content']
-        zIndex: 5
       oms.addMarker marker
     fitMarkers()
     if filteredRestaurants.length == 1 then google.maps.event.trigger(marker, 'click')
@@ -59,6 +58,7 @@ $ ->
           background: '#fff'
         events:
           click: ->
+            $('#adapt-bounds').prop('checked', false)
             map.panTo GeoMarker.getPosition()
             if map.getZoom() < 14 then map.setZoom 14
             map.refresh()
