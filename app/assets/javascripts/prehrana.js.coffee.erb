@@ -6,7 +6,7 @@
 window.console and window.console.info('O, živjo, kaj pa ti tukaj? API je na voljo na http://boni.mr.si/api/restaurants, source pa na https://github.com/mrfoto/studentska-prehrana ;)')
 
 $ ->
-  restaurants = filteredRestaurants = filteredIDs = features = search = featureToggle = latestMarker = request = resizeTimer = geoMarker = null
+  restaurants = filteredRestaurants = filteredIDs = features = search = featureToggle = latestMarker = request = fitMarkersTimer = geoMarker = null
 
   getMarkerIcon = (image) ->
     new google.maps.MarkerImage(image, null, null, null, new google.maps.Size(18,31));
@@ -27,8 +27,8 @@ $ ->
     if filteredRestaurants.length == 1 then google.maps.event.trigger(marker, 'click')
     
   fitMarkers = ->
-    clearTimeout resizeTimer
-    resizeTimer = setTimeout(->
+    clearTimeout fitMarkersTimer
+    fitMarkersTimer = setTimeout(->
         map.refresh()
         if filteredRestaurants.length and $('#adapt-bounds').is(':checked') then map.fitZoom()
       , 300)
@@ -62,7 +62,7 @@ $ ->
           click: ->
             $('#adapt-bounds').prop('checked', false)
             map.panTo geoMarker.getPosition()
-            if map.getZoom() < 14 then map.setZoom 14
+            if map.getZoom() < 16 then map.setZoom 16
             map.refresh()
   
   showFeatureToggle = ->
@@ -168,6 +168,9 @@ $ ->
     $this = $(this)
     if $this.is(':checked')
       fitMarkers()
+      
+  $(document).scroll ->
+    if $(document).scrollLeft() > 100 then $(featureToggle).click()
   
   $(window).resize ->
     showFeatureToggle()
