@@ -6,7 +6,7 @@
 window.console and window.console.info('O, živjo, kaj pa ti tukaj? API je na voljo na http://boni.mr.si/api/restaurants, source pa na https://github.com/mrfoto/studentska-prehrana ;)')
 
 $ ->
-  restaurants = filteredRestaurants = filteredIDs = features = search = featureToggle = latestMarker = request = fitMarkersTimer = geoMarker = null
+  restaurants = filteredRestaurants = filteredIDs = features = search = featureToggle = latestMarker = request = fitMarkersTimer = horizontalScrollTimer = geoMarker = null
 
   getMarkerIcon = (image) ->
     new google.maps.MarkerImage(image, null, null, null, new google.maps.Size(18,31));
@@ -170,7 +170,11 @@ $ ->
       fitMarkers()
       
   $(document).scroll ->
-    if $(document).scrollLeft() > 100 then $(featureToggle).click()
+    if $(document).scrollLeft() > 100 and $('body').hasClass('active-nav')
+      clearTimeout horizontalScrollTimer
+      horizontalScrollTimer= setTimeout(->
+          $(featureToggle).click()
+        , 300)
   
   $(window).resize ->
     showFeatureToggle()
