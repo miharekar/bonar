@@ -4,7 +4,7 @@
 //= require jquery.typewatch
 window.console and window.console.info('O, živjo, kaj pa ti tukaj? API je na voljo na http://boni.mr.si/api/restaurants, source pa na https://github.com/mrfoto/studentska-prehrana ;)')
 $ ->
-  restaurants = filteredRestaurants = filteredIDs = features = search = latestMarker = request = resizeTimer = GeoMarker = null
+  restaurants = filteredRestaurants = filteredIDs = features = search = featureToggle = latestMarker = request = resizeTimer = GeoMarker = null
 
   getMarkerIcon = (image) ->
     new google.maps.MarkerImage(image, null, null, null, new google.maps.Size(18,31));
@@ -20,6 +20,7 @@ $ ->
         icon: scaleMarkers[restaurant['price'][0]]
         shadow: new google.maps.MarkerImage('<%= asset_path("markers/shadow.png") %>', null, null, new google.maps.Point(9,34), new google.maps.Size(31,34))
         content: restaurant['content']
+        zIndex: 5
       oms.addMarker marker
     fitMarkers()
     if filteredRestaurants.length == 1 then google.maps.event.trigger(marker, 'click')
@@ -48,7 +49,47 @@ $ ->
     GeoMarker = new GeolocationMarker map.map
     GeoMarker.setMinimumAccuracy 100
     google.maps.event.addListenerOnce GeoMarker, 'position_changed', ->
-      $('#geolocate-icon').removeClass('hidden')
+      map.addControl
+        position: 'top_right'
+        content: 'Kje sem?'
+        style:
+          margin: '5px'
+          padding: '2px 6px'
+          border: 'solid 1px #717B87'
+          background: '#fff'
+        events:
+          click: ->
+            map.panTo GeoMarker.getPosition()
+            if map.getZoom() < 14 then map.setZoom 14
+            map.refresh()
+  
+  showFeatureToggle = ->
+    if $(window).width() < 768
+      if !featureToggle?
+        featureToggle = map.addControl
+          position: 'top_left'
+          content: 'Iskalnik'
+          style:
+            margin: '5px'
+            padding: '2px 6px'
+            border: 'solid 1px #717B87'
+            background: '#fff'
+          events:
+            click: ->
+              if $('body').hasClass('active-nav')
+                $('body').removeClass('active-nav')
+                $(featureToggle).text('Iskalnik')
+                $('#adapt-bounds').prop('checked', false)
+              else
+                $('body').addClass('active-nav')
+                $(featureToggle).text('Skrij iskalnik')
+                $('#adapt-bounds').prop('checked', true)
+              fitMarkers()
+      $(featureToggle).show()
+    else if featureToggle?
+      $(featureToggle).hide()
+      $(featureToggle).text('Iskalnik')
+      $('body').removeClass('active-nav')
 
   map = new GMaps(
     div: '#map'
@@ -76,7 +117,9 @@ $ ->
     restaurants = data
     displayRestaurants()
     if navigator.geolocation then showGeoMarker()
-    
+  
+  showFeatureToggle()
+  
   $('#map').on 'click', '.loadMenu', (event) ->
     event.preventDefault()
     $this = $(this)
@@ -122,17 +165,7 @@ $ ->
     $this = $(this)
     if $this.is(':checked')
       fitMarkers()
-
-  $('#geolocate-icon').on 'click', (event) ->
-    event.preventDefault()
-    map.panTo GeoMarker.getPosition()
-    if map.getZoom() < 14 then map.setZoom 14
-    map.refresh()
-    
-  $('#toggle-filter').on 'click', (event) ->
-    event.preventDefault()
-    $('body').toggleClass('active-nav')
-    fitMarkers()
   
   $(window).resize ->
+    showFeatureToggle()
     fitMarkers()

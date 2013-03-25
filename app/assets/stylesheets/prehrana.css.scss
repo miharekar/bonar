@@ -64,14 +64,6 @@ html, body, #map, #filter, #main {
 	}		
 }
 
-#geolocate-icon img {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  margin-left: -10px;
-  z-index: 10;
-}
-
 #restaurant-search {
   width: 90%;
   margin: 0 5%;
@@ -119,35 +111,3 @@ html, body, #map, #filter, #main {
     background: linear-gradient(#484848, #383838);
   }
 }
-
-
-/*.filter {
-  position: fixed;
-  top: 0;
-  width: 0;
-  height: 100%;
-  overflow: hidden;
-  overflow-y: auto;
-  transition: width 0.3s ease;
-  a, li {
-    display: block;
-    background: linear-gradient(#3E3E3E, #383838);
-    border-top: 1px solid #484848;
-    border-bottom: 1px solid #2E2E2E;
-    color: white;
-    padding: 15px;
-    &:hover, &:focus {
-      background: linear-gradient(#484848, #383838);
-    }
-  }
-  &:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 34px;
-    background: linear-gradient(left, rgba(black, 0), rgba(black, 0.4));
-  }
-}
-*/
