@@ -21,8 +21,15 @@ $ ->
         shadow: new google.maps.MarkerImage('<%= asset_path("markers/shadow.png") %>', null, null, new google.maps.Point(9,34), new google.maps.Size(31,34))
         content: restaurant['content']
       oms.addMarker marker
-    if filteredRestaurants.length and $('#adapt-bounds').is(':checked') then map.fitZoom()
+    fitMarkers()
     if filteredRestaurants.length == 1 then google.maps.event.trigger(marker, 'click')
+    
+  fitMarkers = ->
+    clearTimeout resizeTimer
+    resizeTimer = setTimeout(->
+        map.refresh()
+        if filteredRestaurants.length and $('#adapt-bounds').is(':checked') then map.fitZoom()
+      , 300)
 
   searchForRestaurants = ->
     if request? then request.abort()
@@ -69,13 +76,28 @@ $ ->
     restaurants = data
     displayRestaurants()
     if navigator.geolocation then showGeoMarker()
+    
+  $('#map').on 'click', '.loadMenu', (event) ->
+    event.preventDefault()
+    $this = $(this)
+    $.get '/menu',
+      restaurant: $this.data('restaurant')
+    , ((data) ->
+      $this.replaceWith data
+      iw.setContent $('.prehrana_info').parent()[0]
+      iw.open map.map, latestMarker
+    ), 'html'
 
   $('#restaurant-search').typeWatch
     callback: (val) ->
       search = val
       searchForRestaurants()
     wait: 500
-    captureLength: 0
+    captureLength: 2
+    
+  $('#filter li').on 'click', (event) ->
+    if event.target == this
+      $(this).find('input').click()
 
   $('.feature-filter').on 'change', () ->
     features = []
@@ -95,26 +117,22 @@ $ ->
       $('.feature-filter').each ->
         $(this).prop('checked', false)
     searchForRestaurants()
-
-  $('#map').on 'click', '.loadMenu', (event) ->
-    event.preventDefault()
+    
+  $('#adapt-bounds').on 'change', () ->
     $this = $(this)
-    $.get '/menu',
-      restaurant: $this.data('restaurant')
-    , ((data) ->
-      $this.replaceWith data
-      iw.setContent $('.prehrana_info').parent()[0]
-      iw.open map.map, latestMarker
-    ), 'html'
+    if $this.is(':checked')
+      fitMarkers()
 
   $('#geolocate-icon').on 'click', (event) ->
     event.preventDefault()
     map.panTo GeoMarker.getPosition()
     if map.getZoom() < 14 then map.setZoom 14
+    map.refresh()
+    
+  $('#toggle-filter').on 'click', (event) ->
+    event.preventDefault()
+    $('body').toggleClass('active-nav')
+    fitMarkers()
   
   $(window).resize ->
-    clearTimeout resizeTimer
-    resizeTimer = setTimeout(->
-        map.refresh()
-        if filteredRestaurants.length and $('#adapt-bounds').is(':checked') then map.fitZoom()
-      , 100)
+    fitMarkers()
