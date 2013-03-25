@@ -2,9 +2,11 @@
 //= require oms
 //= require geolocationmarker
 //= require jquery.typewatch
+
 window.console and window.console.info('O, živjo, kaj pa ti tukaj? API je na voljo na http://boni.mr.si/api/restaurants, source pa na https://github.com/mrfoto/studentska-prehrana ;)')
+
 $ ->
-  restaurants = filteredRestaurants = filteredIDs = features = search = featureToggle = latestMarker = request = resizeTimer = GeoMarker = null
+  restaurants = filteredRestaurants = filteredIDs = features = search = featureToggle = latestMarker = request = resizeTimer = geoMarker = null
 
   getMarkerIcon = (image) ->
     new google.maps.MarkerImage(image, null, null, null, new google.maps.Size(18,31));
@@ -45,9 +47,9 @@ $ ->
       displayRestaurants()
 
   showGeoMarker = ->
-    GeoMarker = new GeolocationMarker map.map
-    GeoMarker.setMinimumAccuracy 100
-    google.maps.event.addListenerOnce GeoMarker, 'position_changed', ->
+    geoMarker = new GeolocationMarker map.map
+    geoMarker.setMinimumAccuracy 100
+    google.maps.event.addListenerOnce geoMarker, 'position_changed', ->
       map.addControl
         position: 'top_right'
         content: 'Kje sem?'
@@ -59,13 +61,14 @@ $ ->
         events:
           click: ->
             $('#adapt-bounds').prop('checked', false)
-            map.panTo GeoMarker.getPosition()
+            map.panTo geoMarker.getPosition()
             if map.getZoom() < 14 then map.setZoom 14
             map.refresh()
   
   showFeatureToggle = ->
     if $(window).width() < 768
       if !featureToggle?
+        $('#adapt-bounds').prop('checked', false)
         featureToggle = map.addControl
           position: 'top_left'
           content: 'Iskalnik'
@@ -96,6 +99,7 @@ $ ->
     lat: 46.119944
     lng: 14.815333
     zoom: 8
+    minZoom: 6
     disableDefaultUI: true
   )
 
@@ -120,14 +124,14 @@ $ ->
   
   showFeatureToggle()
   
-  $('#map').on 'click', '.loadMenu', (event) ->
+  $('#map').on 'click', '.load-menu', (event) ->
     event.preventDefault()
     $this = $(this)
     $.get '/menu',
       restaurant: $this.data('restaurant')
     , ((data) ->
       $this.replaceWith data
-      iw.setContent $('.prehrana_info').parent()[0]
+      iw.setContent $('.prehrana-info').parent()[0]
       iw.open map.map, latestMarker
     ), 'html'
 
@@ -135,7 +139,6 @@ $ ->
     callback: (val) ->
       search = val
       searchForRestaurants()
-    wait: 500
     captureLength: 2
     
   $('#filter li').on 'click', (event) ->

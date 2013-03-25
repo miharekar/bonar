@@ -1,12 +1,13 @@
 <div class="filter" id="filter">
   <ul>
-    <li><input type="checkbox" name="all" id="adapt-bounds"><label for="adapt-bounds">Prilagajaj zemljevid iskanju</label></li>
+    <li><input type="checkbox" name="all" id="adapt-bounds" checked="checked"><label for="adapt-bounds">Prilagajaj zemljevid iskanju</label></li>
     <li><input type="search" id="restaurant-search" placeholder="Išči" incremental="incremental" autocapitalize="off" autocorrect="off"></li>
     <li><input type="checkbox" name="all" id="all-switch" checked="checked" disabled="disabled"><label for="all-switch">vse</label></li>
     <% @features.each do |feature| %>
     <li class="feature-filter-li"><input type="checkbox" name="<%= feature.title.gsub(' ', '') %>" class="feature-filter" id="<%= feature.title.gsub(' ', '') %>-switch" data-feature-id="<%= feature.id %>"><label for="<%= feature.title.gsub(' ', '') %>-switch"><%= feature.title %></label></li>
     <% end %>
   </ul>
+  <div id="filter-shadow"></div>
 </div>
 <div class="main" id="main">
   <div id='map'></div>

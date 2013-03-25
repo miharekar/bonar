@@ -3,19 +3,19 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 html, body, div, h1, h2, h3, h4, h5, h6, p, address, ul, ol, li {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    vertical-align: baseline;
-    background: transparent;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+  background: transparent;
 }
 
 body {
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-weight: normal;
-    font-size: 13px;
-    line-height: 1;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 1;
 }
 
 html, body, #map, #filter, #main {
@@ -26,7 +26,7 @@ html, body, #map, #filter, #main {
   display: none!important;
 }
 
-#filter, #main {
+#filter, #main, #filter-shadow {
   transition: .3s all ease;
 }
 
@@ -42,6 +42,19 @@ html, body, #map, #filter, #main {
   width: 100%;
 	margin-left: 0;
 	float: left;
+  z-index: 5;
+  background-color: rgb(229, 227, 223);
+}
+
+#filter-shadow {
+  pointer-events:none;
+  position: absolute;
+  top: 0;
+  left: 20%;
+  margin-left: -34px;
+  height: 100%;
+  width: 34px;
+  background: linear-gradient(left, rgba(black, 0), rgba(black, 0.4));
 }
 
 .active-nav #filter {	
@@ -51,6 +64,10 @@ html, body, #map, #filter, #main {
 
 .active-nav #main {
 	margin-right: -100%;
+}
+
+.active-nav #filter-shadow {
+	left: 70%;
 }
 
 @media all and (min-width: 768px) {	
@@ -91,7 +108,7 @@ html, body, #map, #filter, #main {
     list-style: decimal inside;
   }
 
-  .prehrana_info {
+  .prehrana-info {
     max-width: 260px;
     margin-bottom: 2px;
   }

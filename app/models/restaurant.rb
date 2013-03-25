@@ -5,7 +5,7 @@ class Restaurant < ActiveRecord::Base
   serialize :opening, Hash
   
   def content
-    content = '<div class="prehrana_info"><h4>' + name + '</h4>'
+    content = '<div class="prehrana-info"><h4>' + name + '</h4>'
     content += '<address>' + address + '</address>'
     content += '<p><strong>' + price + '</strong></p>'
     content += '<ul>'
@@ -26,7 +26,7 @@ class Restaurant < ActiveRecord::Base
     content += '</ul>'
     content += '<p>Storitve: ' + features.map(&:title).join(', ') + '</p>'
     if menu.any?
-      content += '<p><a href="#" class="loadMenu" data-restaurant="' + id.to_s + '">' + 'Jedilnik</a></p>'
+      content += '<p><a href="#" class="load-menu" data-restaurant="' + id.to_s + '">' + 'Jedilnik</a></p>'
     end
     return content
   end

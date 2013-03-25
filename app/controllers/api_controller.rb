@@ -5,7 +5,6 @@ class ApiController < ApplicationController
     else
       restaurants = Restaurant.where('name ILIKE :search OR address ILIKE :search', search: '%' + params[:search] + '%')
     end
-
     render :json => restaurants.to_json(only:[:id, :name, :address, :price, :coordinates, :opening])
   end
 

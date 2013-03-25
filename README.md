@@ -7,6 +7,13 @@ My first Ruby on Rails app ^^
 Successfully running Ruby 2.0.0 and Rails 4.0.0.
 
 ##Unofficial API
+
+The API is in *no way* associated with official website [Študentska prehrana](http://www.studentska-prehrana.si/). It is simply one more thing I'm giving back to community.
+
+I scrape the data from the official site every day at 04:00 GMT. The updating process takes roughly 10 minutes.
+
+Should you use it, you absolutely must cache the response, since the data only changes once per day.
+
 ###Get restaurants
 
 * `GET http://boni.mr.si/api/restaurants` will return all restaurants.
