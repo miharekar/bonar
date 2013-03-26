@@ -1,6 +1,6 @@
 #Bonar
 
-> bónar -ja m (ọ̑) kdor ve, kje imajo bone: poglejmo na bonar / ura je bila 19 in ni vedela kje bi jedla, zato je pogledala na [bonar](http://bonar.si/) / ostala sva brez besed in ti si rekel bonar
+> bónar -ja m (ọ̑) kdor ve, kje imajo bone: poglejmo na bonar / ura je bila 19 in ni vedela kje bi jedla, zato je pogledala na bonar / ostala sva brez besed in ti si rekel bonar
 
 [Bonar: ponudniki študentske prehrane na zemljevidu](http://bonar.si/)
 
@@ -14,6 +14,12 @@ Ko sem začenjal z izdelavo, sem se ravno odločil naučiti [Ruby on Rails](http
 
 ###Issues
 Če imate kakršnekoli probleme ali ideje glede Bonarja, kar odprite [issue](https://github.com/mrfoto/bonar/issues) ali pa me kontaktirajte na Twitterju - [@mr_foto](https://twitter.com/mr_foto).
+
+##Thanks
+
+* Mladen Prajdić: [@MladenPrajdic](https://twitter.com/MladenPrajdic) - for his sql expertise
+* Domen Savič: [@savicdomen](https://twitter.com/savicdomen) - for countless RTs
+* All other Facebook friends and Twitter followers for spreading the love
 
 ##Unofficial API
 

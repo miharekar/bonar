@@ -5,11 +5,11 @@
   Location: Slovenia
 
 /* THANKS */
-	Mladen Prajdić: @MladenPrajdic - for his sql expertise
-  Domen Savič: (savicdomen) - for countless RTs
+  Mladen Prajdić: @MladenPrajdic - for his sql expertise
+  Domen Savič: @savicdomen - for countless RTs
   All other Facebook friends and Twitter followers for spreading the love
 
 /* SITE */
   Language: Slovenian
   Software: Ruby on Rails, Google Maps
-  Source: https://github.com/mrfoto/studentska-prehrana
+  Source: https://github.com/mrfoto/bonar
