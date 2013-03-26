@@ -64,7 +64,6 @@ $ ->
       addControlToMap('geo-marker', 'top_right', 'Kje sem?')
   
   showFeatureToggle = ->
-    isMobile = $(window).width() < 768
     if isMobile 
       if !featureToggle?
         $('#adapt-bounds').prop('checked', false)
@@ -75,6 +74,8 @@ $ ->
       $(featureToggle).text('Iskalnik')
       $('body').removeClass('active-nav')
     map.refresh()
+    
+  isMobile = $(window).width() < 768
     
   map = new GMaps(
     div: '#map'
@@ -172,5 +173,6 @@ $ ->
         , 300)
   
   $(window).resize ->
+    isMobile = $(window).width() < 768
     showFeatureToggle()
     fitMarkers()
