@@ -2,11 +2,13 @@
  * Add to Homescreen v2.0.7 ~ Copyright (c) 2013 Matteo Spinelli, http://cubiq.org
  * Released under MIT license, http://cubiq.org/license
  */
+
 window.addToHomeConfig = {
   touchIcon:true,
-  message:'Namesti si stran na %device: klikni %icon in nato <strong>Add to Home Screen</strong>.'
+  returningVisitor: true,
+  message:'Namesti si Bonar na %device: klikni %icon in nato <strong>Add to Home Screen</strong>.'
 };
- 
+
 var addToHome = (function (w) {
 	var nav = w.navigator,
 		isIDevice = 'platform' in nav && (/iphone|ipod|ipad/gi).test(nav.platform),
