@@ -26,7 +26,7 @@ html, body, #map, #filter, #main {
   display: none!important;
 }
 
-#filter, #main, #filter-shadow {
+.transitions #filter, .transitions #main, .transitions #filter-shadow {
   transition: .3s all ease;
 }
 

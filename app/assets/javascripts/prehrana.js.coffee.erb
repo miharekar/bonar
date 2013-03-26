@@ -105,6 +105,7 @@ $ ->
     displayRestaurants()
     if navigator.geolocation then showGeoMarker()
     showFeatureToggle()
+    $('body').addClass('transitions');
   
   $('#map').on 'click', '.load-menu', (event) ->
     event.preventDefault()
