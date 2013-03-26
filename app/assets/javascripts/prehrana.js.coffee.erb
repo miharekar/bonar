@@ -74,7 +74,8 @@ $ ->
       $(featureToggle).hide()
       $(featureToggle).text('Iskalnik')
       $('body').removeClass('active-nav')
-
+    map.refresh()
+    
   map = new GMaps(
     div: '#map'
     lat: 46.119944
@@ -173,5 +174,4 @@ $ ->
   
   $(window).resize ->
     showFeatureToggle()
-    map.refresh()
     fitMarkers()
