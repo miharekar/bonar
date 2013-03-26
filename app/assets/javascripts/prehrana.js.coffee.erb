@@ -103,8 +103,7 @@ $ ->
     restaurants = data
     displayRestaurants()
     if navigator.geolocation then showGeoMarker()
-  
-  showFeatureToggle()
+    showFeatureToggle()
   
   $('#map').on 'click', '.load-menu', (event) ->
     event.preventDefault()
