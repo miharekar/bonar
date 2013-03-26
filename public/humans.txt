@@ -6,6 +6,7 @@
 
 /* THANKS */
   Mladen Prajdić: @MladenPrajdic - for his sql expertise
+  Peter Gracar: @Pickled_Pete - for the name "Bonar"
   Domen Savič: @savicdomen - for countless RTs
   All other Facebook friends and Twitter followers for spreading the love
 

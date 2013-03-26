@@ -24,7 +24,7 @@ Ko sem začenjal z izdelavo, sem se ravno odločil naučiti [Ruby on Rails](http
 
 ##Unofficial API
 
-The API is in *no way* associated with official website [Študentska prehrana](http://www.studentska-prehrana.si/). It is simply one more thing I'm giving back to community.
+The API is in **no way** associated with official website [Študentska prehrana](http://www.studentska-prehrana.si/). It is simply one more thing I'm giving back to community.
 
 I scrape the data from the official site every day at 04:00 GMT. The updating process takes roughly 10 minutes.
 
