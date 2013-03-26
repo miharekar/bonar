@@ -30,7 +30,7 @@ $ ->
     clearTimeout fitMarkersTimer
     fitMarkersTimer = setTimeout(->
         map.refresh()
-        if filteredRestaurants.length and $('#adapt-bounds').is(':checked') then map.fitZoom()
+        if filteredRestaurants.length in [1..250] and $('#adapt-bounds').is(':checked') then map.fitZoom()
       , 300)
 
   searchForRestaurants = ->
