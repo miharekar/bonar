@@ -1,10 +1,19 @@
-#Študentska prehrana
+#Bonar
 
-[Ponudniki študentske prehrane na zemljevidu](http://boni.mr.si/)
+> bónar -ja m (ọ̑) kdor ve, kje imajo bone: poglejmo na bonar / ura je bila 19 in ni vedela kje bi jedla, zato je pogledala na [bonar](http://bonar.si/) / ostala sva brez besed in ti si rekel bonar
 
-My first Ruby on Rails app ^^
+[Bonar: ponudniki študentske prehrane na zemljevidu](http://bonar.si/)
 
-Successfully running Ruby 2.0.0 and Rails 4.0.0.
+##About
+###Scratching my own itch.
+
+Ker mi ni bilo povšeči, da ne obstaja nobena mobilna aplikacija / mobilnikom prijazna spletna stran, ki bi prikazovala aktualno ponudbo študentske prehrane na zemljevidu, sem se odločil, da naredim svojo.
+
+###Tech
+Ko sem začenjal z izdelavo, sem se ravno odločil naučiti [Ruby on Rails](http://rubyonrails.org/). Ker nič ni boljšega, kot učenje s prakso, sem združil prijetno s koristnim ter naredil spletno aplikacijo kar z Railsi. Bonar je tako moj prvi RoR projekt, poganjata pa ga Ruby 2.0.0 in Rails 4.0.0.
+
+###Issues
+Če imate kakršnekoli probleme ali ideje glede Bonarja, kar odprite [issue](https://github.com/mrfoto/bonar/issues) ali pa me kontaktirajte na Twitterju - [@mr_foto](https://twitter.com/mr_foto).
 
 ##Unofficial API
 
