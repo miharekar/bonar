@@ -82,11 +82,9 @@ $ ->
               if $('body').hasClass('active-nav')
                 $('body').removeClass('active-nav')
                 $(featureToggle).text('Iskalnik')
-                $('#adapt-bounds').prop('checked', false)
               else
                 $('body').addClass('active-nav')
                 $(featureToggle).text('Skrij iskalnik')
-                $('#adapt-bounds').prop('checked', true)
               fitMarkers()
       $(featureToggle).show()
     else if featureToggle?
