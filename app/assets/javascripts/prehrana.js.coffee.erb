@@ -130,7 +130,6 @@ $ ->
     else
       $('body').addClass('active-nav')
       $(featureToggle).text('Skrij iskalnik')
-    fitMarkers()
 
   $('#restaurant-search').typeWatch
     callback: (val) ->
@@ -168,10 +167,8 @@ $ ->
       
   $(document).scroll ->
     if $(document).scrollLeft() > 100 and $('body').hasClass('active-nav')
-      clearTimeout horizontalScrollTimer
-      horizontalScrollTimer= setTimeout(->
-          $(featureToggle).click()
-        , 300)
+      $(document).scrollLeft(0)
+      $(featureToggle).click()
   
   $(window).resize ->
     isMobile = $(window).width() < 768
