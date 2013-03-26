@@ -6,7 +6,7 @@
 window.console and window.console.info('O, živjo, kaj pa ti tukaj? Source in API info sta na voljo na https://github.com/mrfoto/bonar ;)')
 
 $ ->
-  restaurants = filteredRestaurants = filteredIDs = features = search = featureToggle = latestMarker = request = fitMarkersTimer = horizontalScrollTimer = geoMarker = null
+  restaurants = filteredRestaurants = filteredIDs = features = search = featureToggle = isMobile = latestMarker = geoMarker = request  = fitMarkersTimer = horizontalScrollTimer = null
 
   getMarkerIcon = (image) ->
     new google.maps.MarkerImage(image, null, null, null, new google.maps.Size(18,31));
@@ -28,10 +28,10 @@ $ ->
     
   fitMarkers = ->
     clearTimeout fitMarkersTimer
-    fitMarkersTimer = setTimeout(->
-        map.refresh()
-        if filteredRestaurants.length in [1..250] and $('#adapt-bounds').is(':checked') then map.fitZoom()
-      , 300)
+    if $('#adapt-bounds').is(':checked') and filteredRestaurants.length and !(isMobile and filteredRestaurants.length > 200)
+      fitMarkersTimer = setTimeout(->
+          map.fitZoom()
+        , 300)
 
   searchForRestaurants = ->
     if request? then request.abort()
@@ -45,47 +45,30 @@ $ ->
     else
       filteredIDs = null
       displayRestaurants()
+      
+  addControlToMap = (id, postion, content) ->
+    map.addControl
+      id: id
+      position: postion
+      content: content
+      style:
+        margin: '5px'
+        padding: '2px 6px'
+        border: 'solid 1px #717B87'
+        background: '#fff'
 
   showGeoMarker = ->
     geoMarker = new GeolocationMarker map.map
     geoMarker.setMinimumAccuracy 100
     google.maps.event.addListenerOnce geoMarker, 'position_changed', ->
-      map.addControl
-        position: 'top_right'
-        content: 'Kje sem?'
-        style:
-          margin: '5px'
-          padding: '2px 6px'
-          border: 'solid 1px #717B87'
-          background: '#fff'
-        events:
-          click: ->
-            $('#adapt-bounds').prop('checked', false)
-            map.panTo geoMarker.getPosition()
-            if map.getZoom() < 16 then map.setZoom 16
-            map.refresh()
+      addControlToMap('geo-marker', 'top_right', 'Kje sem?')
   
   showFeatureToggle = ->
-    if $(window).width() < 768
+    isMobile = $(window).width() < 768
+    if isMobile 
       if !featureToggle?
         $('#adapt-bounds').prop('checked', false)
-        featureToggle = map.addControl
-          position: 'top_left'
-          content: 'Iskalnik'
-          style:
-            margin: '5px'
-            padding: '2px 6px'
-            border: 'solid 1px #717B87'
-            background: '#fff'
-          events:
-            click: ->
-              if $('body').hasClass('active-nav')
-                $('body').removeClass('active-nav')
-                $(featureToggle).text('Iskalnik')
-              else
-                $('body').addClass('active-nav')
-                $(featureToggle).text('Skrij iskalnik')
-              fitMarkers()
+        featureToggle = addControlToMap('feature-toggle', 'top_left', 'Iskalnik')
       $(featureToggle).show()
     else if featureToggle?
       $(featureToggle).hide()
@@ -132,6 +115,20 @@ $ ->
       iw.setContent $('.prehrana-info').parent()[0]
       iw.open map.map, latestMarker
     ), 'html'
+  
+  $('#map').on 'click', '#geo-marker', () ->  
+    $('#adapt-bounds').prop('checked', false)
+    map.panTo geoMarker.getPosition()
+    if map.getZoom() < 16 then map.setZoom 16
+  
+  $('#map').on 'click', '#feature-toggle', () ->  
+    if $('body').hasClass('active-nav')
+      $('body').removeClass('active-nav')
+      $(featureToggle).text('Iskalnik')
+    else
+      $('body').addClass('active-nav')
+      $(featureToggle).text('Skrij iskalnik')
+    fitMarkers()
 
   $('#restaurant-search').typeWatch
     callback: (val) ->
@@ -176,4 +173,5 @@ $ ->
   
   $(window).resize ->
     showFeatureToggle()
+    map.refresh()
     fitMarkers()
