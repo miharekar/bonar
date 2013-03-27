@@ -28,7 +28,7 @@ The API is in **no way** associated with official website [Študentska prehrana]
 
 I scrape the data from the official site every day at 04:00 GMT. The updating process takes roughly 10 minutes.
 
-Should you use it, you absolutely must cache the response, since the data only changes once per day.
+Should you use it, you absolutely must cache the response, since the data only changes once per day and the size of the response is pretty big.
 
 ###Get restaurants
 
@@ -56,10 +56,60 @@ Should you use it, you absolutely must cache the response, since the data only c
       "Sunday": false,
       "Notes": "Ob petkih je lokal odprt od 12.00 do 15.00 ure."
     }
+    "menu": [
+      [
+        "kostna juha",
+        "Puranja pečenka,kroketi,zelenjava",
+        "solatni bar 8 - solat",
+        "sladica,sok"
+      ],
+      [
+        "zelenjavna juha",
+        "zelenjavna rulada,kroketi,zelenjava",
+        "solatni bar 8 - solat",
+        "sladica,sok"
+      ],
+      [
+        "kostna juha",
+        "hrenovka,tenstan krompir,zelenjava",
+        "solatni bar 8 - solat",
+        "sladica,sok"
+      ],
+      [
+        "kostna juha",
+        "pariški zrezek,tenstan krompir,zelenjava",
+        "solatni bar 8 - solat",
+        "sladica,sok"
+      ],
+      [
+        "kostna juha",
+        "ješprenova mineštra s klobaso",
+        "solatni bar 8 - solat",
+        "sladica,sok"
+      ]
+    ],
+    "features": [
+      {
+        "id": 10,
+        "title": "kosila"
+      },
+      {
+        "id": 7,
+        "title": "solatni bar"
+      },
+      {
+        "id": 8,
+        "title": "dostop za invalide (WC)"
+      },
+      {
+        "id": 1,
+        "title": "vegetarijanska prehrana"
+      }
+    ]
   },
   {
     "id": 1924,
-    "name": "Ejga - restavracija - kavarna - pub - catering",
+    "name": " ",
     "address": "Cesta maršala Tita 27, Jesenice",
     "telephone": [
       "051222152",
@@ -80,71 +130,30 @@ Should you use it, you absolutely must cache the response, since the data only c
         "20:00"
       ],
       "Sunday": false
-    }
+    },
+    "menu": [],
+    "features": [
+      {
+        "id": 2,
+        "title": "Celiakiji prijazni obroki"
+      },
+      {
+        "id": 10,
+        "title": "kosila"
+      },
+      {
+        "id": 1,
+        "title": "Vegetarijanska prehrana"
+      },
+      {
+        "id": 9,
+        "title": "odprto ob vikendih"
+      },
+      {
+        "id": 3,
+        "title": "Stalen arhitektonsko prilagojen dostop za invalide in dostop do mize v notranjosti lokala"
+      }
+    ]
   },…
-]
-```
-
-###Get menu
-
-* `GET http://boni.mr.si/api/menu?restaurant=%d` will return menu of the restaurant with id %d.
-
-```json
-[
-  [
-    "kostna juha",
-    "Puranja pečenka,kroketi,zelenjava",
-    "solatni bar 8 - solat",
-    "sladica,sok"
-  ],
-  [
-    "zelenjavna juha",
-    "zelenjavna rulada,kroketi,zelenjava",
-    "solatni bar 8 - solat",
-    "sladica,sok"
-  ],
-  [
-    "kostna juha",
-    "hrenovka,tenstan krompir,zelenjava",
-    "solatni bar 8 - solat",
-    "sladica,sok"
-  ],
-  [
-    "kostna juha",
-    "pariški zrezek,tenstan krompir,zelenjava",
-    "solatni bar 8 - solat",
-    "sladica,sok"
-  ],
-  [
-    "kostna juha",
-    "ješprenova mineštra s klobaso",
-    "solatni bar 8 - solat",
-    "sladica,sok"
-  ]
-]
-```
-
-###Get features
-
-* `GET http://boni.mr.si/api/features?restaurant=%d` will return features of the restaurant with id %d.
-
-```json
-[
-  {
-    "id": 10,
-    "title": "kosila"
-  },
-  {
-    "id": 7,
-    "title": "solatni bar"
-  },
-  {
-    "id": 8,
-    "title": "dostop za invalide (WC)"
-  },
-  {
-    "id": 1,
-    "title": "vegetarijanska prehrana"
-  }
 ]
 ```
