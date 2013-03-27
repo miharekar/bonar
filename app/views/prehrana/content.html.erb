@@ -3,6 +3,9 @@
   <h4><%= @restaurant.name %></h4>
   <address><%= @restaurant.address %></address>
   <p><strong><%= @restaurant.price %></strong></p>
+  <% if @restaurant.telephone %>
+  <p>Tel.: <%= @restaurant.telephone.map {|str| "<a href=\"tel:#{str}\">#{str}</a>"}.join(', ').html_safe %></p>
+  <% end %>
   <ul>
     <li>Delavnik: <%= @restaurant.opening['Week'][0] %> - <%= @restaurant.opening['Week'][1] %></li>
     <% if @restaurant.opening['Saturday'] %>

@@ -41,6 +41,7 @@ Should you use it, you absolutely must cache the response, since the data only c
     "id": 1909,
     "name": "Dijaški in študentski dom Koper",
     "address": "Cankarjeva 5, Koper/Capodistria",
+    "telephone": [],
     "price": "1,37 EUR",
     "coordinates": [
       "45.54844801068044",
@@ -60,6 +61,10 @@ Should you use it, you absolutely must cache the response, since the data only c
     "id": 1924,
     "name": "Ejga - restavracija - kavarna - pub - catering",
     "address": "Cesta maršala Tita 27, Jesenice",
+    "telephone": [
+      "051222152",
+      "040750111"
+    ],
     "price": "4,37 EUR",
     "coordinates": [
       "46.43674871370644",

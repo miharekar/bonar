@@ -111,10 +111,13 @@ html, body, #map, #filter, #main {
     max-width: 260px;
     margin-bottom: 2px;
   }
+  
+  h4 {
+    font-weight: bold;
+  }
 
   h4, a {
     color: #ff8c1f;
-    font-weight: bold;
   }
 
   a:hover {

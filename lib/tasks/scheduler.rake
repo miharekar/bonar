@@ -52,6 +52,29 @@ def create_feature(feature_id, doc)
   return nil
 end
 
+def get_menu_for restaurant
+  doc = Nokogiri::HTML(open(restaurant.link + '0'))
+  menu = []
+  doc.css('.holderRestaurantInfo>ol>li').each do |li|
+    menu_item = []
+    li.css('li').each do |course|
+      menu_item << course.content.squish
+    end
+    menu << menu_item
+  end
+  return menu
+end
+
+def get_telephone_for restaurant
+  doc = Nokogiri::HTML(open(restaurant.link + '0'))
+  tel = doc.at_css('#ContentHolderMain_ContentHolderMainContent_ContentHolderMainContent_lblRestaurantAddress').content
+  tel = tel.scan(/tel:(.+)/)
+  if tel and tel[0]
+    return tel[0][0].gsub(/[^\d,]/,'').gsub(/ +/,'').split(',')
+  end
+  return nil
+end
+
 def get_opening_times_for restaurant
   doc = Nokogiri::HTML(open(restaurant.link + '1'))
   opening_times = {}
@@ -79,19 +102,6 @@ def get_opening_times_for restaurant
     end
   end
   return opening_times
-end
-
-def get_menu_for restaurant
-  doc = Nokogiri::HTML(open(restaurant.link + '0'))
-  menu = []
-  doc.css('.holderRestaurantInfo>ol>li').each do |li|
-    menu_item = []
-    li.css('li').each do |course|
-      menu_item << course.content.squish
-    end
-    menu << menu_item
-  end
-  return menu
 end
 
 task :update_restaurants => :environment do
@@ -129,6 +139,7 @@ task :update_restaurants => :environment do
         restaurant.price = div.css('.prices strong').first.content
         restaurant.opening = get_opening_times_for restaurant
         restaurant.menu = get_menu_for restaurant
+        restaurant.telephone = get_telephone_for restaurant
 
         p 'Saving ' + restaurant.name + ' - ID: ' + restaurant.restaurant_id
         restaurant.save!
