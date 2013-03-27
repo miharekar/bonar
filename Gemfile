@@ -14,31 +14,29 @@ group :assets do
   gem 'coffee-rails', '~> 4.0.0.beta1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+  # gem 'therubyracer', platforms: :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
 
 gem 'jquery-rails'
+gem 'turbolinks'
+gem 'jbuilder', '~> 1.0.1'
 gem 'nokogiri'
 gem 'geocoder'
 gem 'gmapsjs'
 gem 'newrelic_rpm'
-gem 'rest-client'
 gem 'memcachier'
 gem 'dalli'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
 # Use unicorn as the app server
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+# gem 'capistrano', group: :development
 
 # To use debugger
 # gem 'debugger'

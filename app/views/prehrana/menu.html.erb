@@ -1,0 +1,7 @@
+<% cache @restaurant do %>
+<ol class="menu">
+  <% @restaurant.menu.each do |menu_item| %>
+  <li><%= menu_item.join(', ') =%></li>
+  <% end %>
+</ol>
+<% end %>

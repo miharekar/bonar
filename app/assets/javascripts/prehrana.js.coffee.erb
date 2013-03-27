@@ -19,9 +19,9 @@ $ ->
       marker = map.addMarker
         lat: restaurant['coordinates'][0]
         lng: restaurant['coordinates'][1]
+        details: restaurant['id']
         icon: scaleMarkers[restaurant['price'][0]]
         shadow: new google.maps.MarkerImage('<%= asset_path("markers/shadow.png") %>', null, null, new google.maps.Point(9,34), new google.maps.Size(31,34))
-        content: restaurant['content']
       oms.addMarker marker
     fitMarkers()
     if filteredRestaurants.length == 1 then google.maps.event.trigger(marker, 'click')
@@ -97,9 +97,13 @@ $ ->
 
   iw = new google.maps.InfoWindow()
   oms.addListener 'click', (marker) ->
-    iw.setContent marker.content
-    latestMarker = marker
-    iw.open map.map, marker
+    $.get '/content',
+      restaurant: marker['details']
+    , ((data) ->
+      iw.setContent data
+      latestMarker = marker
+      iw.open map.map, latestMarker
+    ), 'html'
 
   scaleMarkers = [getMarkerIcon('<%= asset_path("markers/ffe7c8.png") %>'), getMarkerIcon('<%= asset_path("markers/ffcc95.png") %>'), getMarkerIcon('<%= asset_path("markers/ffad60.png") %>'), getMarkerIcon('<%= asset_path("markers/ff8c1f.png") %>'), getMarkerIcon('<%= asset_path("markers/e04f00.png") %>')]
 

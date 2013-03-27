@@ -4,13 +4,17 @@ class PrehranaController < ApplicationController
   end
 
   def all_restaurants
-    #Rails.cache.delete('map_restaurants') #debug
-    restaurants = Rails.cache.read('map_restaurants')
-    if restaurants.blank?
-      restaurants = Restaurant.all.to_json(only:[:id, :coordinates, :price], methods:[:content])
-      Rails.cache.write('map_restaurants', restaurants)
-    end
-    render :json => restaurants
+    @restaurants = Restaurant.all
+  end
+  
+  def menu
+    @restaurant = Restaurant.find(params[:restaurant])
+    render :layout => false
+  end
+  
+  def content
+    @restaurant = Restaurant.find(params[:restaurant])
+    render :layout => false
   end
 
   def search
@@ -34,17 +38,5 @@ class PrehranaController < ApplicationController
     end
 
     render :json => restaurant_ids
-  end
-
-  def menu
-    if !params[:restaurant].blank?
-      menu = Restaurant.select(:menu).find(params[:restaurant])[:menu]
-      content = '<ol class="menu">'
-      menu.each do |menu_item|
-        content += '<li>' + menu_item.join(', ') + '</li>'
-      end
-      content += '</ol>'
-      render :text => content
-    end
   end
 end
