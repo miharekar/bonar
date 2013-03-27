@@ -25,7 +25,7 @@ $ ->
       oms.addMarker marker
     fitMarkers()
     if filteredRestaurants.length == 1 then google.maps.event.trigger(marker, 'click')
-    
+
   fitMarkers = ->
     clearTimeout fitMarkersTimer
     if $('#adapt-bounds').is(':checked') and filteredRestaurants.length and !(isMobile and filteredRestaurants.length > 200)
@@ -45,7 +45,7 @@ $ ->
     else
       filteredIDs = null
       displayRestaurants()
-      
+
   addControlToMap = (id, postion, content) ->
     map.addControl
       id: id
@@ -62,9 +62,12 @@ $ ->
     geoMarker.setMinimumAccuracy 100
     google.maps.event.addListenerOnce geoMarker, 'position_changed', ->
       addControlToMap('geo-marker', 'top_right', 'Kje sem?')
-  
+      if isMobile
+        map.panTo geoMarker.getPosition()
+        map.setZoom 16
+
   showFeatureToggle = ->
-    if isMobile 
+    if isMobile
       if !featureToggle?
         $('#adapt-bounds').prop('checked', false)
         featureToggle = addControlToMap('feature-toggle', 'top_left', 'Iskalnik')
@@ -74,9 +77,9 @@ $ ->
       $(featureToggle).text('Iskalnik')
       $('body').removeClass('active-nav')
     map.refresh()
-    
+
   isMobile = $(window).width() < 768
-    
+
   map = new GMaps(
     div: '#map'
     lat: 46.119944
@@ -106,7 +109,7 @@ $ ->
     if navigator.geolocation then showGeoMarker()
     showFeatureToggle()
     $('body').addClass('transitions');
-  
+
   $('#map').on 'click', '.load-menu', (event) ->
     event.preventDefault()
     $this = $(this)
@@ -117,13 +120,13 @@ $ ->
       iw.setContent $('.prehrana-info').parent()[0]
       iw.open map.map, latestMarker
     ), 'html'
-  
-  $('#map').on 'click', '#geo-marker', () ->  
+
+  $('#map').on 'click', '#geo-marker', () ->
     $('#adapt-bounds').prop('checked', false)
     map.panTo geoMarker.getPosition()
     if map.getZoom() < 16 then map.setZoom 16
-  
-  $('#map').on 'click', '#feature-toggle', () ->  
+
+  $('#map').on 'click', '#feature-toggle', () ->
     if $('body').hasClass('active-nav')
       $('body').removeClass('active-nav')
       $(featureToggle).text('Iskalnik')
@@ -136,7 +139,7 @@ $ ->
       search = val
       searchForRestaurants()
     captureLength: 2
-    
+
   $('#filter li').on 'click', (event) ->
     if event.target == this
       $(this).find('input').click()
@@ -159,17 +162,17 @@ $ ->
       $('.feature-filter').each ->
         $(this).prop('checked', false)
     searchForRestaurants()
-    
+
   $('#adapt-bounds').on 'change', () ->
     $this = $(this)
     if $this.is(':checked')
       fitMarkers()
-      
+
   $(document).scroll ->
     if $(document).scrollLeft() > 100 and $('body').hasClass('active-nav')
       $(document).scrollLeft(0)
       $(featureToggle).click()
-  
+
   $(window).resize ->
     isMobile = $(window).width() < 768
     showFeatureToggle()
