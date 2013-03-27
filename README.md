@@ -55,7 +55,7 @@ Should you use it, you absolutely must cache the response, since the data only c
       "Saturday": false,
       "Sunday": false,
       "Notes": "Ob petkih je lokal odprt od 12.00 do 15.00 ure."
-    }
+    },
     "menu": [
       [
         "kostna juha",
