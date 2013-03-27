@@ -1,11 +1,10 @@
 class ApiController < ApplicationController
   def restaurants
     if params[:search].blank?
-      restaurants = Restaurant.all
+      @restaurants = Restaurant.all
     else
-      restaurants = Restaurant.where('name ILIKE :search OR address ILIKE :search', search: '%' + params[:search] + '%')
+      @restaurants = Restaurant.where('name ILIKE :search OR address ILIKE :search', search: '%' + params[:search] + '%')
     end
-    render :json => restaurants.to_json(only:[:id, :name, :address, :price, :coordinates, :opening])
   end
 
   def menu
@@ -16,7 +15,7 @@ class ApiController < ApplicationController
 
   def features
     if !params[:restaurant].blank?
-      render :json => Restaurant.find(params[:restaurant]).features
+      @features = Restaurant.find(params[:restaurant]).features
     end
   end
 end

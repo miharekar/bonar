@@ -126,20 +126,20 @@ Should you use it, you absolutely must cache the response, since the data only c
 ```json
 [
   {
-    "title": "kosila",
-    "feature_id": 10
+    "id": 10,
+    "title": "kosila"
   },
   {
-    "title": "solatni bar",
-    "feature_id": 7
+    "id": 7,
+    "title": "solatni bar"
   },
   {
-    "title": "dostop za invalide (WC)",
-    "feature_id": 8
+    "id": 8,
+    "title": "dostop za invalide (WC)"
   },
   {
-    "title": "vegetarijanska prehrana",
-    "feature_id": 1
+    "id": 1,
+    "title": "vegetarijanska prehrana"
   }
 ]
 ```
