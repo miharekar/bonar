@@ -118,7 +118,7 @@ $ ->
     event.preventDefault()
     $this = $(this)
     $.get '/menu',
-      restaurant: $this.data('restaurant')
+      restaurant: latestMarker['details']
     , ((data) ->
       $this.replaceWith data
       iw.setContent $('.prehrana-info').parent()[0]
