@@ -140,8 +140,9 @@ $ ->
 
   $('#restaurant-search').typeWatch
     callback: (val) ->
-      search = val
-      searchForRestaurants()
+      if val != search
+        search = val
+        searchForRestaurants()
     captureLength: 2
 
   $('#filter li').on 'click', (event) ->
