@@ -17,6 +17,7 @@ Ko sem začenjal z izdelavo, sem se ravno odločil naučiti [Ruby on Rails](http
 
 ##Thanks
 
+* Boštjan Vidovič: [@bostjanvidovic](https://twitter.com/bostjanvidovic) - for the icon
 * Mladen Prajdić: [@MladenPrajdic](https://twitter.com/MladenPrajdic) - for his sql expertise
 * Peter Gracar: [@Pickled_Pete](https://twitter.com/Pickled_Pete) - for the name "Bonar"
 * Domen Savič: [@savicdomen](https://twitter.com/savicdomen) - for countless RTs
