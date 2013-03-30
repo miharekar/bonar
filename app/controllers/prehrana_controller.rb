@@ -4,7 +4,7 @@ class PrehranaController < ApplicationController
   end
 
   def all_restaurants
-    @restaurants = Restaurant.all
+    @restaurants = Restaurant.where(disabled: false)
   end
   
   def menu

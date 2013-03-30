@@ -110,13 +110,13 @@ task :update_restaurants => :environment do
   doc = Nokogiri::HTML(open('http://www.studentska-prehrana.si/Pages/Directory.aspx'))
   restaurant_items = doc.css('.holderRestaurant ul li ul li:not(.blocked)')
   if restaurant_items.count > 0
-    restaurants_to_delete = Restaurant.pluck(:id)
+    restaurants_to_disable = Restaurant.pluck(:id)
     Restaurant.transaction do
       restaurant_items.each do |div|
         restaurant_id = get_restaurant_id div
         restaurant = Restaurant.find_by_restaurant_id(restaurant_id)
         if restaurant
-          restaurants_to_delete.delete(restaurant.id)
+          restaurants_to_disable.delete(restaurant.id)
         else
           restaurant = Restaurant.new
           restaurant.name = div.css('h1 a').first.content
@@ -137,17 +137,21 @@ task :update_restaurants => :environment do
         end
 
         restaurant.price = div.css('.prices strong').first.content
-        restaurant.opening = get_opening_times_for restaurant
-        restaurant.menu = get_menu_for restaurant
-        restaurant.telephone = get_telephone_for restaurant
+        #restaurant.opening = get_opening_times_for restaurant
+        #restaurant.menu = get_menu_for restaurant
+        #restaurant.telephone = get_telephone_for restaurant
+        restaurant.disabled = false
 
         p 'Saving ' + restaurant.name + ' - ID: ' + restaurant.restaurant_id
         restaurant.save!
       end
-      @mail_content << 'Deleting restaurants: ' + Restaurant.select(:name).find(restaurants_to_delete).to_s
-      Restaurant.delete(restaurants_to_delete)
+      @mail_content << 'Disabling restaurants: ' + Restaurant.select(:name).find(restaurants_to_disable).to_s
+      Restaurant.transaction do
+        restaurants_to_disable.each do |id|
+          Restaurant.find(id).disable
+        end
+      end
     end
-    Rails.cache.delete('map_restaurants')
     @mail_content << 'Total: ' + restaurant_items.count.to_s + ' restaurants.'
   else
     @mail_content << 'Restaurant update failed!'
@@ -162,6 +166,8 @@ task :update_restaurants => :environment do
         :to => "info@mr.si",
         :subject => "Restaurants update",
         :text => @mail_content.join("\n")
+  else
+    p @mail_content.join("\n")
   end
 
   p 'done.'

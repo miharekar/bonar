@@ -4,4 +4,9 @@ class Restaurant < ActiveRecord::Base
   serialize :menu, Array
   serialize :telephone, Array
   serialize :opening, Hash
+  
+  def disable
+    self.disabled = true
+    self.save!
+  end
 end
