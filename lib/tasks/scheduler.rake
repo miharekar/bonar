@@ -137,9 +137,9 @@ task :update_restaurants => :environment do
         end
 
         restaurant.price = div.css('.prices strong').first.content
-        #restaurant.opening = get_opening_times_for restaurant
-        #restaurant.menu = get_menu_for restaurant
-        #restaurant.telephone = get_telephone_for restaurant
+        restaurant.opening = get_opening_times_for restaurant
+        restaurant.menu = get_menu_for restaurant
+        restaurant.telephone = get_telephone_for restaurant
         restaurant.disabled = false
 
         p 'Saving ' + restaurant.name + ' - ID: ' + restaurant.restaurant_id
