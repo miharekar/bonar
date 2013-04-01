@@ -145,7 +145,7 @@ task :update_restaurants => :environment do
         p 'Saving ' + restaurant.name + ' - ID: ' + restaurant.restaurant_id
         restaurant.save!
       end
-      @mail_content << 'Disabling restaurants: ' + Restaurant.select(:name).find(restaurants_to_disable).to_s
+      @mail_content << 'Disabling restaurants: ' + Restaurant.where(id: restaurants_to_disable).pluck(:name).join(', ')
       Restaurant.transaction do
         restaurants_to_disable.each do |id|
           Restaurant.find(id).disable
