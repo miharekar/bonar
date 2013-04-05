@@ -21,7 +21,7 @@ end
 
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 1.0.1'
+gem 'jbuilder', '~> 1.2.0'
 gem 'nokogiri'
 gem 'geocoder'
 gem 'gmapsjs'
