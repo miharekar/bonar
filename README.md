@@ -34,7 +34,6 @@ Should you use it, you absolutely must cache the response, since the data only c
 ###Get restaurants
 
 * `GET http://boni.mr.si/api/restaurants` will return all restaurants.
-* `GET http://boni.mr.si/api/restaurants?search=%s` will return same response but restaurants are filtered so that name or address contain %s.
 
 ```json
 [

@@ -24,4 +24,7 @@ Bonar::Application.configure do
 
   # Debug mode disables concatenation and preprocessing of assets.
   config.assets.debug = true
+
+  # Temporarily enable caching in development (COMMENT OUT WHEN DONE!)
+  config.action_controller.perform_caching = true
 end
