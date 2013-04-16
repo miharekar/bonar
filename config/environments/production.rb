@@ -1,7 +1,7 @@
 Bonar::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.middleware.insert_before('ActionDispatch::Static', Rack::Deflater)
-  
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -53,7 +53,7 @@ Bonar::Application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production.
-  config.cache_store = :dalli_store
+  # config.cache_store = :dalli_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
