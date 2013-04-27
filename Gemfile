@@ -4,9 +4,6 @@ ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0.beta1'
 
-gem 'unicorn'
-gem 'pg'
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -16,11 +13,18 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', platforms: :ruby
 
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier', '~> 2.0.1'
 end
 
+group :development do
+  gem 'debugger'
+end
+
+gem 'unicorn'
+gem 'pg'
+
 gem 'jquery-rails'
-gem 'turbolinks'
+gem 'turbolinks', '~> 1.1.1'
 gem 'jbuilder', '~> 1.3.0'
 gem 'nokogiri'
 gem 'geocoder'

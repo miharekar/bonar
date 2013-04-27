@@ -159,9 +159,7 @@ task :update_restaurants => :environment do
 
   if ENV['MAILGUN_API_KEY']
     p 'Sending email...'
-    API_KEY = ENV['MAILGUN_API_KEY']
-    API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/app12738544.mailgun.org"
-    RestClient.post API_URL+"/messages",
+    RestClient.post "https://api:#{ENV['MAILGUN_API_KEY']}@api.mailgun.net/v2/app15300758.mailgun.org/messages",
         :from => "Boni<info@mr.si>",
         :to => "info@mr.si",
         :subject => "Restaurants update",
