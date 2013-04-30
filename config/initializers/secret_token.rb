@@ -9,4 +9,10 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Bonar::Application.config.secret_key_base = '7430b85b0c51bf8ec330981ef302f117a41c25c3567d76c275b0e1c8e86f595de34f3f9a6f70d76adefb8866bc383900dca22ac125435629ed3aaf72e5dabee0'
+
+secret = ENV['BONAR_SECRET']
+if secret.length < 30
+  raise "Secret token cannot be loaded"
+else
+  Bonar::Application.config.secret_token = secret
+end

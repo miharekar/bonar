@@ -20,6 +20,8 @@ group :development do
   gem 'debugger'
 end
 
+gem 'figaro'
+
 gem 'unicorn'
 gem 'pg'
 
