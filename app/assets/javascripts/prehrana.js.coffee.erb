@@ -9,7 +9,7 @@ $ ->
   restaurants = filteredRestaurants = filteredIDs = features = search = featureToggle = isMobile = latestMarker = geoMarker = request  = fitMarkersTimer = horizontalScrollTimer = null
 
   getMarkerIcon = (image) ->
-    new google.maps.MarkerImage(image, null, null, null, new google.maps.Size(18,31));
+    {url: image, scaledSize: new google.maps.Size(18,31)}
 
   displayRestaurants = ->
     if !restaurants?.length then return
@@ -21,7 +21,7 @@ $ ->
         lng: restaurant['coordinates'][1]
         details: restaurant['id']
         icon: scaleMarkers[restaurant['price'][0]]
-        shadow: new google.maps.MarkerImage('<%= asset_path("markers/shadow.png") %>', null, null, new google.maps.Point(9,34), new google.maps.Size(31,34))
+        shadow: {url: '<%= asset_path("markers/shadow.png") %>', origin: new google.maps.Point(9,34), scaledSize: new google.maps.Size(31,34)}
       oms.addMarker marker
     fitMarkers()
     if filteredRestaurants.length == 1 then google.maps.event.trigger(marker, 'click')
