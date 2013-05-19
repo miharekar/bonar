@@ -8,12 +8,12 @@ gem 'rails', '4.0.0.rc1'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 4.0.0.rc1'
-  gem 'coffee-rails', '~> 4.0.0'
+  gem 'coffee-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', platforms: :ruby
 
-  gem 'uglifier', '~> 2.0.1'
+  gem 'uglifier'
 end
 
 group :development do
@@ -26,8 +26,8 @@ gem 'unicorn'
 gem 'pg'
 
 gem 'jquery-rails'
-gem 'turbolinks', '~> 1.1.1'
-gem 'jbuilder', '~> 1.3.0'
+gem 'turbolinks'
+gem 'jbuilder'
 gem 'nokogiri'
 gem 'geocoder'
 gem 'gmapsjs'
