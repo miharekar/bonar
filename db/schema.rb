@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20130330121333) do
     t.integer "restaurant_id", null: false
   end
 
-  add_index "features_restaurants", ["restaurant_id", "feature_id"], name: "index_features_restaurants_on_restaurant_id_and_feature_id", unique: true
+  add_index "features_restaurants", ["restaurant_id", "feature_id"], name: "index_features_restaurants_on_restaurant_id_and_feature_id", unique: true, using: :btree
 
   create_table "restaurants", force: true do |t|
     t.string   "name"
