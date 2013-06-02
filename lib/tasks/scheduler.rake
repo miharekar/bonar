@@ -104,7 +104,7 @@ def get_opening_times_for restaurant
   return opening_times
 end
 
-task :update_restaurants => :environment do
+task update_restaurants: :environment do
   p 'Updating restaurants...'
   @mail_content = ['Restaurant update report']
   doc = Nokogiri::HTML(open('http://www.studentska-prehrana.si/Pages/Directory.aspx'))
@@ -160,10 +160,10 @@ task :update_restaurants => :environment do
   if ENV['MAILGUN_API_KEY']
     p 'Sending email...'
     RestClient.post "https://api:#{ENV['MAILGUN_API_KEY']}@api.mailgun.net/v2/app15300758.mailgun.org/messages",
-        :from => "Boni<info@mr.si>",
-        :to => "info@mr.si",
-        :subject => "Restaurants update",
-        :text => @mail_content.join("\n")
+        from: "Boni<info@mr.si>",
+        to: "info@mr.si",
+        subject: "Restaurants update",
+        text: @mail_content.join("\n")
   else
     p @mail_content.join("\n")
   end

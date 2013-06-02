@@ -10,25 +10,17 @@ class PrehranaController < ApplicationController
   
   def menu
     @restaurant = Restaurant.find(params[:restaurant])
-    render :layout => false
+    render layout: false
   end
   
   def content
     @restaurant = Restaurant.find(params[:restaurant])
-    render :layout => false
+    render layout: false
   end
 
   def search
-    if !params[:features].blank?
-      restaurant_ids = Restaurant.find_by_sql(['SELECT restaurant_id FROM (
-                                                  SELECT features_restaurants.*, ROW_NUMBER() OVER(PARTITION BY restaurants.id ORDER BY features.id) AS rn FROM restaurants
-                                                  JOIN features_restaurants ON restaurants.id = features_restaurants.restaurant_id
-                                                  JOIN features ON features_restaurants.feature_id = features.id
-                                                  WHERE features.id in (?)
-                                                ) t
-                                                WHERE rn = ?', params[:features], params[:features].count]).map(&:restaurant_id)
-    end
-
+    restaurant_ids = Restaurant.filter_by_features params[:features] unless params[:features].blank?
+    
     if !params[:search].blank?
       if restaurant_ids
         restaurants = Restaurant.where('(name ILIKE :search OR address ILIKE :search) AND id IN (:ids)', search: '%' + params[:search] + '%', ids: restaurant_ids)
@@ -38,6 +30,6 @@ class PrehranaController < ApplicationController
       restaurant_ids = restaurants.map(&:id)
     end
 
-    render :json => restaurant_ids
+    render json: restaurant_ids
   end
 end
