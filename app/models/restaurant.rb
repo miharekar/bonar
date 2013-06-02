@@ -23,4 +23,10 @@ class Restaurant < ActiveRecord::Base
   def self.search search
     where('name ILIKE :search OR address ILIKE :search', search: '%' + search + '%')
   end
+  
+  def self.search_and_features search, features
+    search_ids = Restaurant.search(params[:search]).map(&:id)
+    features_ids = Restaurant.filter_by_features(params[:features]).map(&:restaurant_id)
+    features_ids & search_ids
+  end
 end
