@@ -20,13 +20,23 @@ class Restaurant < ActiveRecord::Base
                              WHERE rn = ?', features, features.count])
   end
   
-  def self.search search
-    where('name ILIKE :search OR address ILIKE :search', search: '%' + search + '%')
+  def self.filter_by_text text
+    where('name ILIKE :text OR address ILIKE :text', text: '%' + text + '%')
   end
   
-  def self.search_and_features search, features
-    search_ids = Restaurant.search(params[:search]).map(&:id)
-    features_ids = Restaurant.filter_by_features(params[:features]).map(&:restaurant_id)
-    features_ids & search_ids
+  def self.text_and_features text, features
+    text_ids = filter_by_text(text).map(&:id)
+    features_ids = filter_by_features(features).map(&:restaurant_id)
+    features_ids & text_ids
+  end
+  
+  def self.search text, features
+    if !text.blank? and !features.blank?
+      text_and_features(text, features)
+    elsif !features.blank?
+      filter_by_features(features).map(&:restaurant_id)
+    else
+      filter_by_text(text).map(&:id)
+    end
   end
 end
