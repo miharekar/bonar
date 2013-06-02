@@ -18,15 +18,14 @@ class PrehranaController < ApplicationController
     render layout: false
   end
 
-  def search  
+  def search
+    features_ids = Restaurant.filter_by_features(params[:features]).map(&:restaurant_id) unless params[:features].blank?
+    search_ids = Restaurant.search(params[:search]).map(&:id) unless params[:search].blank?
+    
     if !params[:features].blank? and !params[:search].blank?
-      features_ids = Restaurant.filter_by_features(params[:features]).map(&:restaurant_id)
-      search_ids = Restaurant.search(params[:search]).map(&:id)
       restaurant_ids = features_ids & search_ids
-    elsif !params[:features].blank?
-      restaurant_ids = Restaurant.filter_by_features(params[:features]).map(&:restaurant_id)
     else
-      restaurant_ids = Restaurant.search(params[:search]).map(&:id)
+      restaurant_ids = search_ids || features_ids
     end
 
     render json: restaurant_ids
