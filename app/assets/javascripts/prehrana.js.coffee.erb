@@ -80,6 +80,8 @@ $ ->
     map.refresh()
 
   isMobile = $(window).width() < 768
+  
+  google.maps.visualRefresh = true
 
   map = new GMaps(
     div: '#map'
