@@ -170,3 +170,10 @@ task update_restaurants: :environment do
 
   p 'done.'
 end
+
+task migrate_to_features_array: :environment do
+  Restaurant.all.each do |restaurant|
+    restaurant.features_array = restaurant.features.pluck(:id)
+    restaurant.save!
+  end
+end

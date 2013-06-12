@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130330121333) do
+ActiveRecord::Schema.define(version: 20130612043524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "features", force: true do |t|
     t.string   "title"
@@ -42,7 +43,10 @@ ActiveRecord::Schema.define(version: 20130330121333) do
     t.text     "opening"
     t.text     "menu"
     t.text     "telephone"
-    t.boolean  "disabled",      default: false
+    t.boolean  "disabled",       default: false
+    t.integer  "features_array", default: [],    array: true
   end
+
+  add_index "restaurants", ["features_array"], name: "index_restaurants_on_features_array", using: :gin
 
 end
