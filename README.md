@@ -19,6 +19,7 @@ Ko sem začenjal z izdelavo, sem se ravno začenjal učiti [Ruby on Rails](http:
 
 * Boštjan Vidovič: [@bostjanvidovic](https://twitter.com/bostjanvidovic) - for the icon
 * Mladen Prajdić: [@MladenPrajdic](https://twitter.com/MladenPrajdic) - for his sql expertise
+* Adam Sanderson: [@adamsanderson](https://github.com/adamsanderson) - for help with Postgres arrays
 * Peter Gracar: [@Pickled_Pete](https://twitter.com/Pickled_Pete) - for the name "Bonar"
 * Domen Savič: [@savicdomen](https://twitter.com/savicdomen) - for countless RTs
 * All other Facebook friends and Twitter followers for spreading the love
