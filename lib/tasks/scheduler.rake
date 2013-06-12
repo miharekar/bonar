@@ -127,14 +127,15 @@ task update_restaurants: :environment do
           @mail_content << 'Adding new restaurant ' + restaurant.name + ' | ' + restaurant.restaurant_id
         end
 
-        restaurant.features.delete_all
+        features = []
         div.attribute('sssp:rs').value.split(';').each do |feature_id|
           feature = Feature.find_by_feature_id(feature_id)
           if !feature
             feature = create_feature(feature_id, doc)
           end
-          restaurant.features << feature
+          features << feature
         end
+        restaurant.features_array = features
 
         restaurant.price = div.css('.prices strong').first.content
         restaurant.opening = get_opening_times_for restaurant
