@@ -19,6 +19,6 @@ class PrehranaController < ApplicationController
   end
 
   def search
-    render json: Restaurant.search(params[:search], params[:features])
+    render json: Restaurant.filter_by_features(params[:features]).filter_by_text(params[:search]).map(&:id)
   end
 end
