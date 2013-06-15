@@ -14,10 +14,18 @@ class Restaurant < ActiveRecord::Base
   end
 
   def self.filter_by_features features
-    where 'features_array @> ARRAY[?]', features.map(&:to_i)
+    if features.blank?
+      scoped
+    else
+      where 'features_array @> ARRAY[?]', features.map(&:to_i)
+    end
   end
 
   def self.filter_by_text text
-    where 'name ILIKE :text OR address ILIKE :text', text: '%' + text + '%'
+    if text.blank?
+      scoped
+    else
+      where 'name ILIKE :text OR address ILIKE :text', text: '%' + text + '%'
+    end
   end
 end
