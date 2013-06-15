@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Bonar</title>   
+    <title>Bonar</title>
     <meta charset="utf-8">
     <%= csrf_meta_tags %>
     <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0">
@@ -10,8 +10,8 @@
     <meta name="description" content="Ponudniki študentske prehrane na zemljevidu">
     <meta name="keywords" content="študentska prehrana, študentski boni, boni, bonar, prehrana, zemljevid, mapa, karta">
     <meta name="author" content="Miha Rekar">
-    <meta property="og:title" content="Bonar"> 
-    <meta property="og:description" content="Ponudniki študentske prehrane na zemljevidu"> 
+    <meta property="og:title" content="Bonar">
+    <meta property="og:description" content="Ponudniki študentske prehrane na zemljevidu">
     <meta property="og:image" content="<%= path_to_image 'icons/sb144.png' %>">
     <link rel="author" href="humans.txt">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<%= path_to_image 'icons/sb144.png' %>">
@@ -19,14 +19,67 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= path_to_image 'icons/sb72.png' %>">
     <link rel="apple-touch-icon-precomposed" href="<%= path_to_image 'icons/sb57.png' %>">
     <link rel="shortcut icon" href="<%= path_to_image 'icons/sb57.png' %>">
-    <link rel="shortcut icon" href="<%= path_to_image 'icons/favicon.ico' %>">  
+    <link rel="shortcut icon" href="<%= path_to_image 'icons/favicon.ico' %>">
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <%= javascript_include_tag 'application' %>
   </head>
   <body>
     <%= yield %>
+    <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+    <link rel="stylesheet" type="text/css" href="http://assets.cookieconsent.silktide.com/current/style.min.css"/>
+    <script type="text/javascript" src="http://assets.cookieconsent.silktide.com/current/plugin.min.js"></script>
     <script type="text/javascript">
+    // <![CDATA[
+    cc.initialise({
+    	cookies: {
+    		analytics: {},
+    		necessary: {}
+    	},
+    	settings: {
+    		style: "monochrome",
+    		tagPosition: "bottom-left"
+    	},
+    	strings: {
+    		analyticsDefaultTitle: 'Statistika',
+    		analyticsDefaultDescription: 'Anonimno spremljamo statistiko obiska za izboljšanje uporabniške izkušnje.',
+    		necessaryDefaultTitle: 'Obvezni piškotki',
+    		necessaryDefaultDescription: 'Brez teh piškotkov stran ne mora delovati.',
+    		learnMore: 'Več',
+    		closeWindow: 'Zapri',
+    		notificationTitleImplicit: 'Z uporabo piškotkov omogočamo boljšo uporabniško izkušnjo',
+    		notificationTitle: 'Z uporabo piškotkov omogočamo boljšo uporabniško izkušnjo',
+    		seeDetails: 'Podrobno',
+    		savePreference: 'Shrani',
+    		saveForAllSites: 'Shrani za vse strani',
+    		hideDetails: 'Skrij',
+    		privacySettings: 'Zasebnost',
+    		privacySettingsDialogTitleA: 'Zasebnost',
+    		privacySettingsDialogTitleB: 'za to stran',
+    		privacySettingsDialogSubtitle: 'Z uporabo piškotkov omogočamo boljšo uporabniško izkušnjo',
+    		changeForAllSitesLink: 'Globalne nastavitve',
+    		preferenceUseGlobal: 'Uporabi globalne nastavitve',
+    		preferenceConsent: 'Strinjam se',
+    		preferenceDecline: 'Ne strinjam se',
+    		notUsingCookies: 'Ta stran ne uporablja piškotkov.',
+    		allSitesSettingsDialogTitleA: 'Zasebnost',
+    		allSitesSettingsDialogTitleB: 'za vse strani',
+    		allSitesSettingsDialogSubtitle: 'Lahko si nastaviš zasebnost za vse strani, ki uporabljajo ta vtičnik.',
+    		backToSiteSettings: 'Nazaj',
+    		preferenceAsk: 'Vsakič me vprašaj',
+    		preferenceAlways: 'Vedno dovoli',
+    		preferenceNever: 'Nikoli ne dovoli',
+    		socialDefaultTitle: 'Družabna omrežja',
+    		socialDefaultDescription: 'Facebook, Twitter in ostala družabna omrežja.',
+    		advertisingDefaultTitle: 'Oglaševanje',
+    		advertisingDefaultDescription: 'Oglasi bodo servirani glede na zgodovino obiskov strani.'
+    	}
+    });
+    // ]]>
+    </script>
+    <!-- End Cookie Consent plugin -->
+
+    <script type="text/plain" class="cc-onconsent-analytics">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-356422-20']);
       _gaq.push(['_trackPageview']);
