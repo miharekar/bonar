@@ -2,46 +2,45 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0.rc2'
+gem 'rails', '~> 4.0.0'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 4.0.0.rc2'
-  gem 'coffee-rails'
+gem 'pg'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', platforms: :ruby
-
-  gem 'uglifier'
+group :production do
+  gem 'unicorn'
+  gem 'newrelic_rpm'
+  gem 'rails_12factor'
 end
 
+# Use SCSS for stylesheets
+gem 'sass-rails'
+
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier'
+
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails'
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder'
+
 group :development do
-  gem 'debugger'
+  gem 'jazz_hands'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 gem 'figaro'
 
-gem 'unicorn'
-gem 'pg'
-
-gem 'jquery-rails'
-gem 'turbolinks'
-gem 'jbuilder'
 gem 'nokogiri'
+
 gem 'geocoder'
 gem 'gmapsjs'
+
 gem 'rest-client'
-gem 'newrelic_rpm'
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano', group: :development
-
-# To use debugger
-# gem 'debugger'
