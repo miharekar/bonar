@@ -1,0 +1,19 @@
+- @restaurants.each do |restaurant|
+  .panel.panel-info
+    .panel-heading
+      %h4.panel-title
+        %a.accordion-toggle{ "data-parent" => "#accordion", "data-toggle" => "collapse", href: "#restaurant-#{restaurant.id}" }
+          = restaurant.name
+          |
+          = number_to_human (restaurant.distance_from([params[:lat], params[:lng]]) * 1000), units: {unit: "m", thousand: "km"}
+    .panel-collapse.collapse{ id: "restaurant-#{restaurant.id}" }
+      .panel-body
+        = render 'prehrana/restaurant', restaurant: restaurant
+        - if restaurant.menu.any?
+          .table-responsive
+            %table.table.table-condensed.table-striped
+              %tbody
+                - restaurant.menu.each do |menu_item|
+                  %tr
+                    - menu_item.each do |dish|
+                      %td= dish

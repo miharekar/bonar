@@ -13,16 +13,22 @@
     = javascript_include_tag "list"
     = csrf_meta_tags
   %body
-    .navbar.navbar-default.navbar-static-top
+    #wrap
+      .navbar.navbar-default.navbar-static-top
+        .container
+          .navbar-header
+            %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            %a.navbar-brand{href: "/"} Bonar
       .container
-        .navbar-header
-          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.navbar-brand{href: "/"} Bonar
-    .container
-      .row
-        .col-md-12
-          = render 'layouts/flash'
-          = yield
+        .row
+          .col-md-12
+            = render 'layouts/flash'
+            = yield
+    #footer
+      .container
+        %p.text-muted.credit
+          Copyright © 2013
+          %a{href: "http://bonar.si/"} Bonar

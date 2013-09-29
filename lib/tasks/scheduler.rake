@@ -104,6 +104,14 @@ def get_opening_times_for restaurant
   return opening_times
 end
 
+task restaurant_coordinates_to_latlng: :environment do
+  Restaurant.all.each do |restaurant|
+    restaurant.latitude = restaurant.coordinates[0].to_f
+    restaurant.longitude = restaurant.coordinates[1].to_f
+    restaurant.save!
+  end
+end
+
 task update_restaurants: :environment do
   p 'Updating restaurants...'
   @mail_content = ['Restaurant update report']
@@ -124,6 +132,8 @@ task update_restaurants: :environment do
           restaurant.restaurant_id = restaurant_id
           restaurant.address = div.css('h2').first.content.gsub(/[()]/, "")
           restaurant.coordinates = get_coordinates_for restaurant.address
+          restaurant.latitude = restaurant.coordinates[0].to_f
+          restaurant.longitude = restaurant.coordinates[1].to_f
           @mail_content << 'Adding new restaurant ' + restaurant.name + ' | ' + restaurant.restaurant_id
         end
 

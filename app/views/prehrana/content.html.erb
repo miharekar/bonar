@@ -1,30 +1,6 @@
 <% cache @restaurant do %>
-<div class="prehrana-info">
-  <h4><%= @restaurant.name %></h4>
-  <address><%= @restaurant.address %></address>
-  <p><strong><%= @restaurant.price %></strong></p>
-  <% if @restaurant.telephone.any? %>
-  <p>Tel.: <%= @restaurant.telephone.map {|str| "<a href=\"tel:#{str}\">#{str}</a>"}.join(', ').html_safe %></p>
-  <% end %>
-  <ul>
-    <li>Delavnik: <%= @restaurant.opening['Week'][0] %> - <%= @restaurant.opening['Week'][1] %></li>
-    <% if @restaurant.opening['Saturday'] %>
-    <li>Sobota: <%= @restaurant.opening['Saturday'][0] %> - <%= @restaurant.opening['Saturday'][1] %></li>
-    <% else %>
-    <li>Sobota: zaprto</li>
-    <% end %>
-    <% if @restaurant.opening['Sunday'] %>
-    <li>Nedelja: <%= @restaurant.opening['Sunday'][0] %> - <%= @restaurant.opening['Sunday'][1] %></li>
-    <% else %>
-    <li>Nedelja: zaprto</li>
-    <% end %>
-    <% if @restaurant.opening['Notes'] %>
-    <li>Opombe: <%= @restaurant.opening['Notes'] %></li>
-    <% end %>
-  </ul>
-  <p>Storitve: <%= @restaurant.features.map(&:title).join(', ') %></p>
+  <%= render 'restaurant', restaurant: @restaurant %>
   <% if @restaurant.menu.any? %>
-  <p><a href="#" class="load-menu" data-restaurant="<%= @restaurant.id.to_s %>">Jedilnik</a></p>
+    <p><a href="#" class="load-menu" data-restaurant="<%= @restaurant.id.to_s %>">Jedilnik</a></p>
   <% end %>
-</div>
 <% end %>

@@ -3,8 +3,7 @@ class ListController < ApplicationController
   end
 
   def nearest
-    Restaurant.nearest_to_position params[:coords]
-    raise a
-    render json: params.to_json
+    @restaurants = Restaurant.near([params[:lat], params[:lng]], 20).limit(15)
+    render layout: false
   end
 end

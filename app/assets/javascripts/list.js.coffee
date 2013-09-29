@@ -7,19 +7,14 @@
 
 class Compass
   constructor: (options = {enableHighAccuracy: yes, maximumAge: 10000, timeout: 100000}) ->
-    @lat    = 0
-    @lng    = 0
-    @alt    = 0
-    @acc    = 0
-    @altAcc = 0
-    @hdg    = 0
-    @spd    = 0
-    @_grabGPS(options)
-  _grabGPS: (options) ->
-    navigator.geolocation.watchPosition(@_parseGPS, @_parseErr, options)
+    @navigatorID = navigator.geolocation.watchPosition(@_parseGPS, @_parseErr, options)
+
   _parseGPS: (position) =>
-    $.get 'nearest', position, (data) ->
-      console.log data
+    if position.coords.accuracy < 100
+      @stop()
+      $.get 'nearest', { lat: position.coords.latitude, lng: position.coords.longitude }, (data) ->
+        $('#accordion').html(data)
+
   _parseErr: (err) ->
     switch err.code
       when 1
@@ -31,7 +26,8 @@ class Compass
       else
         @error = 'Well, this is embarassing...'
     #console.log @error
+
   stop: ->
-    navigator.geolocation.clearWatch _grabGPS
+    navigator.geolocation.clearWatch @navigatorID
 
 window.Compass = Compass
