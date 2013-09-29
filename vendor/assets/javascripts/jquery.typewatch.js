@@ -1,12 +1,12 @@
 /*
-*	TypeWatch 2.1
+*	TypeWatch 2.2
 *
 *	Examples/Docs: github.com/dennyferra/TypeWatch
-*	
-*  Copyright(c) 2013 
+*
+*  Copyright(c) 2013
 *	Denny Ferrassoli - dennyferra.com
 *   Charles Christolini
-*  
+*
 *  Dual licensed under the MIT and GPL licenses:
 *  http://www.opensource.org/licenses/mit-license.php
 *  http://www.gnu.org/licenses/gpl.html
@@ -32,8 +32,7 @@
 
 			// Fire if text >= options.captureLength AND text != saved text OR if override AND text >= options.captureLength
 			if ((value.length >= options.captureLength && value.toUpperCase() != timer.text)
-				|| (override && value.length >= options.captureLength)
-        || (value.length == 0 && timer.text))
+				|| (override && value.length >= options.captureLength))
 			{
 				timer.text = value.toUpperCase();
 				timer.cb.call(timer.el, value);
@@ -68,7 +67,7 @@
 					var evtElementType = this.type.toUpperCase();
 
 					// If enter key is pressed and not a TEXTAREA and matched inputTypes
-					if (evt.keyCode == 13 && evtElementType != 'TEXTAREA' && jQuery.inArray(evtElementType, options.inputTypes) >= 0) {
+					if (typeof evt.keyCode != 'undefined' && evt.keyCode == 13 && evtElementType != 'TEXTAREA' && jQuery.inArray(evtElementType, options.inputTypes) >= 0) {
 						timerWait = 1;
 						overrideBool = true;
 					}
@@ -77,11 +76,12 @@
 						checkElement(timer, overrideBool)
 					}
 
-					// Clear timer					
+					// Clear timer
 					clearTimeout(timer.timer);
 					timer.timer = setTimeout(timerCallbackFx, timerWait);
 				};
-        jQuery(elem).on('keydown input', startWatch);
+
+				jQuery(elem).on('keydown paste cut input', startWatch);
 			}
 		};
 

@@ -26,5 +26,5 @@ Bonar::Application.configure do
   config.assets.debug = true
 
   # Temporarily enable caching in development (COMMENT OUT WHEN DONE!)
-  config.action_controller.perform_caching = true
+  # config.action_controller.perform_caching = true
 end

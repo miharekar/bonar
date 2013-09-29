@@ -36,15 +36,15 @@ function GeolocationMarker(opt_map, opt_markerOpts, opt_circleOpts) {
     'cursor': 'pointer',
     'draggable': false,
     'flat': true,
-    'icon': new google.maps.MarkerImage(
-        'https://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/images/gpsloc.png',
-        new google.maps.Size(34, 34),
-        null,
-        new google.maps.Point(8, 8),
-        new google.maps.Size(17, 17)),
-
+    'icon': {
+        'url': 'https://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/images/gpsloc.png',
+        'size': new google.maps.Size(34, 34),
+        'scaledSize': new google.maps.Size(17, 17),
+        'origin': new google.maps.Point(0, 0),
+        'anchor': new google.maps.Point(8, 8)
+    },
     // This marker may move frequently - don't force canvas tile redraw
-    'optimized': false, 
+    'optimized': false,
     'position': new google.maps.LatLng(0, 0),
     'title': 'Current location',
     'zIndex': 2
@@ -89,9 +89,9 @@ function GeolocationMarker(opt_map, opt_markerOpts, opt_circleOpts) {
    * @type {google.maps.Map?}
    */
   this.map = null;
-  
+
   this.set('minimum_accuracy', null);
-  
+
   this.set('position_options', /** GeolocationPositionOptions */
       ({enableHighAccuracy: true, maximumAge: 1000}));
 
@@ -210,7 +210,7 @@ GeolocationMarker.prototype.setCircleOptions = function(circleOpts) {
 };
 
 /**
- * @private 
+ * @private
  * @param {GeolocationPosition} position
  */
 GeolocationMarker.prototype.updatePosition_ = function(position) {
@@ -235,7 +235,7 @@ GeolocationMarker.prototype.updatePosition_ = function(position) {
 
   if (mapNotSet || this.position == null ||
       !this.position.equals(newPosition)) {
-	// The local set method does not allow position to be updated
+  // The local set method does not allow position to be updated
     google.maps.MVCObject.prototype.set.call(this, 'position', newPosition);
   }
 };
