@@ -180,6 +180,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    useragent (0.7.0)
     yard (0.8.7.2)
 
 PLATFORMS
@@ -205,3 +206,4 @@ DEPENDENCIES
   turbolinks
   uglifier
   unicorn
+  useragent

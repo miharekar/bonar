@@ -1,5 +1,9 @@
 class PrehranaController < ApplicationController
   def index
+    if is_ios_7?
+      render :ios7
+    end
+
     @features = Feature.all.order(:title)
   end
 
@@ -20,5 +24,11 @@ class PrehranaController < ApplicationController
 
   def search
     render json: Restaurant.filter_by_features(params[:features]).filter_by_text(params[:search]).map(&:id)
+  end
+
+  private
+  def is_ios_7?
+    user_agent = UserAgent.parse(request.user_agent)
+    user_agent.platform == 'iPhone' and user_agent.version.to_s.to_i == 7
   end
 end

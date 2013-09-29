@@ -9,7 +9,7 @@ Bonar::Application.routes.draw do
   get 'menu' => 'prehrana#menu'
   get 'content' => 'prehrana#content'
   get 'api/restaurants'
-  
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

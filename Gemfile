@@ -44,3 +44,5 @@ gem 'geocoder'
 gem 'gmapsjs'
 
 gem 'rest-client'
+
+gem 'useragent'
