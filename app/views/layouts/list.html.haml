@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %meta{charset: "utf-8"}/
+    %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
+    %meta{content: "Miha Rekar", name: "author"}/
+    %title Bonar
+    %link{href: "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css", rel: "stylesheet"}/
+    %link{href: "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css", rel: "stylesheet"}/
+    = stylesheet_link_tag "list", media: "all"
+    %script{src: "//code.jquery.com/jquery-1.10.2.min.js"}
+    %script{src: "//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"}
+    = javascript_include_tag "list"
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-default.navbar-static-top
+      .container
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{href: "/"} Bonar
+    .container
+      .row
+        .col-md-12
+          = render 'layouts/flash'
+          = yield

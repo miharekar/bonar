@@ -4,6 +4,8 @@ class Restaurant < ActiveRecord::Base
   serialize :telephone, Array
   serialize :opening, Hash
 
+  reverse_geocoded_by :coordinates
+
   def features
     Feature.where(id: features_array).order(:title)
   end

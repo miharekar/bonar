@@ -8,7 +8,6 @@ gem 'pg'
 
 group :production do
   gem 'unicorn'
-  gem 'newrelic_rpm'
   gem 'rails_12factor'
 end
 
@@ -36,6 +35,8 @@ group :development do
   gem 'binding_of_caller'
 end
 
+gem 'newrelic_rpm'
+
 gem 'figaro'
 
 gem 'nokogiri'
@@ -46,3 +47,14 @@ gem 'gmapsjs'
 gem 'rest-client'
 
 gem 'useragent'
+
+# HAML
+gem 'haml'
+gem 'haml-rails'
+
+# pagination
+gem 'kaminari'
+gem 'kaminari-bootstrap'
+
+# geo sort
+gem 'geocoder'
