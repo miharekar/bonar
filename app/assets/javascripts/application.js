@@ -11,11 +11,4 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery_ujs
-//= require add2home
 //= require prefixfree
-
-window.addToHomeConfig = {
-  touchIcon:true,
-  returningVisitor: true,
-  message:'Namesti si Bonar na %device: klikni %icon in nato <strong>Add to Home Screen</strong>.'
-};
