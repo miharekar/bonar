@@ -52,9 +52,5 @@ gem 'useragent'
 gem 'haml'
 gem 'haml-rails'
 
-# pagination
-gem 'kaminari'
-gem 'kaminari-bootstrap'
-
 # geo sort
 gem 'geocoder'
