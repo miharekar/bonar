@@ -26,14 +26,14 @@ class Compass
       $.get '/list/nearest', { lat: position.coords.latitude, lng: position.coords.longitude }, (data) ->
         $('#accordion').html(data)
 
-  _parseErr: (err) ->
+  _parseErr: (err) =>
     switch err.code
       when 1
-        error = 'Permission denied by user'
+        error = 'Za delovanje potrebujem dostop do lokacije'
       when 2
-        error = 'Cant fix GPS position'
+        error = 'Ne morem pridobiti lokacije'
       when 3
-        error = 'GPS is taking too long to respond'
+        error = 'GPS se ne odziva'
       else
         error = 'Well, this is embarassing...'
     @_message error
