@@ -1,7 +1,7 @@
 class PrehranaController < ApplicationController
   def index
     if is_ios_7?
-      redirect_to :list_index, notice: 'iOS 7 (še) ne podpira Bonar zemljevida'
+      redirect_to list_path, notice: 'iOS 7 (še) ne podpira Bonar zemljevida'
     end
 
     @features = Feature.all.order(:title)

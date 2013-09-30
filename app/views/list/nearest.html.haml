@@ -2,10 +2,12 @@
   .panel.panel-info
     .panel-heading
       %h4.panel-title
-        %a.accordion-toggle{ "data-parent" => "#accordion", "data-toggle" => "collapse", href: "#restaurant-#{restaurant.id}" }
+        %a.accordion-toggle{ href: "#restaurant-#{restaurant.id}", data: { parent: '#accordion', toggle: 'collapse' } }
           = restaurant.name
           |
           = number_to_human (restaurant.distance_from([params[:lat], params[:lng]]) * 1000), units: {unit: "m", thousand: "km"}
+          |
+          = restaurant.price
     .panel-collapse.collapse{ id: "restaurant-#{restaurant.id}" }
       .panel-body
         = render 'prehrana/restaurant', restaurant: restaurant

@@ -7,25 +7,36 @@
 
 class Compass
   constructor: (options = {enableHighAccuracy: yes, maximumAge: 10000, timeout: 100000}) ->
-    @navigatorID = navigator.geolocation.watchPosition(@_parseGPS, @_parseErr, options)
+    if navigator.geolocation
+      @_progress_to 33
+      @navigatorID = navigator.geolocation.watchPosition(@_parseGPS, @_parseErr, options)
+    else
+      @_message 'Za delovanje potrebujem GPS'
+
+  _progress_to: (percent) ->
+    $('#nearest-progress').css width: "#{percent}%"
+
+  _message: (text) ->
+    $('#accordion').text(text)
 
   _parseGPS: (position) =>
     if position.coords.accuracy < 100
       @stop()
-      $.get 'nearest', { lat: position.coords.latitude, lng: position.coords.longitude }, (data) ->
+      @_progress_to 67
+      $.get '/list/nearest', { lat: position.coords.latitude, lng: position.coords.longitude }, (data) ->
         $('#accordion').html(data)
 
   _parseErr: (err) ->
     switch err.code
       when 1
-        @error = 'Permission denied by user'
+        error = 'Permission denied by user'
       when 2
-        @error = 'Cant fix GPS position'
+        error = 'Cant fix GPS position'
       when 3
-        @error = 'GPS is taking too long to respond'
+        error = 'GPS is taking too long to respond'
       else
-        @error = 'Well, this is embarassing...'
-    #console.log @error
+        error = 'Well, this is embarassing...'
+    @_message error
 
   stop: ->
     navigator.geolocation.clearWatch @navigatorID
