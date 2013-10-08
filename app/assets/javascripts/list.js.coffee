@@ -4,6 +4,7 @@
 
 #= require jquery_ujs
 #= require prefixfree
+#= require add2home
 
 class Compass
   constructor: (options = {enableHighAccuracy: yes, maximumAge: 10000, timeout: 100000}) ->
