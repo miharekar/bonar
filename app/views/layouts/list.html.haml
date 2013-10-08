@@ -1,12 +1,26 @@
 !!!
 %html
   %head
-    %meta{charset: "utf-8"}/
-    %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
-    %meta{content: "Miha Rekar", name: "author"}/
     %title Bonar
-    %link{href: "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css", rel: "stylesheet"}/
-    %link{href: "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css", rel: "stylesheet"}/
+    %meta{charset: "utf-8"}
+    %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}
+    %meta{content: "Miha Rekar", name: "author"}
+    %meta{content: "Bonar", name: "apple-mobile-web-app-title"}
+    %meta{content: "yes", name: "apple-mobile-web-app-capable"}
+    %meta{content: "Ponudniki študentske prehrane na zemljevidu", name: "description"}
+    %meta{content: "študentska prehrana, študentski boni, boni, bonar, prehrana, zemljevid, mapa, karta", name: "keywords"}
+    %meta{content: "Bonar", property: "og:title"}
+    %meta{content: "Ponudniki študentske prehrane na zemljevidu", property: "og:description"}
+    %meta{content: path_to_image('icons/sb144.png'), property: "og:image"}
+    %link{href: path_to_image('icons/sb144.png'), rel: "apple-touch-icon-precomposed", sizes: "144x144"}
+    %link{href: path_to_image('icons/sb114.png'), rel: "apple-touch-icon-precomposed", sizes: "114x114"}
+    %link{href: path_to_image('icons/sb72.png'), rel: "apple-touch-icon-precomposed", sizes: "72x72"}
+    %link{href: path_to_image('icons/sb57.png'), rel: "apple-touch-icon-precomposed"}
+    %link{href: path_to_image('icons/sb57.png'), rel: "shortcut icon"}
+    %link{href: path_to_image('icons/favicon.ico'), rel: "shortcut icon"}
+    %link{href: "humans.txt", rel: "author"}
+    %link{href: "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css", rel: "stylesheet"}
+    %link{href: "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css", rel: "stylesheet"}
     = stylesheet_link_tag "list", media: "all"
     %script{src: "//code.jquery.com/jquery-1.10.2.min.js"}
     %script{src: "//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"}
