@@ -40,18 +40,6 @@ def get_restaurant_id restaurant_div
   return parameters['e_restaurant'][0]
 end
 
-def create_feature(feature_id, doc)
-  title = doc.at_css('#rService' + feature_id).parent['title']
-  if title
-    @mail_content << 'Creating feature ' + title
-    feature = Feature.new
-    feature.feature_id = feature_id
-    feature.title = doc.at_css('#rService' + feature_id).parent['title']
-    return feature
-  end
-  return nil
-end
-
 def get_menu_for restaurant
   doc = Nokogiri::HTML(open(restaurant.link + '0'))
   menu = []
@@ -139,9 +127,9 @@ task update_restaurants: :environment do
 
         features = []
         div.attribute('sssp:rs').value.split(';').each do |feature_id|
-          feature = Feature.find_by_feature_id(feature_id)
-          if !feature
-            feature = create_feature(feature_id, doc)
+          feature = Feature.find_or_create_by(feature_id: feature_id) do |feature|
+            feature.title = doc.at_css('#rService' + feature_id).parent['title']
+            @mail_content << 'Creating feature ' + feature.title
           end
           features << feature
         end
