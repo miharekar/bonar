@@ -23,12 +23,6 @@ gem 'coffee-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-
-# Build JSON APIs with ease
-gem 'jbuilder'
-
 # JSON serialization
 gem 'active_model_serializers', '~> 0.9.0.pre', github: 'rails-api/active_model_serializers'
 
