@@ -6,6 +6,10 @@ class Restaurant < ActiveRecord::Base
 
   reverse_geocoded_by :latitude, :longitude
 
+  scope :active, -> { where(disabled: false) }
+  scope :with_features, -> features { where('features_array @> ARRAY[?]', features.map(&:to_i)) if features.present? }
+  scope :with_text, -> text { where('name ILIKE :text OR address ILIKE :text', text: '%' + text + '%') if text.present? }
+
   def features
     Feature.where(id: features_array).order(:title)
   end
@@ -13,21 +17,5 @@ class Restaurant < ActiveRecord::Base
   def disable
     self.disabled = true
     self.save!
-  end
-
-  def self.filter_by_features features
-    if features.blank?
-      scoped
-    else
-      where 'features_array @> ARRAY[?]', features.map(&:to_i)
-    end
-  end
-
-  def self.filter_by_text text
-    if text.blank?
-      scoped
-    else
-      where 'name ILIKE :text OR address ILIKE :text', text: '%' + text + '%'
-    end
   end
 end

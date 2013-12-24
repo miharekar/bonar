@@ -1,30 +1,26 @@
 class PrehranaController < ApplicationController
   def index
-    if is_ios_7?
-      redirect_to list_path, notice: 'iOS 7 (še) ne podpira Bonar zemljevida'
-    end
-
-    @features = Feature.all.order(:title)
+    redirect_to list_path, notice: 'iOS 7 (še) ne podpira Bonar zemljevida' if is_ios_7?
+    @features = Feature.order(:title)
   end
 
   def all_restaurants
-    @restaurants = Restaurant.where(disabled: false)
-    fresh_when(@restaurants)
-    render json: @restaurants, root: false
+    @restaurants = Restaurant.active
+    if stale?(@restaurants)
+      render json: @restaurants, root: false, basic: true
+    end
   end
 
-  def menu
+  def load_restaurant
     @restaurant = Restaurant.find(params[:restaurant])
     render layout: false
   end
-
-  def content
-    @restaurant = Restaurant.find(params[:restaurant])
-    render layout: false
-  end
+  alias_method :menu, :load_restaurant
+  alias_method :content, :load_restaurant
 
   def search
-    render json: Restaurant.filter_by_features(params[:features]).filter_by_text(params[:search]).map(&:id)
+    restaurants = Restaurant.with_features(params[:features]).with_text(params[:search]).pluck(:id)
+    render json: restaurants, root: false
   end
 
   private
