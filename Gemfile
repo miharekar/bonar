@@ -30,7 +30,7 @@ gem 'turbolinks'
 gem 'jbuilder'
 
 # JSON serialization
-gem 'active_model_serializers'
+gem 'active_model_serializers', '~> 0.9.0.pre', github: 'rails-api/active_model_serializers'
 
 group :development do
   gem 'better_errors'
