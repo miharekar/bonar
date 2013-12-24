@@ -1,8 +1,7 @@
 class ApiController < ApplicationController
   def restaurants
-    @restaurants = Restaurant.active
-    if stale?(@restaurants)
-      render json: @restaurants, root: false
+    if stale?(Restaurant.active.first)
+      render json: Restaurant.active, root: false
     end
   end
 end
