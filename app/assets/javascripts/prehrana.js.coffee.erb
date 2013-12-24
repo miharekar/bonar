@@ -104,6 +104,8 @@ $ ->
       iw.setContent data
       latestMarker = marker
       iw.open map.map, latestMarker
+      google.maps.event.addListener map.map, 'click', ->
+        iw.close()
     ), 'html'
 
   scaleMarkers = [getMarkerIcon('<%= asset_path("markers/ffe7c8.png") %>'), getMarkerIcon('<%= asset_path("markers/ffcc95.png") %>'), getMarkerIcon('<%= asset_path("markers/ffad60.png") %>'), getMarkerIcon('<%= asset_path("markers/ff8c1f.png") %>'), getMarkerIcon('<%= asset_path("markers/e04f00.png") %>')]
