@@ -1,0 +1,6 @@
+- cache @restaurant do
+  %p
+    = render @restaurant
+    - if @restaurant.menu.any?
+      %p
+        %a.load-menu{"data-restaurant" => @restaurant.id.to_s, href: "#"} Jedilnik

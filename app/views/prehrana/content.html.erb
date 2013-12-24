@@ -1,6 +1,0 @@
-<% cache @restaurant do %>
-  <%= render 'restaurant', restaurant: @restaurant %>
-  <% if @restaurant.menu.any? %>
-    <p><a href="#" class="load-menu" data-restaurant="<%= @restaurant.id.to_s %>">Jedilnik</a></p>
-  <% end %>
-<% end %>

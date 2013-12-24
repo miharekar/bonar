@@ -10,7 +10,7 @@
           = restaurant.price
     .panel-collapse.collapse{ id: "restaurant-#{restaurant.id}" }
       .panel-body
-        = render 'prehrana/restaurant', restaurant: restaurant
+        = render restaurant
         - if restaurant.menu.any?
           .table-responsive
             %table.table.table-condensed.table-striped
