@@ -1,4 +1,4 @@
-development:
+development: &development
   adapter: postgresql
   host: localhost
   encoding: unicode
@@ -11,7 +11,4 @@ test:
   database: prehrana_test
 
 production:
-  adapter: postgresql
-  host: localhost
-  encoding: unicode
-  database: prehrana_production
+  <<: *development
