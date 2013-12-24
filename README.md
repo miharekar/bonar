@@ -10,7 +10,7 @@
 Nekega dne sem se lačen znašel v neznanem kraju. Kot pravi študent, sem najprej pomislil "le kje lahko jem na bone". Ugotovil sem, da ne obstaja niti ena mobilna aplikacija / mobilnikom prijazna spletna stran, ki bi prikazovala aktualno ponudbo študentske prehrane. Vse so ali nehali razvijati, ali pa prikazujejo netočne in/ali zastarele informacije. Zato sem se odločil, da naredim svojo.
 
 ###Tech
-Ko sem začenjal z izdelavo, sem se ravno začenjal učiti [Ruby on Rails](http://rubyonrails.org/). Ker ni nič boljšega, kot učenje s prakso, sem naredil spletno aplikacijo kar z Railsi. Bonar je tako moj prvi RoR projekt, poganjata pa ga bleeding edge Ruby 2.0.0 in Rails 4.0.0.
+Ko sem začenjal z izdelavo, sem se ravno začenjal učiti [Ruby on Rails](http://rubyonrails.org/). Ker ni nič boljšega, kot učenje s prakso, sem naredil spletno aplikacijo kar z Railsi. Bonar je tako moj prvi RoR projekt in tako moj playground.
 
 ###Issues
 Če imate kakršnekoli probleme, pripombe ali ideje glede Bonarja, kar odprite [issue](https://github.com/mrfoto/bonar/issues) ali pa me kontaktirajte na Twitterju - [@mr_foto](https://twitter.com/mr_foto).
