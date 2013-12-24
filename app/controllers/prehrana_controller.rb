@@ -9,7 +9,8 @@ class PrehranaController < ApplicationController
 
   def all_restaurants
     @restaurants = Restaurant.where(disabled: false)
-    fresh_when(@restaurants.first)
+    fresh_when(@restaurants)
+    render json: @restaurants, root: false
   end
 
   def menu

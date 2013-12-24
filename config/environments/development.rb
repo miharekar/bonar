@@ -27,4 +27,6 @@ Bonar::Application.configure do
 
   # Temporarily enable caching in development (COMMENT OUT WHEN DONE!)
   # config.action_controller.perform_caching = true
+
+  BetterErrors.use_pry!
 end
