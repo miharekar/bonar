@@ -24,7 +24,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 
 # JSON serialization
-gem 'active_model_serializers', '~> 0.9.0.pre', github: 'rails-api/active_model_serializers'
+gem 'active_model_serializers', '~> 0.9.0.alpha1'
 
 group :development do
   gem 'better_errors'
@@ -39,21 +39,24 @@ group :development do
   gem 'hirb'
 end
 
+# Newrelic /newrelic
 gem 'newrelic_rpm'
-
-gem 'figaro'
-
-gem 'nokogiri'
-
-gem 'geocoder'
-
-gem 'rest-client'
-
-gem 'useragent'
 
 # HAML
 gem 'haml'
 gem 'haml-rails'
+
+# ENV var management
+gem 'figaro'
+
+# XML parser
+gem 'nokogiri'
+
+# REST API
+gem 'rest-client'
+
+# UserAgent parser
+gem 'useragent'
 
 # geo sort
 gem 'geocoder'
