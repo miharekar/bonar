@@ -3,7 +3,7 @@ class RestaurantSerializer < ActiveModel::Serializer
   has_many :features
 
   def filter(keys)
-    if @options[:basic]
+    if @scope == :basic
       keys = [:id, :coordinates, :price]
     else
       keys

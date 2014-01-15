@@ -6,7 +6,7 @@ class PrehranaController < ApplicationController
 
   def all_restaurants
     if stale?(Restaurant.active.first)
-      render json: Restaurant.active, root: false, basic: true
+      render json: Restaurant.active, root: false, scope: :basic
     end
   end
 
