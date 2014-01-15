@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20130929142641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
 
   create_table "features", force: true do |t|
     t.string   "title"
@@ -36,15 +35,15 @@ ActiveRecord::Schema.define(version: 20130929142641) do
     t.string   "address"
     t.string   "price"
     t.text     "coordinates"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "link"
     t.string   "restaurant_id"
     t.text     "opening"
     t.text     "menu"
     t.text     "telephone"
     t.boolean  "disabled",       default: false
-    t.integer  "features_array", default: [],                 array: true
+    t.integer  "features_array", default: [],    array: true
     t.decimal  "latitude"
     t.decimal  "longitude"
   end

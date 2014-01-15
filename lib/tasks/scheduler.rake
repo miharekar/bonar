@@ -18,9 +18,7 @@ def get_google_coordinates_for address
   p 'Getting Google coords for ' + address
   coordinates =  Geocoder.coordinates(address + ', Slovenia')
   if(!coordinates)
-    p 'Sleeping...'
-    sleep(1)
-    get_google_coordinates_for address
+    @mail_content << "Could not get coordinates for #{address}"
   end
   return coordinates.map(&:to_s)
 end
@@ -92,14 +90,6 @@ def get_opening_times_for restaurant
   return opening_times
 end
 
-task restaurant_coordinates_to_latlng: :environment do
-  Restaurant.all.each do |restaurant|
-    restaurant.latitude = restaurant.coordinates[0].to_f
-    restaurant.longitude = restaurant.coordinates[1].to_f
-    restaurant.save!
-  end
-end
-
 task update_restaurants: :environment do
   p 'Updating restaurants...'
   @mail_content = ['Restaurant update report']
@@ -168,4 +158,12 @@ task update_restaurants: :environment do
   end
 
   p 'done.'
+end
+
+task restaurant_coordinates_to_latlng: :environment do
+  Restaurant.all.each do |restaurant|
+    restaurant.latitude = restaurant.coordinates[0].to_f
+    restaurant.longitude = restaurant.coordinates[1].to_f
+    restaurant.save!
+  end
 end
