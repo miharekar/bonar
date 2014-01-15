@@ -19,6 +19,7 @@ def get_google_coordinates_for address
   coordinates =  Geocoder.coordinates(address + ', Slovenia')
   if(!coordinates)
     @mail_content << "Could not get coordinates for #{address}"
+    coordinates = ['','']
   end
   return coordinates.map(&:to_s)
 end
