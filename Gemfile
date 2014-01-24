@@ -4,12 +4,8 @@ ruby '2.1.0'
 
 gem 'rails', '~> 4.0.2'
 
+# Use postgres as the database for Active Record
 gem 'pg'
-
-group :production do
-  gem 'unicorn'
-  gem 'rails_12factor'
-end
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -26,9 +22,21 @@ gem 'jquery-rails'
 # JSON serialization
 gem 'active_model_serializers', '~> 0.9.0.alpha1'
 
+group :production do
+  gem 'unicorn'
+  gem 'rails_12factor'
+end
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'bullet'
+  gem 'quiet_assets'
+  gem 'letter_opener'
+  #gem 'rack-mini-profiler'
+end
+
+group :development, :test do
   # Pry stuff
   gem 'pry'
   gem 'pry-coolline'
@@ -37,6 +45,11 @@ group :development do
   gem 'pry-rails'
   gem 'awesome_print'
   gem 'hirb'
+  # Testing
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'guard-rspec'
+  gem 'terminal-notifier-guard'
 end
 
 # Newrelic /newrelic

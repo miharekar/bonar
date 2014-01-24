@@ -29,4 +29,12 @@ Bonar::Application.configure do
   # config.action_controller.perform_caching = true
 
   BetterErrors.use_pry!
+
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.add_footer = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+  end
 end
