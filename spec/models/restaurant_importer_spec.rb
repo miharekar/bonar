@@ -14,7 +14,7 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
     it 'parses it to Restaurant' do
       expect(parsed).to be_instance_of(Restaurant)
       expect(parsed.name).to eq('Aperitivo Ljubljana')
-      expect(parsed.restaurant_id).to eq('CRK3PKZVD5HW2N2TPB8JZUE7RA')
+      expect(parsed.spid).to eq('CRK3PKZVD5HW2N2TPB8JZUE7RA')
       expect(parsed.address).to eq('Ambrožev trg 10, Ljubljana')
       expect(parsed.price).to eq(1.87)
       expect(parsed.features.length).to eq(3)

@@ -17,8 +17,8 @@ class RestaurantImporter
 
   def parse_restaurant(restaurant)
     ir = ImportedRestaurant.new(restaurant)
-    Restaurant.find_or_create_by(restaurant_id: ir.spid) do |r|
-      r.restaurant_id = ir.spid
+    Restaurant.find_or_create_by(spid: ir.spid) do |r|
+      r.spid = ir.spid
       r.name = ir.name
       r.address = ir.address
       r.price = ir.price
@@ -39,7 +39,7 @@ class RestaurantImporter
   end
 
   def get_feature(spid)
-    Feature.find_or_create_by(feature_id: spid) do |f|
+    Feature.find_or_create_by(spid: spid) do |f|
       f.title = @doc.at_css("#rService#{spid}").parent['title']
     end
   end
