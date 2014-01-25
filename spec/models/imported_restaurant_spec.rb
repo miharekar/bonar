@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ImportedRestaurant do
+describe ImportedRestaurant, vcr: { record: :new_episodes } do
   def imported_restaurant_for(name)
     ImportedRestaurant.new Nokogiri::XML(File.open("#{Rails.root}/spec/fixtures/restaurants/#{name}.html", "r:UTF-8"), nil, 'UTF-8').children.first
   end
@@ -36,14 +36,14 @@ describe ImportedRestaurant do
     expect(celica.spfeatures).to match_array([2, 7, 8, 11])
   end
 
-  it 'gets coordinates(latitude and longitude)', :vcr do
+  it 'gets coordinates(latitude and longitude)' do
     expect(celica.latitude).to be_within(0.0005).of(46.0566030)
     expect(celica.longitude).to be_within(0.0005).of(14.5165372)
     expect(aperitivo.latitude).to be_within(0.0005).of(46.0564509)
     expect(aperitivo.longitude).to be_within(0.0005).of(14.5080702)
   end
 
-  it 'gets telephones', vcr: { record: :new_episodes } do
+  it 'gets telephones' do
     expect(celica.telephones).to eq([])
     expect(aga.telephones).to match_array(['014302105'])
     expect(feliks.telephones).to match_array(['045151520', '051320520'])
