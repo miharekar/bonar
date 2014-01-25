@@ -17,15 +17,15 @@ class RestaurantImporter
 
   def parse_restaurant(restaurant)
     ir = ImportedRestaurant.new(restaurant)
-    Restaurant.create(
-      restaurant_id: ir.spid,
-      name: ir.name,
-      address: ir.address,
-      price: ir.price,
-      features_array: build_features_array(ir),
-      latitude: ir.latitude,
-      longitude: ir.longitude
-    )
+    Restaurant.find_or_create_by(restaurant_id: ir.spid) do |r|
+      r.restaurant_id = ir.spid
+      r.name = ir.name
+      r.address = ir.address
+      r.price = ir.price
+      r.features_array = build_features_array(ir)
+      r.latitude = ir.latitude
+      r.longitude = ir.longitude
+    end
   end
 
   private
