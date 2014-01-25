@@ -27,6 +27,7 @@ class RestaurantImporter
       r.longitude = ir.longitude
       r.telephone = ir.telephones
       r.menu = ir.menu
+      r.opening = ir.opening
     end
   end
 

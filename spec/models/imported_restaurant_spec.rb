@@ -10,6 +10,7 @@ describe ImportedRestaurant, vcr: { record: :new_episodes } do
   let(:aga) { imported_restaurant_for('aga') }
   let(:feliks) { imported_restaurant_for('feliks') }
   let(:katra) { imported_restaurant_for('katra') }
+  let(:klementina) { imported_restaurant_for('klementina') }
 
   it 'parses Studentska Prehrana ID - spid' do
     expect(aperitivo.spid).to eq('CRK3PKZVD5HW2N2TPB8JZUE7RA')
@@ -60,5 +61,18 @@ describe ImportedRestaurant, vcr: { record: :new_episodes } do
     expect(celica.menu).to eq([])
   end
 
-  it 'gets opening times'
+  it 'gets opening times' do
+    expect(aperitivo.opening[:week]).to match_array(['08:00', '20:00'])
+    expect(aperitivo.opening[:saturday]).to match_array(['08:00', '14:00'])
+    expect(aperitivo.opening[:sunday]).to be_false
+
+    expect(celica.opening[:week]).to match_array(['11:00', '16:00'])
+    expect(celica.opening[:saturday]).to be_false
+    expect(celica.opening[:sunday]).to be_false
+
+    expect(klementina.opening[:week]).to match_array(['12:00', '20:00'])
+    expect(klementina.opening[:saturday]).to match_array(['12:00', '20:00'])
+    expect(klementina.opening[:sunday]).to match_array(['12:00', '20:00'])
+    expect(klementina.opening[:notes]).to eq('Ponedeljek in torek ZAPRTO')
+  end
 end

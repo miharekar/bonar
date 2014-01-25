@@ -52,17 +52,39 @@ class ImportedRestaurant
     end
   end
 
+  def opening
+    info_html.css('.info li').each_with_object({}) do |i, o|
+      o.merge!(parse_opening(i))
+    end
+  end
+
   private
   def parse_telephone(match)
     return [] unless match
     match.captures.first.split(',').each_with_object([]) do |tel, o|
-      o.concat tel.gsub(/\D/, '').scan(/.{1,9}/)
+      o.concat(tel.gsub(/\D/, '').scan(/.{1,9}/))
     end
   end
 
   def parse_offer(offer)
     offer.css('li').inject([]) do |i, course|
       i << course.content.squish
+    end
+  end
+
+  def parse_opening(interval)
+    id = interval.attribute('id').content.gsub(/ContentHolderMain_ContentHolderMainContent_ContentHolderMainContent_riInfo_li/, '')
+    case id
+    when 'Week', 'Saturday', 'Sunday'
+      { id.downcase.to_sym => interval.content.strip.scan(/\d{2}:\d{2}/)}
+    when 'Notes'
+      { notes: interval.content.gsub('Opombe:', '').squish }
+    when 'ClosedWeekends'
+      { saturday: false, sunday: false }
+    when 'ClosedSunday'
+      { sunday: false }
+    when 'ClosedSaturday'
+      { saturday: false }
     end
   end
 
