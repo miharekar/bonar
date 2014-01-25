@@ -6,7 +6,7 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
   end
 
   it 'scrapes multiple restaurants' do
-    expect(@importer.restaurants.count).to be > 100
+    expect(@importer.restaurants.count).to be > 50
   end
 
   context 'single imported restaurant' do

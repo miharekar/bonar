@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ImportedRestaurant, vcr: { record: :new_episodes } do
   def imported_restaurant_for(name)
-    ImportedRestaurant.new Nokogiri::XML(File.open("#{Rails.root}/spec/fixtures/restaurants/#{name}.html", "r:UTF-8"), nil, 'UTF-8').children.first
+    ImportedRestaurant.new Nokogiri::XML(File.open("#{Rails.root}/spec/fixtures/restaurants/#{name}.html")).children.first
   end
 
   let(:aperitivo) { imported_restaurant_for('aperitivo') }
