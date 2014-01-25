@@ -11,24 +11,24 @@ class RestaurantImporter
 
   def import
     restaurants.each do |restaurant|
-      parse_restaurant restaurant
+      update_restaurant restaurant
     end
   end
 
-  def parse_restaurant(restaurant)
+  def update_restaurant(restaurant)
     ir = ImportedRestaurant.new(restaurant)
-    Restaurant.find_or_create_by(spid: ir.spid) do |r|
-      r.spid = ir.spid
-      r.name = ir.name
-      r.address = ir.address
-      r.price = ir.price
-      r.features_array = build_features_array(ir)
-      r.latitude = ir.latitude
-      r.longitude = ir.longitude
-      r.telephones = ir.telephones
-      r.menu = ir.menu
-      r.opening = ir.opening
-    end
+    r = Restaurant.find_or_create_by(spid: ir.spid).update(
+      spid: ir.spid,
+      name: ir.name,
+      address: ir.address,
+      price: ir.price,
+      features_array: build_features_array(ir),
+      latitude: ir.latitude,
+      longitude: ir.longitude,
+      telephones: ir.telephones,
+      menu: ir.menu,
+      opening: ir.opening
+    )
   end
 
   private
