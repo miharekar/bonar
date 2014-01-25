@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130929142641) do
+ActiveRecord::Schema.define(version: 20140125180527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20130929142641) do
     t.string   "restaurant_id"
     t.text     "opening"
     t.text     "menu"
-    t.text     "telephone"
+    t.text     "telephones"
     t.boolean  "disabled",       default: false
     t.integer  "features_array", default: [],    array: true
     t.decimal  "latitude"

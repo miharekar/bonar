@@ -43,7 +43,7 @@ class ImportedRestaurant
   end
 
   def telephones
-    parse_telephone menu_html.at_css('h2 span').content.match(/tel:(.*)\)/)
+    parse_telephones menu_html.at_css('h2 span').content.match(/tel:(.*)\)/)
   end
 
   def menu
@@ -59,7 +59,7 @@ class ImportedRestaurant
   end
 
   private
-  def parse_telephone(match)
+  def parse_telephones(match)
     return [] unless match
     match.captures.first.split(',').each_with_object([]) do |tel, o|
       o.concat(tel.gsub(/\D/, '').scan(/.{1,9}/))

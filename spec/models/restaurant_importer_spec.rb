@@ -20,7 +20,7 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
       expect(parsed.features.length).to eq(3)
       expect(parsed.latitude).to be_within(0.0005).of(46.0564509)
       expect(parsed.longitude).to be_within(0.0005).of(14.5080702)
-      expect(parsed.telephone).to eq([])
+      expect(parsed.telephones).to eq([])
       expect(parsed.menu.length).to eq(3)
       expect(parsed.opening[:week]).to match_array(['08:00', '20:00'])
       expect(parsed.opening[:saturday]).to match_array(['08:00', '14:00'])

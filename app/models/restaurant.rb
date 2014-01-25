@@ -1,6 +1,6 @@
 class Restaurant < ActiveRecord::Base
   serialize :menu, Array
-  serialize :telephone, Array
+  serialize :telephones, Array
   serialize :opening, Hash
 
   reverse_geocoded_by :latitude, :longitude

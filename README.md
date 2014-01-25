@@ -42,7 +42,7 @@ Should you use it, you absolutely must cache the response, since the data only c
     "id": 1909,
     "name": "Dijaški in študentski dom Koper",
     "address": "Cankarjeva 5, Koper/Capodistria",
-    "telephone": [],
+    "telephones": [],
     "price": "1,37 EUR",
     "coordinates": [
       "45.54844801068044",
@@ -112,7 +112,7 @@ Should you use it, you absolutely must cache the response, since the data only c
     "id": 1924,
     "name": " ",
     "address": "Cesta maršala Tita 27, Jesenice",
-    "telephone": [
+    "telephones": [
       "051222152",
       "040750111"
     ],

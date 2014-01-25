@@ -3,9 +3,9 @@
   %address= restaurant.address
   %p
     %strong= restaurant.price
-  - if restaurant.telephone.any?
+  - if restaurant.telephones.any?
     %p
-      Tel.: #{restaurant.telephone.map {|str| "<a href=\"tel:#{str}\">#{str}</a>"}.join(', ').html_safe}
+      Tel.: #{restaurant.telephones.map {|str| "<a href=\"tel:#{str}\">#{str}</a>"}.join(', ').html_safe}
   %ul
     %li
       Delavnik: #{restaurant.opening['Week'][0]} - #{restaurant.opening['Week'][1]}

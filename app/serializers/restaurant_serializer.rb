@@ -1,5 +1,5 @@
 class RestaurantSerializer < ActiveModel::Serializer
-  attributes :id, :name, :address, :telephone, :price, :coordinates, :opening, :menu
+  attributes :id, :name, :address, :telephones, :price, :coordinates, :opening, :menu
   has_many :features
 
   def filter(keys)
