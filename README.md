@@ -44,10 +44,8 @@ Should you use it, you absolutely must cache the response, since the data only c
     "address": "Cankarjeva 5, Koper/Capodistria",
     "telephones": [],
     "price": "1,37 EUR",
-    "coordinates": [
-      "45.54844801068044",
-      "13.732124879080478"
-    ],
+    "latitude": "45.54844801068044",
+    "longitude": "13.732124879080478",
     "opening": {
       "Week": [
         "12:00",
@@ -117,10 +115,8 @@ Should you use it, you absolutely must cache the response, since the data only c
       "040750111"
     ],
     "price": "4,37 EUR",
-    "coordinates": [
-      "46.43674871370644",
-      "14.05316910554446"
-    ],
+    "latitude": "46.43674871370644",
+    "longitude": "14.05316910554446",
     "opening": {
       "Week": [
         "09:00",

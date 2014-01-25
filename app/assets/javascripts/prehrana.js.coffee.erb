@@ -18,8 +18,8 @@ $ ->
     filteredRestaurants = if filteredIDs then restaurants.filter (restaurant) -> restaurant['id'] in filteredIDs else restaurants
     for restaurant in filteredRestaurants
       marker = map.addMarker
-        lat: restaurant['coordinates'][0]
-        lng: restaurant['coordinates'][1]
+        lat: restaurant['latitude']
+        lng: restaurant['longitude']
         details: restaurant['id']
         icon: scaleMarkers[restaurant['price'][0]]
         shadow: {url: '<%= asset_path("markers/shadow.png") %>', origin: new google.maps.Point(9,34), scaledSize: new google.maps.Size(31,34)}

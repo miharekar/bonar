@@ -17,8 +17,4 @@ class Restaurant < ActiveRecord::Base
     self.disabled = true
     self.save!
   end
-
-  def coordinates
-    [latitude, longitude]
-  end
 end
