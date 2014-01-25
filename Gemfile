@@ -50,6 +50,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'guard-rspec'
   gem 'terminal-notifier-guard'
+  gem 'webmock'
+  gem 'vcr'
 end
 
 # Newrelic /newrelic

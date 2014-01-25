@@ -1,5 +1,4 @@
 class Restaurant < ActiveRecord::Base
-  serialize :coordinates, Array
   serialize :menu, Array
   serialize :telephone, Array
   serialize :opening, Hash
@@ -17,5 +16,9 @@ class Restaurant < ActiveRecord::Base
   def disable
     self.disabled = true
     self.save!
+  end
+
+  def coordinates
+    [latitude, longitude]
   end
 end
