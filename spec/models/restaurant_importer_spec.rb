@@ -21,6 +21,7 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
       expect(parsed.latitude).to be_within(0.0005).of(46.0564509)
       expect(parsed.longitude).to be_within(0.0005).of(14.5080702)
       expect(parsed.telephone).to eq([])
+      expect(parsed.menu.length).to eq(3)
     end
 
     it 'doesnt import same restaurant twice' do

@@ -5,6 +5,14 @@ class ImportedRestaurant
     @html = html
   end
 
+  def menu_html
+    @menu_html ||= Nokogiri::HTML(open(RESTAURANT_URL % [spid, 0]))
+  end
+
+  def info_html
+    @info_html ||= Nokogiri::HTML(open(RESTAURANT_URL % [spid, 1]))
+  end
+
   def spid
     url = @html.at_css('h1 a')['href']
     Rack::Utils.parse_query(URI(url).query)['e_restaurant']
@@ -26,10 +34,6 @@ class ImportedRestaurant
     @html.attribute('sssp:rs').value.split(';').map(&:to_i)
   end
 
-  def telephones
-    parse_telephone menu_html.at_css('h2 span').content.match(/tel:(.*)\)/)
-  end
-
   def latitude
     coordinates[:latitude]
   end
@@ -38,11 +42,27 @@ class ImportedRestaurant
     coordinates[:longitude]
   end
 
+  def telephones
+    parse_telephone menu_html.at_css('h2 span').content.match(/tel:(.*)\)/)
+  end
+
+  def menu
+    menu_html.css('.holderRestaurantInfo>ol>li').inject([]) do |m, o|
+      m << parse_offer(o)
+    end
+  end
+
   private
-  def parse_telephone match
+  def parse_telephone(match)
     return [] unless match
     match.captures.first.split(',').each_with_object([]) do |tel, o|
       o.concat tel.gsub(/\D/, '').scan(/.{1,9}/)
+    end
+  end
+
+  def parse_offer(offer)
+    offer.css('li').inject([]) do |i, course|
+      i << course.content.squish
     end
   end
 
@@ -61,11 +81,4 @@ class ImportedRestaurant
     { latitude: c[0].to_f, longitude: c[1].to_f } if c
   end
 
-  def menu_html
-    @menu_html ||= Nokogiri::HTML(open(RESTAURANT_URL % [spid, 0]))
-  end
-
-  def info_html
-    @info_html ||= Nokogiri::HTML(open(RESTAURANT_URL % [spid, 1]))
-  end
 end

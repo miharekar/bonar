@@ -44,12 +44,21 @@ describe ImportedRestaurant, vcr: { record: :new_episodes } do
   end
 
   it 'gets telephones' do
+    expect(aperitivo.telephones).to eq([])
     expect(celica.telephones).to eq([])
     expect(aga.telephones).to match_array(['014302105'])
     expect(feliks.telephones).to match_array(['045151520', '051320520'])
     expect(katra.telephones).to match_array(['015427000', '015427105', '041722272', '041722027'])
   end
 
-  it 'gets menu'
+  it 'gets menu' do
+    expect(aperitivo.menu).to match_array([
+      ['gobova/goveja', 'solata s slanino', 'sezonsko sadje'],
+      ['gobova/goveja', 'vegi sendvič', 'sezonsko sadje'],
+      ['paradižnikova', 'sirni krožnik', 'sezonsko sadje']
+    ])
+    expect(celica.menu).to eq([])
+  end
+
   it 'gets opening times'
 end
