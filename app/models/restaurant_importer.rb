@@ -25,6 +25,7 @@ class RestaurantImporter
       r.features_array = build_features_array(ir)
       r.latitude = ir.latitude
       r.longitude = ir.longitude
+      r.telephone = ir.telephones
     end
   end
 

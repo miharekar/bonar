@@ -1,8 +1,15 @@
 require 'spec_helper'
 
 describe ImportedRestaurant do
-  let(:aperitivo) { ImportedRestaurant.new Nokogiri::XML(File.open("#{Rails.root}/spec/fixtures/restaurants/aperitivo.html", "r:UTF-8"), nil, 'UTF-8').children.first }
-  let(:celica) { ImportedRestaurant.new Nokogiri::XML(File.open("#{Rails.root}/spec/fixtures/restaurants/celica.html", "r:UTF-8"), nil, 'UTF-8').children.first }
+  def imported_restaurant_for(name)
+    ImportedRestaurant.new Nokogiri::XML(File.open("#{Rails.root}/spec/fixtures/restaurants/#{name}.html", "r:UTF-8"), nil, 'UTF-8').children.first
+  end
+
+  let(:aperitivo) { imported_restaurant_for('aperitivo') }
+  let(:celica) { imported_restaurant_for('celica') }
+  let(:aga) { imported_restaurant_for('aga') }
+  let(:feliks) { imported_restaurant_for('feliks') }
+  let(:katra) { imported_restaurant_for('katra') }
 
   it 'parses Studentska Prehrana ID - spid' do
     expect(aperitivo.spid).to eq('CRK3PKZVD5HW2N2TPB8JZUE7RA')
@@ -36,7 +43,13 @@ describe ImportedRestaurant do
     expect(aperitivo.longitude).to be_within(0.0005).of(14.5080702)
   end
 
-  it 'gets telephones'
+  it 'gets telephones', vcr: { record: :new_episodes } do
+    expect(celica.telephones).to eq([])
+    expect(aga.telephones).to match_array(['014302105'])
+    expect(feliks.telephones).to match_array(['045151520', '051320520'])
+    expect(katra.telephones).to match_array(['015427000', '015427105', '041722272', '041722027'])
+  end
+
   it 'gets menu'
   it 'gets opening times'
 end

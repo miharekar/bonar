@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RestaurantImporter, :vcr do
+describe RestaurantImporter, vcr: { record: :new_episodes } do
   before(:all) do
     VCR.use_cassette('RestaurantImporter/AllRestaurants') { @importer = RestaurantImporter.new }
   end
@@ -20,6 +20,7 @@ describe RestaurantImporter, :vcr do
       expect(parsed.features.length).to eq(3)
       expect(parsed.latitude).to be_within(0.0005).of(46.0564509)
       expect(parsed.longitude).to be_within(0.0005).of(14.5080702)
+      expect(parsed.telephone).to eq([])
     end
 
     it 'doesnt import same restaurant twice' do

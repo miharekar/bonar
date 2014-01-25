@@ -1,4 +1,6 @@
 class ImportedRestaurant
+  RESTAURANT_URL = 'http://www.studentska-prehrana.si/Pages/RestaurantInfo.aspx?e_restaurant=%s&feature=%d'
+
   def initialize(html)
     @html = html
   end
@@ -24,6 +26,10 @@ class ImportedRestaurant
     @html.attribute('sssp:rs').value.split(';').map(&:to_i)
   end
 
+  def telephones
+    parse_telephone menu_html.at_css('h2 span').content.match(/tel:(.*)\)/)
+  end
+
   def latitude
     coordinates[:latitude]
   end
@@ -33,6 +39,13 @@ class ImportedRestaurant
   end
 
   private
+  def parse_telephone match
+    return [] unless match
+    match.captures.first.split(',').each_with_object([]) do |tel, o|
+      o.concat tel.gsub(/\D/, '').scan(/.{1,9}/)
+    end
+  end
+
   def coordinates
     @coordinates ||= get_geopedia_coordinates || get_google_coordinates || { latitude: 0, longitude: 0 }
   end
@@ -46,5 +59,13 @@ class ImportedRestaurant
   def get_google_coordinates
     c = Geocoder.coordinates(address + ', Slovenia')
     { latitude: c[0].to_f, longitude: c[1].to_f } if c
+  end
+
+  def menu_html
+    @menu_html ||= Nokogiri::HTML(open(RESTAURANT_URL % [spid, 0]))
+  end
+
+  def info_html
+    @info_html ||= Nokogiri::HTML(open(RESTAURANT_URL % [spid, 1]))
   end
 end
