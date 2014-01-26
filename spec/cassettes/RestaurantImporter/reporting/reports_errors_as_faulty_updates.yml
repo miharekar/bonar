@@ -1,0 +1,263 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://services.geopedia.si/geocoding?q=Glavni%20trg%2043,%20Slovenj%20Gradec
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - Jetty(6.1.22)
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <kml xmlns="http://earth.google.com/kml/2.0">
+        <Response>
+        <name>Glavni trg 43, Slovenj Gradec</name>
+        <Status>
+        <code>200</code>
+        <request>geocode</request>
+        </Status>
+        <Placemark id="p1">
+        <address>Glavni trg 43, 2380 SLOVENJ GRADEC, Slovenia</address>
+        <AddressDetails Accuracy="8" xmlns="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+        <Country>
+        <CountryNameCode>SI</CountryNameCode>
+        <CountryName>Slovenia</CountryName>
+        <Locality>
+        <LocalityName>Slovenj Gradec</LocalityName>
+        </Locality>
+        <Thoroughfare>
+        <ThoroughfareName>Glavni trg</ThoroughfareName>
+        </Thoroughfare>
+        <PostalCode>
+        <PostalCodeNumber>2380</PostalCodeNumber>
+        </PostalCode>
+        </Country>
+        </AddressDetails>
+        <Point>
+        <coordinates>15.078221916316473,46.508479766658965</coordinates>
+        </Point>
+        </Placemark>
+        <opozorilo>Uporabnik nima dovoljenja za uporabo servisa geocoding</opozorilo>
+        </Response>
+        </kml>
+    http_version: 
+  recorded_at: Sun, 26 Jan 2014 18:36:18 GMT
+- request:
+    method: get
+    uri: http://www.studentska-prehrana.si/Pages/RestaurantInfo.aspx?e_restaurant=HRH7AHUGJKNT32BL83UK5M47CA&feature=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - text/html; charset=utf-8
+      Location:
+      - "/Pages/Error.aspx?errorType=500"
+      Server:
+      - Microsoft-IIS/7.0
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Sun, 26 Jan 2014 18:36:22 GMT
+      Content-Length:
+      - '148'
+    body:
+      encoding: UTF-8
+      string: "<html><head><title>Object moved</title></head><body>\r\n<h2>Object
+        moved to <a href=\"/Pages/Error.aspx?errorType=500\">here</a>.</h2>\r\n</body></html>\r\n"
+    http_version: 
+  recorded_at: Sun, 26 Jan 2014 18:36:23 GMT
+- request:
+    method: get
+    uri: http://www.studentska-prehrana.si/Pages/Error.aspx?errorType=500
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - text/html; charset=utf-8
+      Vary:
+      - Accept-Encoding
+      Server:
+      - Microsoft-IIS/7.0
+      Set-Cookie:
+      - ASP.NET_SessionId=5lhuurxa4eyjomf13j4uwcqi; path=/; HttpOnly
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Sun, 26 Jan 2014 18:36:23 GMT
+      Content-Length:
+      - '2113'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        DQoNCjwhRE9DVFlQRSBodG1sPg0KPGh0bWwgbGFuZz0iZW4iPg0KPGhlYWQg
+        aWQ9IkhlYWRNYWluTGF5b3V0Ij48bWV0YSBodHRwLWVxdWl2PSJDb250ZW50
+        LVR5cGUiIGNvbnRlbnQ9InRleHQvaHRtbDsgY2hhcnNldD1VVEYtOCIgLz48
+        dGl0bGU+DQoJTmFwYWthIDUwMCAtIE5hcGFrYSAtIMWhdHVkZW50c2thIHBy
+        ZWhyYW5hDQo8L3RpdGxlPg0KPGxpbmsgdHlwZT0idGV4dC9jc3MiIGhyZWY9
+        Ii9BcHBfVGhlbWVzL1NPUy9TdHlsZXMvc3R5bGUuY3NzIiByZWw9InN0eWxl
+        c2hlZXQiIG1lZGlhPSJBbGwiIC8+DQo8bGluayB0eXBlPSJ0ZXh0L2NzcyIg
+        aHJlZj0iL0FwcF9UaGVtZXMvU09TL1N0eWxlcy9wcmludC5jc3MiIHJlbD0i
+        c3R5bGVzaGVldCIgbWVkaWE9InByaW50IiAvPg0KPCEtLVtpZiBsdGUgSUUg
+        N10+DQo8bGluayB0eXBlPSJ0ZXh0L2NzcyIgaHJlZj0iL0FwcF9UaGVtZXMv
+        U09TL1N0eWxlcy9pZTZlcnIuY3NzIiByZWw9InN0eWxlc2hlZXQiIG1lZGlh
+        PSJBbGwiIC8+DQo8IVtlbmRpZl0tLT4NCg0KPCEtLVtpZiBsdGUgSUUgN10+
+        DQo8bGluayB0eXBlPSJ0ZXh0L2NzcyIgaHJlZj0iL0FwcF9UaGVtZXMvU09T
+        L1N0eWxlcy9pZTdmaXguY3NzIiByZWw9InN0eWxlc2hlZXQiIG1lZGlhPSJB
+        bGwiIC8+DQo8IVtlbmRpZl0tLT4NCg0KPCEtLVtpZiBsdGUgSUUgOF0+DQo8
+        bGluayB0eXBlPSJ0ZXh0L2NzcyIgaHJlZj0iL0FwcF9UaGVtZXMvU09TL1N0
+        eWxlcy9pZThmaXguY3NzIiByZWw9InN0eWxlc2hlZXQiIG1lZGlhPSJBbGwi
+        IC8+DQo8IVtlbmRpZl0tLT4NCg0KPCEtLVtpZiBsdGUgSUUgN10+DQogICAg
+        PHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiIHNyYz0nL2pzL2pxdWVy
+        eS5taW4uanMnPjwvc2NyaXB0Pg0KICAgIDxzY3JpcHQgdHlwZT0idGV4dC9q
+        YXZhc2NyaXB0IiBzcmM9Jy9qcy9hdXRvZ2VuX2N0bC0xX2N0bC0xX2N0bC0x
+        LmpzJz48L3NjcmlwdD4NCjwhW2VuZGlmXS0tPg0KCTxsaW5rIGlkPSJsbmtG
+        YXZpY29uIiByZWw9Imljb24iIHR5cGU9ImltYWdlL3BuZyIgaHJlZj0iL0Fw
+        cF9UaGVtZXMvU09TL0ltYWdlcy9mYXZpY29uLnBuZyIgLz48bGluayBpZD0i
+        bG5rU2hvcnRJY29uIiByZWw9InNob3J0Y3V0IGljb24iIHR5cGU9ImltYWdl
+        L3gtaWNvbiIgaHJlZj0iL0FwcF9UaGVtZXMvU09TL0ltYWdlcy9mYXZpY29u
+        LmljbyIgLz48L2hlYWQ+DQoNCjxib2R5Pg0KDQoNCjxkaXYgaWQ9ImNvb2tp
+        ZXBvcHVwIiBjbGFzcz0iY29va2llX3BvcHVwIiBzdHlsZT0iZGlzcGxheTpu
+        b25lIj4NCiAgICA8ZGl2IGNsYXNzPSJjb29raWV0ZXh0Ij4NCiAgICAgICBO
+        YcWhYSBzcGxldG5hIHN0cmFuIHVwb3JhYmxqYSBwacWha290a2UgemEgcHJp
+        amF2by4gWiBuYWRhbGpuam8gdXBvcmFibyB0ZSBzcGxldG5lIHN0cmFuaSBz
+        ZSBkYWplIHNvZ2xhc2plIHphIHBpxaFrb3RrZSwga2kgc2UgdXBvcmFibGph
+        am8uDQogICAgICAgPGlucHV0IHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOnRy
+        YW5zcGFyZW50O21hcmdpbi1sZWZ0OjE1cHg7Ym9yZGVyOiAxcHggc29saWQg
+        I2FhYWFhYTsgZm9udC1zaXplOjEwcHg7IGNvbG9yOiAjRkZGRkZGO2ZvbnQt
+        d2VpZ2h0OiBib2xkO21hcmdpbi1sZWZ0OiAxNXB4OyIgY2xhc3M9ImNvb2tp
+        ZV9wb3B1cCBidG5jb29raWVfY2xvc2UiIHR5cGU9ImJ1dHRvbiIgaWQ9Imxf
+        Y29va2llT2siIG9uY2xpY2s9IlNldENvb2tpZSgpIiB2YWx1ZT0iU3RyaW5q
+        YW0gc2UiIC8+DQogICAgICAgPGlucHV0IHN0eWxlPSJiYWNrZ3JvdW5kLWNv
+        bG9yOnRyYW5zcGFyZW50O21hcmdpbi1sZWZ0OjE1cHg7Ym9yZGVyOiAxcHgg
+        c29saWQgI2FhYWFhYTsgZm9udC1zaXplOjEwcHg7IGNvbG9yOiAjRkZGRkZG
+        O2ZvbnQtd2VpZ2h0OiBib2xkO21hcmdpbi1sZWZ0OiAxNXB4OyIgY2xhc3M9
+        ImNvb2tpZV9wb3B1cCBidG5jb29raWVfY2xvc2UiIHR5cGU9ImJ1dHRvbiIg
+        aWQ9ImxfY29va2llTm90T2siIG9uY2xpY2s9IkNsb3NlQ29va2llKCkiIHZh
+        bHVlPSJOZSBzdHJpbmphbSBzZSIgLz4NCiAgICA8L2Rpdj4NCjwvZGl2Pg0K
+        DQo8ZGl2IGNsYXNzPSJ3cmFwcGVyIj4NCjxmb3JtIG1ldGhvZD0icG9zdCIg
+        YWN0aW9uPSJFcnJvci5hc3B4P2Vycm9yVHlwZT01MDAiIGlkPSJtYWluRm9y
+        bSI+DQo8aW5wdXQgdHlwZT0iaGlkZGVuIiBuYW1lPSJfX1ZJRVdTVEFURSIg
+        aWQ9Il9fVklFV1NUQVRFIiB2YWx1ZT0iL3dFUER3VUpOVGMxTWpJNU9ETXla
+        QmdEQlNOamRHd3dNQ1JqZEd3d01DUnNibXRHYjI5MFpYSWtiSE4wZGt4cGJt
+        dHpUV1Z1ZFE4VUt3QU9aR1JrWkdSa1pCUXJBQUZrQWdGa1pHUm1Bdi8vLy84
+        UFpBVWxZM1JzTURBa1kzUnNNREFrYkc1clZHOXdVbWxuYUhRa2JITjBka3hw
+        Ym10elRXVnVkUThVS3dBT1pHUmtaR1JrWkJRckFBRmtBZ0ZrWkdSbUF2Ly8v
+        LzhQWkFVa1kzUnNNREFrWTNSc01EQWtiRzVyVkc5d1RHVm1kQ1JzYzNSMlRH
+        bHVhM05OWlc1MUR4UXJBQTVrWkdSa1pHUmtQQ3NBQlFBQ0JXUmtaR1lDLy8v
+        Ly93OWsiIC8+DQoNCg0KPHNjcmlwdCBzcmM9Ii9Kcy9jb25kaXRpb25hbC5q
+        cyIgdHlwZT0idGV4dC9qYXZhc2NyaXB0Ij48L3NjcmlwdD4NCjxzY3JpcHQg
+        c3JjPSIvSnMvanF1ZXJ5Lm1pbi5qcyIgdHlwZT0idGV4dC9qYXZhc2NyaXB0
+        Ij48L3NjcmlwdD4NCjxzY3JpcHQgc3JjPSIvSnMvanF1ZXJ5LnRpbWVycy4x
+        LjIuanMiIHR5cGU9InRleHQvamF2YXNjcmlwdCI+PC9zY3JpcHQ+DQo8c2Ny
+        aXB0IHNyYz0iL0pzL3N0aWNreXNpZGViYXIuanF1ZXJ5LmpzIiB0eXBlPSJ0
+        ZXh0L2phdmFzY3JpcHQiPjwvc2NyaXB0Pg0KPHNjcmlwdCBzcmM9Ii9Kcy9q
+        cXVlcnkuZWFzaW5nLjEuMy5qcyIgdHlwZT0idGV4dC9qYXZhc2NyaXB0Ij48
+        L3NjcmlwdD4NCjxzY3JpcHQgc3JjPSIvSnMvY2FsZW5kYXIuanMiIHR5cGU9
+        InRleHQvamF2YXNjcmlwdCI+PC9zY3JpcHQ+DQo8c2NyaXB0IHNyYz0iL0pz
+        L2V4cGFuZEZlYXR1cmUuanMiIHR5cGU9InRleHQvamF2YXNjcmlwdCI+PC9z
+        Y3JpcHQ+DQo8c2NyaXB0IHNyYz0iL0pzL2NhbF9zbC1TSS5qcyIgdHlwZT0i
+        dGV4dC9qYXZhc2NyaXB0Ij48L3NjcmlwdD4NCjxzY3JpcHQgc3JjPSIvSnMv
+        cmVjYXB0Y2hhX3NsLVNJLmpzIiB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPjwv
+        c2NyaXB0Pg0KCTxkaXYgY2xhc3M9ImJhckhlYWRlciI+DQoJCTxkaXYgY2xh
+        c3M9InBhZ2VXaWR0aCI+DQoJCQkNCgkJPHVsIGlkPSJsbmtUb3BMZWZ0X2xz
+        dHZMaW5rc01lbnVfdWxIZWFkIiBjbGFzcz0iaGVhZGVyTGVmdCI+DQoJCQkN
+        CgkJCTxsaT4NCgkJCQk8YSBocmVmPSJodHRwOi8vd3d3LnN0dWRlbnRza2Et
+        b3JnLnNpLyIgdGl0bGU9IsWgdHVkZW50c2thIG9yZ2FuaXphY2lqYSBTbG92
+        ZW5pamUiIHRhcmdldD0iX2JsYW5rIj7FoHR1ZGVudHNrYSBvcmdhbml6YWNp
+        amEgU2xvdmVuaWplPC9hPg0KCQkJPC9saT4NCgkNCgkJCTxsaT4NCgkJCQk8
+        YSBocmVmPSJodHRwOi8vd3d3LnNvdS1sai5zaSIgdGl0bGU9IsWgdHVkZW50
+        c2thIG9yZ2FuaXphY2lqYSB1bml2ZXJ6ZSB2IExqdWJsamFuaSIgdGFyZ2V0
+        PSJfYmxhbmsiPsWgT1UgdiBManVibGphbmk8L2E+DQoJCQk8L2xpPg0KCQ0K
+        CQkJPGxpPg0KCQkJCTxhIGhyZWY9Imh0dHA6Ly93d3cuc291bS5zaS8iIHRp
+        dGxlPSLFoHR1ZGVudHNrYSBvcmdhbml6YWNpamEgdW5pdmVyemUgdiBNYXJp
+        Ym9ydSIgdGFyZ2V0PSJfYmxhbmsiPsWgT1VNPC9hPg0KCQkJPC9saT4NCgkN
+        CgkJCTxsaT4NCgkJCQk8YSBocmVmPSJodHRwOi8vc291cC5zaS8iIHRpdGxl
+        PSLFoHR1ZGVudHNrYSBvcmdhbml6YWNpamEgbmEgcHJpbW9yc2tlbSIgdGFy
+        Z2V0PSJfYmxhbmsiPsWgT1VQPC9hPg0KCQkJPC9saT4NCgkNCgkJCTxsaT4N
+        CgkJCQk8YSBocmVmPSJodHRwOi8vd3d3LnNraXMtenZlemEuc2kvZG9tb3Yv
+        IiB0aXRsZT0iWnZlemEgxaBLSVMgLSDFoXR1ZGVudHNraSBrbHViaSBTbG92
+        ZW5pamUiIHRhcmdldD0iX2JsYW5rIj5admV6YSDFoEtJUzwvYT4NCgkJCTwv
+        bGk+DQoJDQoJCTwvdWw+DQoJDQoNCgkJCQ0KCQk8dWwgaWQ9Imxua1RvcFJp
+        Z2h0X2xzdHZMaW5rc01lbnVfdWxIZWFkIiBjbGFzcz0iaGVhZGVyUmlnaHQi
+        Pg0KCQkJDQoJCQk8bGk+DQoJCQkJPGEgaHJlZj0ibWFpbHRvOnByZWhyYW5h
+        QHN0dWRlbnRza2Etb3JnLnNpIiB0aXRsZT0iUG/FoWxqaSBuYSBlbGVrdHJv
+        bnNraSBuYXNsb3YgcHJlaHJhbmFAc3R1ZGVudHNrYS1vcmcuc2kiIHRhcmdl
+        dD0iX2JsYW5rIj5wcmVocmFuYUBzdHVkZW50c2thLW9yZy5zaTwvYT4NCgkJ
+        CTwvbGk+DQoJDQoJCTwvdWw+DQoJDQoNCgkJPC9kaXY+DQoJPC9kaXY+DQoJ
+        DQoNCgkNCg0KCQ0KCTxkaXYgY2xhc3M9ImJhckNvbnRlbnQiPg0KCQk8ZGl2
+        IGNsYXNzPSJwYWdlV2lkdGgiPg0KCQkJDQoJPGEgaWQ9IkNvbnRlbnRIb2xk
+        ZXJNYWluX0NvbnRlbnRIb2xkZXJNYWluQ29udGVudF9jbnRybEVycm9yX2hs
+        SG9tZSIgaHJlZj0iaHR0cDovL3d3dy5zdHVkZW50c2thLXByZWhyYW5hLnNp
+        L2RlZmF1bHQuYXNweCI+PC9hPg0KDQoJCTwvZGl2Pg0KCQk8ZGl2IGNsYXNz
+        PSJicmVha2VyIGxhcmdlciI+PC9kaXY+CQ0KCTwvZGl2Pg0KDQoJPGRpdiBj
+        bGFzcz0iYmFyRm9vdGVyIj4NCgkJPGRpdiBjbGFzcz0icGFnZVdpZHRoIj4N
+        CgkJCQ0KCQk8dWwgaWQ9Imxua0Zvb3Rlcl9sc3R2TGlua3NNZW51X3VsSGVh
+        ZCIgY2xhc3M9ImZvb3RlclJpZ2h0Ij4NCgkJCQ0KCQkJPGxpPg0KCQkJCVN1
+        YnZlbmNpb25pcmFuYSDFoXR1ZGVudHNrYSBwcmVocmFuYSAmYnVsbDsgwqkg
+        MjAxMCAtIDxhIGhyZWY9Imh0dHA6Ly93d3cubWFyZ2VudG8uY29tIj5NYXJn
+        ZW50byBzdG9yaXR2ZTwvYT4gJmJ1bGw7IHZzZSBwcmF2aWNlIHByaWRyxb5h
+        bmUNCgkJCTwvbGk+DQoJDQoJCTwvdWw+DQoJDQoNCgkJPC9kaXY+DQoJPC9k
+        aXY+DQo8L2Zvcm0+DQo8L2Rpdj4NCg0KDQoNCjwvYm9keT4NCjwvaHRtbD4N
+        CjxzY3JpcHQgdHlwZT0idGV4dC9qYXZhc2NyaXB0Ij4NCiAgICAkKCcjY29v
+        a2llcG9wdXAnKS5oaWRlKCkuZmFkZUluKDUwMDApOw0KDQogICAgZnVuY3Rp
+        b24gQ2xvc2VDb29raWUoKSB7DQogICAgICAgICQoJyNjb29raWVwb3B1cCcp
+        LmZhZGVPdXQoMTAwMCk7DQogICAgfQ0KDQogICAgZnVuY3Rpb24gU2V0Q29v
+        a2llKCkgew0KICAgICAgICB2YXIgZXhwaXJlID0gbmV3IERhdGUoKTsNCiAg
+        ICAgICAgZXhwaXJlLnNldERhdGUoZXhwaXJlLmdldERhdGUoKSArIDcxMik7
+        DQogICAgICAgIGRvY3VtZW50LmNvb2tpZSA9ICJzc3BfZ2E9dGVzdDsgZXhw
+        aXJlcz0iICsgZXhwaXJlLnRvR01UU3RyaW5nKCk7DQoNCiAgICAgICAgQ2xv
+        c2VDb29raWUoKTsNCiAgICB9DQo8L3NjcmlwdD4=
+    http_version: 
+  recorded_at: Sun, 26 Jan 2014 18:36:23 GMT
+recorded_with: VCR 2.8.0

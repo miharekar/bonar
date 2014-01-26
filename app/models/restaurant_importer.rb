@@ -31,6 +31,8 @@ class RestaurantImporter
       opening: ir.opening,
       disabled: false
     )
+  rescue
+    @report[:faulty_updates] << ir.spid
   end
 
   private
