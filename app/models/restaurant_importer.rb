@@ -10,9 +10,7 @@ class RestaurantImporter
   end
 
   def import
-    restaurants.each do |restaurant|
-      update_restaurant restaurant
-    end
+    update_restaurants
     disable_nonpresent_restaurants
   end
 
@@ -33,6 +31,17 @@ class RestaurantImporter
   end
 
   private
+  def update_restaurants
+    restaurants.each do |restaurant|
+      update_restaurant(restaurant)
+    end
+  end
+
+  def disable_nonpresent_restaurants
+    spids = restaurants.map(&:spid)
+    Restaurant.active.where.not(spid: spids).update_all(disabled: true)
+  end
+
   def build_restaurants
     restaurants = @doc.css('.holderRestaurant ul li ul li:not(.blocked)')
     restaurants.map{ |r| ImportedRestaurant.new(r) }
@@ -48,10 +57,5 @@ class RestaurantImporter
     Feature.find_or_create_by(spid: spid) do |f|
       f.title = @doc.at_css("#rService#{spid}").parent['title']
     end
-  end
-
-  def disable_nonpresent_restaurants
-    spids = restaurants.map(&:spid)
-    Restaurant.active.where.not(spid: spids).update_all(disabled: true)
   end
 end
