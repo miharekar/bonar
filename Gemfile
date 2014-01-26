@@ -84,3 +84,6 @@ gem 'useragent'
 
 # geo sort
 gem 'geocoder'
+
+# markdown emails
+gem 'maildown'
