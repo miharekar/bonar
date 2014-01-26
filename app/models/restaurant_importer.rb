@@ -1,5 +1,6 @@
 class RestaurantImporter
   DIRECTORY_URL = 'http://www.studentska-prehrana.si/Pages/Directory.aspx'
+  attr_reader :report
 
   def initialize
     @doc = Nokogiri::HTML(open(DIRECTORY_URL))
@@ -10,12 +11,13 @@ class RestaurantImporter
   end
 
   def import
+    @report = Hash.new{ |h,k| h[k] = [] }
     update_restaurants
     disable_nonpresent_restaurants
   end
 
   def update_restaurant(ir)
-    Restaurant.find_or_create_by(spid: ir.spid).update(
+    get_restaurant(ir.spid).update(
       spid: ir.spid,
       name: ir.name,
       address: ir.address,
@@ -31,6 +33,12 @@ class RestaurantImporter
   end
 
   private
+  def get_restaurant spid
+    Restaurant.find_or_create_by(spid: spid) do |r|
+      @report[:new_restaurants] << r
+    end
+  end
+
   def update_restaurants
     restaurants.each do |restaurant|
       update_restaurant(restaurant)

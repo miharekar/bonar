@@ -1,0 +1,202 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://services.geopedia.si/geocoding?q=Metelkova%208,%20Ljubljana
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - Jetty(6.1.22)
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <kml xmlns="http://earth.google.com/kml/2.0">
+        <Response>
+        <name>Metelkova 8, Ljubljana</name>
+        <Status>
+        <code>200</code>
+        <request>geocode</request>
+        </Status>
+        <Placemark id="p1">
+        <address>Metelkova ulica 8, 1000 LJUBLJANA, Slovenia</address>
+        <AddressDetails Accuracy="8" xmlns="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+        <Country>
+        <CountryNameCode>SI</CountryNameCode>
+        <CountryName>Slovenia</CountryName>
+        <Locality>
+        <LocalityName>Ljubljana</LocalityName>
+        </Locality>
+        <Thoroughfare>
+        <ThoroughfareName>Metelkova ulica</ThoroughfareName>
+        </Thoroughfare>
+        <PostalCode>
+        <PostalCodeNumber>1000</PostalCodeNumber>
+        </PostalCode>
+        </Country>
+        </AddressDetails>
+        <Point>
+        <coordinates>14.516537236795786,46.056603090485176</coordinates>
+        </Point>
+        </Placemark>
+        <opozorilo>Uporabnik nima dovoljenja za uporabo servisa geocoding</opozorilo>
+        </Response>
+        </kml>
+    http_version: 
+  recorded_at: Sun, 26 Jan 2014 17:35:43 GMT
+- request:
+    method: get
+    uri: http://services.geopedia.si/geocoding?q=Ambro%C5%BEev%20trg%2010,%20Ljubljana
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - Jetty(6.1.22)
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxv
+        bmU9InllcyI/Pgo8a21sIHhtbG5zPSJodHRwOi8vZWFydGguZ29vZ2xlLmNv
+        bS9rbWwvMi4wIj4KPFJlc3BvbnNlPgo8bmFtZT5BbWJyb8W+ZXYgdHJnIDEw
+        LCBManVibGphbmE8L25hbWU+CjxTdGF0dXM+Cjxjb2RlPjIwMDwvY29kZT4K
+        PHJlcXVlc3Q+Z2VvY29kZTwvcmVxdWVzdD4KPC9TdGF0dXM+CjxvcG96b3Jp
+        bG8+VXBvcmFibmlrIG5pbWEgZG92b2xqZW5qYSB6YSB1cG9yYWJvIHNlcnZp
+        c2EgZ2VvY29kaW5nPC9vcG96b3JpbG8+CjwvUmVzcG9uc2U+Cjwva21sPgo=
+    http_version: 
+  recorded_at: Sun, 26 Jan 2014 17:35:44 GMT
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?address=Ambro%C5%BEev%20trg%2010,%20Ljubljana,%20Slovenia&language=en&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Sun, 26 Jan 2014 17:35:44 GMT
+      Expires:
+      - Mon, 27 Jan 2014 17:35:44 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 80:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Ljubljana",
+                       "short_name" : "Ljubljana",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "City Municipality of Ljubljana",
+                       "short_name" : "City Municipality of Ljubljana",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Ljubljana",
+                       "short_name" : "Ljubljana",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Slovenia",
+                       "short_name" : "SI",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Ljubljana, Slovenia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 46.1422017,
+                          "lng" : 14.6446962
+                       },
+                       "southwest" : {
+                          "lat" : 45.990033,
+                          "lng" : 14.419502
+                       }
+                    },
+                    "location" : {
+                       "lat" : 46.05645089999999,
+                       "lng" : 14.5080702
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 46.1422017,
+                          "lng" : 14.6446962
+                       },
+                       "southwest" : {
+                          "lat" : 45.990033,
+                          "lng" : 14.419502
+                       }
+                    }
+                 },
+                 "partial_match" : true,
+                 "types" : [ "locality", "political" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Sun, 26 Jan 2014 17:35:44 GMT
+recorded_with: VCR 2.8.0
