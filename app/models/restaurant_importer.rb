@@ -32,20 +32,20 @@ class RestaurantImporter
       disabled: false
     )
   rescue
-    @report[:faulty_updates] << ir.spid
+    @report[:faulty] << ir.spid
   end
 
   private
   def get_restaurant spid
     Restaurant.find_or_create_by(spid: spid) do |r|
-      @report[:new] << r
+      @report[:new] << spid
     end
   end
 
   def update_restaurants
     restaurants.each do |restaurant|
       unless update_restaurant(restaurant)
-        @report[:faulty_updates] << restaurant.spid
+        @report[:faulty] << restaurant.spid
       end
     end
   end
@@ -53,7 +53,7 @@ class RestaurantImporter
   def disable_nonpresent_restaurants
     spids = restaurants.map(&:spid)
     to_disable = Restaurant.active.where.not(spid: spids)
-    @report[:disabled] = to_disable.to_a
+    @report[:disabled] = to_disable.pluck(:spid)
     to_disable.update_all(disabled: true)
   end
 
@@ -71,7 +71,7 @@ class RestaurantImporter
   def get_feature(spid)
     Feature.find_or_create_by(spid: spid) do |f|
       f.title = @doc.at_css("#rService#{spid}").parent['title']
-      @report[:new_features] << f
+      @report[:new_features] << spid
     end
   end
 end

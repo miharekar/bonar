@@ -9,10 +9,9 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
   let(:celica) { build(:imported_restaurant, name: :celica) }
   let(:feliks) { build(:imported_restaurant, name: :feliks) }
   let(:slovenj_gradec) { build(:imported_restaurant, name: :slovenj_gradec) }
-  let(:r_aga) { Restaurant.find_by(spid: '8T8W26CAVLRWKC6TPZ7CDL5RHS') }
-  let(:r_celica) { Restaurant.find_by(spid: 'D5HE9HE54UGNKDTALN9C8PQ722') }
-  let(:r_feliks) { Restaurant.find_by(spid: 'SCPQ5CPX7CRRXX8G8AZVGB5VEA') }
-  let(:r_slovenj_gradec) { Restaurant.find_by(spid: 'HRH7AHUGJKNT32BL83UK5M47CA') }
+  let(:aga_spid) { '8T8W26CAVLRWKC6TPZ7CDL5RHS' }
+  let(:celica_spid) { 'D5HE9HE54UGNKDTALN9C8PQ722' }
+  let(:feliks_spid) { 'SCPQ5CPX7CRRXX8G8AZVGB5VEA' }
 
   it 'scrapes multiple restaurants' do
     expect(@importer.restaurants.count).to be > 50
@@ -50,11 +49,11 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
     it 'reports new restaurants' do
       allow(@importer).to receive(:restaurants).and_return([aga])
       @importer.import
-      expect(@importer.report).to include({ new: [r_aga] })
+      expect(@importer.report).to include({ new: [aga_spid] })
 
       allow(@importer).to receive(:restaurants).and_return([aga, celica, feliks])
       @importer.import
-      expect(@importer.report).to include({ new: [r_celica, r_feliks] })
+      expect(@importer.report).to include({ new: [celica_spid, feliks_spid] })
     end
 
     it 'reports disabled restaurants' do
@@ -64,31 +63,32 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
       allow(@importer).to receive(:restaurants).and_return([aga, celica])
       @importer.import
 
-      expect(@importer.report).to include({ disabled: [r_feliks] })
+      expect(@importer.report).to include({ disabled: [feliks_spid] })
     end
 
     it 'reports faulty update' do
       allow(@importer).to receive(:restaurants).and_return([aga])
       allow(@importer).to receive(:update_restaurant).and_return(false)
       @importer.import
-      expect(@importer.report).to include({ faulty_updates: ['8T8W26CAVLRWKC6TPZ7CDL5RHS'] })
+      expect(@importer.report).to include({ faulty: ['8T8W26CAVLRWKC6TPZ7CDL5RHS'] })
     end
 
     it 'reports errors as faulty updates' do
       allow(@importer).to receive(:restaurants).and_return([slovenj_gradec])
       @importer.import
-      expect(@importer.report).to include({ faulty_updates: ['HRH7AHUGJKNT32BL83UK5M47CA'] })
+      expect(@importer.report).to include({ faulty: ['HRH7AHUGJKNT32BL83UK5M47CA'] })
     end
 
     it 'reports new features' do
       allow(@importer).to receive(:restaurants).and_return([aga])
       @importer.import
-      expect(@importer.report).to include({ new_features: r_aga.features })
+      features = Restaurant.find_by(spid: aga_spid).features.pluck(:spid)
+      expect(@importer.report).to include({ new_features: features })
     end
 
     it 'returns report after import' do
       allow(@importer).to receive(:restaurants).and_return([aga, celica, feliks])
-      expect(@importer.import).to include({ new: [r_aga, r_celica, r_feliks] })
+      expect(@importer.import).to include({ new: [aga_spid, celica_spid, feliks_spid] })
     end
   end
 end
