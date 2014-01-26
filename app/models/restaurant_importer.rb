@@ -6,7 +6,7 @@ class RestaurantImporter
   end
 
   def restaurants
-    @restaurants ||= @doc.css('.holderRestaurant ul li ul li:not(.blocked)')
+    @restaurants ||= build_restaurants
   end
 
   def import
@@ -15,9 +15,8 @@ class RestaurantImporter
     end
   end
 
-  def update_restaurant(restaurant)
-    ir = ImportedRestaurant.new(restaurant)
-    r = Restaurant.find_or_create_by(spid: ir.spid).update(
+  def update_restaurant(ir)
+    Restaurant.find_or_create_by(spid: ir.spid).update(
       spid: ir.spid,
       name: ir.name,
       address: ir.address,
@@ -32,6 +31,11 @@ class RestaurantImporter
   end
 
   private
+  def build_restaurants
+    restaurants = @doc.css('.holderRestaurant ul li ul li:not(.blocked)')
+    restaurants.map{ |r| ImportedRestaurant.new(r) }
+  end
+
   def build_features_array(ir)
     ir.spfeatures.inject([]) do |fa, spid|
       fa << get_feature(spid).id

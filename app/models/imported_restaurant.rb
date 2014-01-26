@@ -1,8 +1,8 @@
 class ImportedRestaurant
   RESTAURANT_URL = 'http://www.studentska-prehrana.si/Pages/RestaurantInfo.aspx?e_restaurant=%s&feature=%d'
 
-  def initialize(html)
-    @html = html
+  def initialize(restaurant_li)
+    @restaurant_li = restaurant_li
   end
 
   def menu_html
@@ -14,24 +14,24 @@ class ImportedRestaurant
   end
 
   def spid
-    url = @html.at_css('h1 a')['href']
+    url = @restaurant_li.at_css('h1 a')['href']
     Rack::Utils.parse_query(URI(url).query)['e_restaurant']
   end
 
   def name
-    @html.at_css('h1 a').content.gsub(/\"/, '')
+    @restaurant_li.at_css('h1 a').content.gsub(/\"/, '')
   end
 
   def address
-    @html.at_css('h2').content.gsub(/[()]/, '')
+    @restaurant_li.at_css('h2').content.gsub(/[()]/, '')
   end
 
   def price
-    @html.at_css('.prices strong').content.gsub(',', '.').to_f
+    @restaurant_li.at_css('.prices strong').content.gsub(',', '.').to_f
   end
 
   def spfeatures
-    @html.attribute('sssp:rs').value.split(';').map(&:to_i)
+    @restaurant_li.attribute('sssp:rs').value.split(';').map(&:to_i)
   end
 
   def latitude
@@ -54,7 +54,7 @@ class ImportedRestaurant
 
   def opening
     info_html.css('.info li').each_with_object({}) do |i, o|
-      o.merge!(parse_opening(i))
+      o.merge!(parse_opening_times(i))
     end
   end
 
@@ -72,11 +72,11 @@ class ImportedRestaurant
     end
   end
 
-  def parse_opening(interval)
+  def parse_opening_times(interval)
     id = interval.attribute('id').content.gsub(/ContentHolderMain_ContentHolderMainContent_ContentHolderMainContent_riInfo_li/, '')
     case id
     when 'Week', 'Saturday', 'Sunday'
-      { id.downcase.to_sym => interval.content.strip.scan(/\d{2}:\d{2}/)}
+      { id.downcase.to_sym => interval.content.strip.scan(/\d{2}:\d{2}/) }
     when 'Notes'
       { notes: interval.content.gsub('Opombe:', '').squish }
     when 'ClosedWeekends'
@@ -102,5 +102,4 @@ class ImportedRestaurant
     c = Geocoder.coordinates(address + ', Slovenia')
     { latitude: c[0].to_f, longitude: c[1].to_f } if c
   end
-
 end
