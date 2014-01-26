@@ -35,7 +35,7 @@ class RestaurantImporter
   private
   def get_restaurant spid
     Restaurant.find_or_create_by(spid: spid) do |r|
-      @report[:new_restaurants] << r
+      @report[:new] << r
     end
   end
 
@@ -47,7 +47,9 @@ class RestaurantImporter
 
   def disable_nonpresent_restaurants
     spids = restaurants.map(&:spid)
-    Restaurant.active.where.not(spid: spids).update_all(disabled: true)
+    to_disable = Restaurant.active.where.not(spid: spids)
+    @report[:disabled] = to_disable.to_a
+    to_disable.update_all(disabled: true)
   end
 
   def build_restaurants

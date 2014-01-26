@@ -44,15 +44,25 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
     end
   end
 
-  context 'reporting' do
-    it 'reports about new restaurants' do
+  context 'reports' do
+    it 'new restaurants' do
       allow(@importer).to receive(:restaurants).and_return([aga])
       @importer.import
-      expect(@importer.report).to include({ new_restaurants: [r_aga] })
+      expect(@importer.report).to include({ new: [r_aga] })
 
       allow(@importer).to receive(:restaurants).and_return([aga, celica, feliks])
       @importer.import
-      expect(@importer.report).to include({ new_restaurants: [r_celica, r_feliks] })
+      expect(@importer.report).to include({ new: [r_celica, r_feliks] })
+    end
+
+    it 'disabled restaurants' do
+      allow(@importer).to receive(:restaurants).and_return([aga, celica, feliks])
+      @importer.import
+
+      allow(@importer).to receive(:restaurants).and_return([aga, celica])
+      @importer.import
+
+      expect(@importer.report).to include({ disabled: [r_feliks] })
     end
   end
 end
