@@ -1,16 +1,12 @@
 require 'spec_helper'
 
 describe ImportedRestaurant, vcr: { record: :new_episodes } do
-  def imported_restaurant_for(name)
-    ImportedRestaurant.new Nokogiri::XML(File.open("#{Rails.root}/spec/fixtures/restaurants/#{name}.html")).children.first
-  end
-
-  let(:aperitivo) { imported_restaurant_for('aperitivo') }
-  let(:celica) { imported_restaurant_for('celica') }
-  let(:aga) { imported_restaurant_for('aga') }
-  let(:feliks) { imported_restaurant_for('feliks') }
-  let(:katra) { imported_restaurant_for('katra') }
-  let(:klementina) { imported_restaurant_for('klementina') }
+  let(:aperitivo) { build(:imported_restaurant, name: :aperitivo) }
+  let(:celica) { build(:imported_restaurant, name: :celica) }
+  let(:aga) { build(:imported_restaurant, name: :aga) }
+  let(:feliks) { build(:imported_restaurant, name: :feliks) }
+  let(:katra) { build(:imported_restaurant, name: :katra) }
+  let(:klementina) { build(:imported_restaurant, name: :klementina) }
 
   it 'parses Studentska Prehrana ID - spid' do
     expect(aperitivo.spid).to eq('CRK3PKZVD5HW2N2TPB8JZUE7RA')

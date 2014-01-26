@@ -13,6 +13,7 @@ class RestaurantImporter
     restaurants.each do |restaurant|
       update_restaurant restaurant
     end
+    disable_nonpresent_restaurants
   end
 
   def update_restaurant(ir)
@@ -26,7 +27,8 @@ class RestaurantImporter
       longitude: ir.longitude,
       telephones: ir.telephones,
       menu: ir.menu,
-      opening: ir.opening
+      opening: ir.opening,
+      disabled: false
     )
   end
 
@@ -46,5 +48,10 @@ class RestaurantImporter
     Feature.find_or_create_by(spid: spid) do |f|
       f.title = @doc.at_css("#rService#{spid}").parent['title']
     end
+  end
+
+  def disable_nonpresent_restaurants
+    spids = restaurants.map(&:spid)
+    Restaurant.active.where.not(spid: spids).update_all(disabled: true)
   end
 end
