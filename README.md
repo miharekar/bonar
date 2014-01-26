@@ -1,4 +1,9 @@
-#Bonar [![Code Climate](https://codeclimate.com/github/mrfoto/bonar.png)](https://codeclimate.com/github/mrfoto/bonar)
+#Bonar
+
+[![Build Status](https://travis-ci.org/mrfoto/bonar.png)](https://travis-ci.org/mrfoto/bonar)
+[![Code Climate](https://codeclimate.com/github/mrfoto/bonar.png)](https://codeclimate.com/github/mrfoto/bonar)
+[![Coverage Status](https://coveralls.io/repos/mrfoto/bonar/badge.png)](https://coveralls.io/r/mrfoto/bonar)
+[![Dependency Status](https://gemnasium.com/mrfoto/bonar.png)](https://gemnasium.com/mrfoto/bonar)
 
 > bónar -ja m (ọ̑) kdor ve, kje imajo bone: poglejmo na bonar / ura je bila 19 in ni vedela kje bi jedla, zato je pogledala na bonar / ostala sva brez besed in ti si rekel bonar
 

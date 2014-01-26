@@ -36,6 +36,19 @@ group :development do
   #gem 'rack-mini-profiler'
 end
 
+group :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'guard-rspec'
+  gem 'terminal-notifier-guard'
+  # web mocking
+  gem 'webmock'
+  gem 'vcr'
+  # code coverage
+  gem 'simplecov'
+  gem 'coveralls'
+end
+
 group :development, :test do
   # App preloading
   gem 'spring'
@@ -48,13 +61,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'awesome_print'
   gem 'hirb'
-  # Testing
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
-  gem 'guard-rspec'
-  gem 'terminal-notifier-guard'
-  gem 'webmock'
-  gem 'vcr'
 end
 
 # Newrelic /newrelic

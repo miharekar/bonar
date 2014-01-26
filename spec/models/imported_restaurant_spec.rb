@@ -7,6 +7,7 @@ describe ImportedRestaurant, vcr: { record: :new_episodes } do
   let(:feliks) { build(:imported_restaurant, name: :feliks) }
   let(:katra) { build(:imported_restaurant, name: :katra) }
   let(:klementina) { build(:imported_restaurant, name: :klementina) }
+  let(:damajanty) { build(:imported_restaurant, name: :damajanty) }
 
   it 'parses Studentska Prehrana ID - spid' do
     expect(aperitivo.spid).to eq('CRK3PKZVD5HW2N2TPB8JZUE7RA')
@@ -70,5 +71,7 @@ describe ImportedRestaurant, vcr: { record: :new_episodes } do
     expect(klementina.opening[:saturday]).to match_array(['12:00', '20:00'])
     expect(klementina.opening[:sunday]).to match_array(['12:00', '20:00'])
     expect(klementina.opening[:notes]).to eq('Ponedeljek in torek ZAPRTO')
+
+    expect(damajanty.opening[:saturday]).to be_false
   end
 end
