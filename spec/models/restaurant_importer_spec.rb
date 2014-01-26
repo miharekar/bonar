@@ -44,8 +44,8 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
     end
   end
 
-  context 'reports' do
-    it 'new restaurants' do
+  context 'reporting' do
+    it 'reports new restaurants' do
       allow(@importer).to receive(:restaurants).and_return([aga])
       @importer.import
       expect(@importer.report).to include({ new: [r_aga] })
@@ -55,7 +55,7 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
       expect(@importer.report).to include({ new: [r_celica, r_feliks] })
     end
 
-    it 'disabled restaurants' do
+    it 'reports disabled restaurants' do
       allow(@importer).to receive(:restaurants).and_return([aga, celica, feliks])
       @importer.import
 
@@ -63,6 +63,18 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
       @importer.import
 
       expect(@importer.report).to include({ disabled: [r_feliks] })
+    end
+
+    it 'reports faulty update' do
+      allow(@importer).to receive(:restaurants).and_return([aga])
+      allow(@importer).to receive(:update_restaurant).and_return(false)
+      @importer.import
+      expect(@importer.report).to include({ faulty_updates: ['8T8W26CAVLRWKC6TPZ7CDL5RHS'] })
+    end
+
+    it 'returns report after import' do
+      allow(@importer).to receive(:restaurants).and_return([aga, celica, feliks])
+      expect(@importer.import).to include({ new: [r_aga, r_celica, r_feliks] })
     end
   end
 end

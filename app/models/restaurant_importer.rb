@@ -14,6 +14,7 @@ class RestaurantImporter
     @report = Hash.new{ |h,k| h[k] = [] }
     update_restaurants
     disable_nonpresent_restaurants
+    @report
   end
 
   def update_restaurant(ir)
@@ -41,7 +42,9 @@ class RestaurantImporter
 
   def update_restaurants
     restaurants.each do |restaurant|
-      update_restaurant(restaurant)
+      unless update_restaurant(restaurant)
+        @report[:faulty_updates] << restaurant.spid
+      end
     end
   end
 
