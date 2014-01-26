@@ -37,6 +37,9 @@ group :development do
 end
 
 group :development, :test do
+  # App preloading
+  gem 'spring'
+  gem 'spring-commands-rspec'
   # Pry stuff
   gem 'pry'
   gem 'pry-coolline'
