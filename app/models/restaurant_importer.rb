@@ -71,6 +71,7 @@ class RestaurantImporter
   def get_feature(spid)
     Feature.find_or_create_by(spid: spid) do |f|
       f.title = @doc.at_css("#rService#{spid}").parent['title']
+      @report[:new_features] << f
     end
   end
 end

@@ -80,6 +80,12 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
       expect(@importer.report).to include({ faulty_updates: ['HRH7AHUGJKNT32BL83UK5M47CA'] })
     end
 
+    it 'reports new features' do
+      allow(@importer).to receive(:restaurants).and_return([aga])
+      @importer.import
+      expect(@importer.report).to include({ new_features: r_aga.features })
+    end
+
     it 'returns report after import' do
       allow(@importer).to receive(:restaurants).and_return([aga, celica, feliks])
       expect(@importer.import).to include({ new: [r_aga, r_celica, r_feliks] })
