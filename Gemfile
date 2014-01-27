@@ -32,6 +32,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'bullet'
   gem 'quiet_assets'
+  gem 'sprockets_better_errors'
   gem 'letter_opener'
   #gem 'rack-mini-profiler'
 end

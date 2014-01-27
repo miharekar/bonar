@@ -214,6 +214,8 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    sprockets_better_errors (0.0.4)
+      sprockets-rails (>= 1.0.0)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
     terminal-notifier-guard (1.5.3)
@@ -279,6 +281,7 @@ DEPENDENCIES
   simplecov
   spring
   spring-commands-rspec
+  sprockets_better_errors
   terminal-notifier-guard
   uglifier
   unicorn

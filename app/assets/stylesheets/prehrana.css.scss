@@ -1,6 +1,4 @@
-// Place all the styles related to the prehrana controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+//= require add2home
 
 html, body, div, h1, h2, h3, h4, h5, h6, p, address, ul, ol, li {
   margin: 0;
@@ -56,8 +54,8 @@ html, body, #map, #filter, #main {
   background: linear-gradient(left, rgba(black, 0), rgba(black, 0.4));
 }
 
-.active-nav #filter {	
-	margin-left: 0;	
+.active-nav #filter {
+	margin-left: 0;
 	width: 70%;
 }
 
@@ -69,15 +67,15 @@ html, body, #map, #filter, #main {
 	left: 70%;
 }
 
-@media all and (min-width: 768px) {	
+@media all and (min-width: 768px) {
 	#filter {
-		width: 20%;	
+		width: 20%;
 		margin-left: 0;
 	}
 	#main {
 		width: 80%;
 		float: left;
-	}		
+	}
 }
 
 #filter li {
@@ -111,7 +109,7 @@ html, body, #map, #filter, #main {
     max-width: 260px;
     margin-bottom: 2px;
   }
-  
+
   h4 {
     font-weight: bold;
   }

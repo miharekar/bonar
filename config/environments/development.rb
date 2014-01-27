@@ -29,6 +29,9 @@ Bonar::Application.configure do
   # Temporarily enable caching in development (COMMENT OUT WHEN DONE!)
   # config.action_controller.perform_caching = true
 
+  # Catch sprockets noncompiled assets
+  config.assets.raise_production_errors = true
+
   BetterErrors.use_pry!
 
   config.after_initialize do
