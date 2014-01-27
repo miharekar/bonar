@@ -43,6 +43,16 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
     it 'doesnt import same restaurant twice' do
       expect(@importer.update_restaurant(@importer.restaurants.first)).to eq(updated)
     end
+
+    it 'doesnt overwrite coordinates' do
+      allow(@importer).to receive(:restaurants).and_return([aga])
+      @importer.import
+      Restaurant.find_by(spid: aga_spid).update(latitude: 46.1234, longitude: 15.1234)
+      @importer.import
+
+      expect(Restaurant.find_by(spid: aga_spid).latitude).to eq(46.1234)
+      expect(Restaurant.find_by(spid: aga_spid).longitude).to eq(15.1234)
+    end
   end
 
   context 'reporting' do

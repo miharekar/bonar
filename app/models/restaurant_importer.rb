@@ -18,14 +18,9 @@ class RestaurantImporter
   end
 
   def update_restaurant(ir)
-    get_restaurant(ir.spid).update(
-      spid: ir.spid,
-      name: ir.name,
-      address: ir.address,
+    get_restaurant(ir).update(
       price: ir.price,
       features_array: build_features_array(ir),
-      latitude: ir.latitude,
-      longitude: ir.longitude,
       telephones: ir.telephones,
       menu: ir.menu,
       opening: ir.opening,
@@ -36,9 +31,13 @@ class RestaurantImporter
   end
 
   private
-  def get_restaurant spid
-    Restaurant.find_or_create_by(spid: spid) do |r|
-      @report[:new] << spid
+  def get_restaurant ir
+    Restaurant.find_or_create_by(spid: ir.spid) do |r|
+      @report[:new] << ir.spid
+      r.name = ir.name
+      r.latitude = ir.latitude
+      r.longitude = ir.longitude
+      r.address = ir.address
     end
   end
 
