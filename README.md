@@ -44,66 +44,69 @@ Should you use it, you absolutely must cache the response, since the data only c
 ```json
 [
   {
-    "id": 1909,
-    "name": "Dijaški in študentski dom Koper",
-    "address": "Cankarjeva 5, Koper/Capodistria",
-    "telephones": [],
-    "price": "1,37 EUR",
-    "latitude": "45.54844801068044",
-    "longitude": "13.732124879080478",
+    "id": 12813,
+    "name": "Halo Shaolin - dostava",
+    "address": "Trg OF 13, Ljubljana",
+    "telephone": [
+      "040549068",
+      "0803808"
+    ],
+    "price": "4.0",
+    "coordinates": [
+      "46.0541149271136",
+      "14.557732745077"
+    ],
     "opening": {
-      "Week": [
-        "12:00",
-        "16:00"
+      "week": [
+        "10:00",
+        "20:00"
       ],
-      "Saturday": false,
-      "Sunday": false,
-      "Notes": "Ob petkih je lokal odprt od 12.00 do 15.00 ure."
+      "saturday": [
+        "11:00",
+        "20:00"
+      ],
+      "sunday": [
+        "11:00",
+        "20:00"
+      ],
+      "notes": "27.12. od 08.00 do 18.0030.12. od 08.00 do 20.0031.12. od 08.00 do 15.00"
     },
     "menu": [
       [
-        "kostna juha",
-        "Puranja pečenka,kroketi,zelenjava",
-        "solatni bar 8 - solat",
-        "sladica,sok"
+        "kislo pekoča juha",
+        "govedina zelenjavo",
+        "mešana",
+        "ocvrta banana"
       ],
       [
         "zelenjavna juha",
-        "zelenjavna rulada,kroketi,zelenjava",
-        "solatni bar 8 - solat",
-        "sladica,sok"
+        "mongolska govedina",
+        "mešana",
+        "Ocvrti ananas"
       ],
       [
-        "kostna juha",
-        "hrenovka,tenstan krompir,zelenjava",
-        "solatni bar 8 - solat",
-        "sladica,sok"
-      ],
-      [
-        "kostna juha",
-        "pariški zrezek,tenstan krompir,zelenjava",
-        "solatni bar 8 - solat",
-        "sladica,sok"
-      ],
-      [
-        "kostna juha",
-        "ješprenova mineštra s klobaso",
-        "solatni bar 8 - solat",
-        "sladica,sok"
+        "koruzna z rakci",
+        "riž s piščancem",
+        "mešana",
+        "ocvrta banana"
       ]
     ],
     "features": [
       {
-        "id": 10,
+        "id": 2,
+        "title": "celiakiji prijazni obroki"
+      },
+      {
+        "id": 5,
+        "title": "dostava"
+      },
+      {
+        "id": 11,
         "title": "kosila"
       },
       {
-        "id": 7,
-        "title": "solatni bar"
-      },
-      {
-        "id": 8,
-        "title": "dostop za invalide (WC)"
+        "id": 10,
+        "title": "odprto ob vikendih"
       },
       {
         "id": 1,
@@ -112,48 +115,43 @@ Should you use it, you absolutely must cache the response, since the data only c
     ]
   },
   {
-    "id": 1924,
-    "name": " ",
-    "address": "Cesta maršala Tita 27, Jesenice",
-    "telephones": [
-      "051222152",
-      "040750111"
+    "id": 12814,
+    "name": "Hiša pod gradom",
+    "address": "Streliška 10, Ljubljana",
+    "telephone": [],
+    "price": "3.27",
+    "coordinates": [
+      "46.0493199622809",
+      "14.5113411755481"
     ],
-    "price": "4,37 EUR",
-    "latitude": "46.43674871370644",
-    "longitude": "14.05316910554446",
     "opening": {
-      "Week": [
-        "09:00",
+      "week": [
+        "11:00",
         "20:00"
       ],
-      "Saturday": [
-        "09:00",
+      "saturday": [
+        "12:00",
         "20:00"
       ],
-      "Sunday": false
+      "sunday": false
     },
     "menu": [],
     "features": [
       {
         "id": 2,
-        "title": "Celiakiji prijazni obroki"
+        "title": "celiakiji prijazni obroki"
       },
       {
-        "id": 10,
+        "id": 11,
         "title": "kosila"
       },
       {
-        "id": 1,
-        "title": "Vegetarijanska prehrana"
-      },
-      {
-        "id": 9,
+        "id": 10,
         "title": "odprto ob vikendih"
       },
       {
-        "id": 3,
-        "title": "Stalen arhitektonsko prilagojen dostop za invalide in dostop do mize v notranjosti lokala"
+        "id": 1,
+        "title": "vegetarijanska prehrana"
       }
     ]
   },…
