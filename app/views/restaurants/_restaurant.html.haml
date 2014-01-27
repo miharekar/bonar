@@ -8,19 +8,19 @@
       Tel.: #{restaurant.telephones.map {|str| "<a href=\"tel:#{str}\">#{str}</a>"}.join(', ').html_safe}
   %ul
     %li
-      Delavnik: #{restaurant.opening['Week'][0]} - #{restaurant.opening['Week'][1]}
-    - if restaurant.opening['Saturday']
+      Delavnik: #{restaurant.opening[:week][0]} - #{restaurant.opening[:week][1]}
+    - if restaurant.opening[:saturday]
       %li
-        Sobota: #{restaurant.opening['Saturday'][0]} - #{restaurant.opening['Saturday'][1]}
+        Sobota: #{restaurant.opening[:saturday][0]} - #{restaurant.opening[:saturday][1]}
     - else
       %li Sobota: zaprto
-    - if restaurant.opening['Sunday']
+    - if restaurant.opening[:sunday]
       %li
-        Nedelja: #{restaurant.opening['Sunday'][0]} - #{restaurant.opening['Sunday'][1]}
+        Nedelja: #{restaurant.opening[:sunday][0]} - #{restaurant.opening[:sunday][1]}
     - else
       %li Nedelja: zaprto
-    - if restaurant.opening['Notes']
+    - if restaurant.opening[:notes]
       %li
-        Opombe: #{restaurant.opening['Notes']}
+        Opombe: #{restaurant.opening[:notes]}
   %p
     Storitve: #{restaurant.features.map(&:title).join(', ')}
