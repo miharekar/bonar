@@ -18,6 +18,6 @@ class Updates < ActionMailer::Base
     @new_features = report[:new_features] || []
     @new_features = @new_features.map{ |spid| Feature.find_by(spid: spid) }
 
-    mail to: 'Miha Rekar<info@mr.si>', subject: 'Bonar restaurants updated'
+    mail to: 'Miha Rekar<info@mr.si>', subject: 'Bonar restaurants update report'
   end
 end

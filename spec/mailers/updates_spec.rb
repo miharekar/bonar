@@ -6,7 +6,7 @@ describe Updates do
       let(:mail) { Updates.restaurant({}) }
 
       it 'renders the subject' do
-        expect(mail.subject).to eq('Bonar restaurants updated')
+        expect(mail.subject).to eq('Bonar restaurants update report')
       end
 
       it 'Miha is the receiver' do
