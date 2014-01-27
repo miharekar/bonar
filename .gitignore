@@ -15,6 +15,10 @@
 /log/*.log
 /tmp
 
+# Ignore metrics
+/sandi_meter
+/coverage
+
 #OS stuff
 *.swp
 *~

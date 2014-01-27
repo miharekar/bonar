@@ -4,9 +4,17 @@ class RestaurantSerializer < ActiveModel::Serializer
 
   def filter(keys)
     if @scope == :basic
-      keys = [:id, :coordinates, :price]
+      keys = [:id, :latitude, :longitude, :price]
     else
       keys
     end
+  end
+
+  def telephone
+    object.telephones
+  end
+
+  def coordinates
+    [object.latitude, object.longitude]
   end
 end
