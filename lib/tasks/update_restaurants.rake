@@ -1,5 +1,6 @@
 task update_restaurants: :environment do
   ri = RestaurantImporter.new
   ri.import
-  Updates.restaurant(ri.report).deliver
+  mail = Updates.restaurant(ri.report)
+  mail.deliver if mail.body.parts.present?
 end
