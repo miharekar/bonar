@@ -3,7 +3,7 @@ class ListController < ApplicationController
   end
 
   def nearest
-    @restaurants = Restaurant.near([params[:lat], params[:lng]], 20).limit(15)
+    @restaurants = Restaurant.active.near([params[:lat], params[:lng]], 20).limit(15)
     render layout: false
   end
 end
