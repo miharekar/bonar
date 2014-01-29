@@ -25,8 +25,8 @@ describe ImportedRestaurant, vcr: { record: :new_episodes } do
   end
 
   it 'parses price' do
-    expect(aperitivo.price).to eq(1.87)
-    expect(celica.price).to eq(3.15)
+    expect(aperitivo.price).to eq('1,87 EUR')
+    expect(celica.price).to eq('3,15 EUR')
   end
 
   it 'parses Studentska Prehrana Features - spfeatures' do

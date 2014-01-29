@@ -27,7 +27,7 @@ class ImportedRestaurant
   end
 
   def price
-    @restaurant_li.at_css('.prices strong').content.gsub(',', '.').to_f
+    @restaurant_li.at_css('.prices strong').content
   end
 
   def spfeatures
