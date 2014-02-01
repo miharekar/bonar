@@ -1,5 +1,6 @@
 <% if @faulty.present? %>
 ## Faulty updates
+
   <% @faulty.each do |spid| %>
   - <%= spid %>
   <% end %>
@@ -7,13 +8,15 @@
 
 <% if @new.present? %>
 ## New restaurants
+
   <% @new.each do |r| %>
-  - <%= r.inspect %> - <%= r.spid %>
+  - <%= r.name %> - <%= r.spid %> [<%= r.latitude %>, <%= r.longitude %>]
   <% end %>
 <% end %>
 
 <% if @disabled.present? %>
 ## Disabled restaurants
+
   <% @disabled.each do |r| %>
   - <%= r.name %> - <%= r.spid %>
   <% end %>
@@ -21,6 +24,7 @@
 
 <% if @new_features.present? %>
 ## New features
+
   <% @new_features.each do |f| %>
   - <%= f.title %> - <%= f.spid %>
   <% end %>

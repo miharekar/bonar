@@ -57,6 +57,8 @@ describe Updates do
         expect(content).to include('New restaurants')
         expect(content).to include('Aga')
         expect(content).to include('8T8W26CAVLRWKC6TPZ7CDL5RHS')
+        expect(content).to include('46.0519113217271')
+        expect(content).to include('14.5050508208164')
       end
 
       it 'includes disabled restaurants in body' do
