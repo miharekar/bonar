@@ -1,6 +1,5 @@
 class PrehranaController < ApplicationController
   def index
-    redirect_to list_path, notice: 'iOS 7 (še) ne podpira Bonar zemljevida' if is_ios_7?
     @features = Feature.order(:title)
   end
 
@@ -20,11 +19,5 @@ class PrehranaController < ApplicationController
   def search
     restaurants = Restaurant.with_features(params[:features]).with_text(params[:search]).pluck(:id)
     render json: restaurants, root: false
-  end
-
-  private
-  def is_ios_7?
-    user_agent = UserAgent.parse(request.user_agent)
-    user_agent.platform == 'iPhone' and user_agent.version.to_s.to_i == 7
   end
 end

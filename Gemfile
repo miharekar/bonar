@@ -25,6 +25,9 @@ gem 'active_model_serializers', '~> 0.9.0.alpha1'
 group :production do
   gem 'unicorn'
   gem 'rails_12factor'
+  # caching
+  gem 'memcachier'
+  gem 'dalli'
 end
 
 group :development do

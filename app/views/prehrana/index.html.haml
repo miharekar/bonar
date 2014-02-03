@@ -1,0 +1,17 @@
+#filter.filter
+  %ul
+    %li
+      = check_box_tag('adapt-bounds', 1, true)
+      = label_tag('adapt-bounds', 'Prilagajaj zemljevid iskanju')
+    %li
+      %input#restaurant-search{autocapitalize: "off", autocorrect: "off", incremental: "incremental", placeholder: "Išči", type: "search"}
+    %li
+      = check_box_tag('all-switch', 1, true, disabled: true)
+      = label_tag('all-switch', 'vse')
+    - @features.each do |feature|
+      %li
+        = check_box_tag(feature.html_title, 1, false, data: { feature_id: feature.id }, class: 'feature-filter')
+        = label_tag(feature.html_title, feature.title)
+  #filter-shadow
+#main
+  #map

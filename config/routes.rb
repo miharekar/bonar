@@ -9,8 +9,6 @@ Bonar::Application.routes.draw do
   get 'menu' => 'prehrana#menu'
   get 'content' => 'prehrana#content'
   get 'api/restaurants'
-  get 'list' => 'list#index'
-  get 'list/nearest'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -20,7 +18,6 @@ Bonar::Application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resources :api
 
   # Example resource route with options:
   #   resources :products do
