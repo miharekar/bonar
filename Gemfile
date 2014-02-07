@@ -22,6 +22,25 @@ gem 'jquery-rails'
 # JSON serialization
 gem 'active_model_serializers', '~> 0.9.0.alpha1'
 
+# Newrelic /newrelic
+gem 'newrelic_rpm'
+
+# HAML
+gem 'haml'
+gem 'haml-rails'
+
+# ENV var management
+gem 'figaro'
+
+# XML parser
+gem 'nokogiri'
+
+# geo sort
+gem 'geocoder'
+
+# markdown emails
+gem 'maildown'
+
 group :production do
   gem 'unicorn'
   gem 'rails_12factor'
@@ -66,28 +85,3 @@ group :development, :test do
   gem 'awesome_print'
   gem 'hirb'
 end
-
-# Newrelic /newrelic
-gem 'newrelic_rpm'
-
-# HAML
-gem 'haml'
-gem 'haml-rails'
-
-# ENV var management
-gem 'figaro'
-
-# XML parser
-gem 'nokogiri'
-
-# REST API
-gem 'rest-client'
-
-# UserAgent parser
-gem 'useragent'
-
-# geo sort
-gem 'geocoder'
-
-# markdown emails
-gem 'maildown'
