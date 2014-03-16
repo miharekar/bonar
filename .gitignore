@@ -19,7 +19,7 @@
 /sandi_meter
 /coverage
 
-#OS stuff
+# OS stuff
 *.swp
 *~
 .DS_Store
