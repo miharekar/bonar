@@ -22,9 +22,6 @@ gem 'jquery-rails'
 # JSON serialization
 gem 'active_model_serializers', '~> 0.9.0.alpha1'
 
-# Newrelic /newrelic
-gem 'newrelic_rpm'
-
 # HAML
 gem 'haml'
 gem 'haml-rails'
@@ -49,6 +46,11 @@ group :production do
   gem 'dalli'
 end
 
+group :production, :development do
+  # Newrelic /newrelic
+  gem 'newrelic_rpm'
+end
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -56,16 +58,6 @@ group :development do
   gem 'quiet_assets'
   gem 'letter_opener'
   #gem 'rack-mini-profiler'
-end
-
-group :test do
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
-  gem 'guard-rspec'
-  gem 'terminal-notifier-guard'
-  # web mocking
-  gem 'webmock'
-  gem 'vcr'
 end
 
 group :development, :test do
@@ -80,4 +72,14 @@ group :development, :test do
   gem 'pry-rails'
   gem 'awesome_print'
   gem 'hirb'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'guard-rspec'
+  gem 'terminal-notifier-guard'
+  # web mocking
+  gem 'webmock'
+  gem 'vcr'
 end
