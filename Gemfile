@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 
-ruby '2.1.1'
+ruby '2.1.2'
 
-gem 'rails', '~> 4.0.4'
+gem 'rails', '~> 4.1.2'
 
 # Use postgres as the database for Active Record
 gem 'pg'
 
 # Use SCSS for stylesheets
-gem 'sass-rails'
+gem 'sass-rails', '~> 4.0.3'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
@@ -30,7 +30,7 @@ gem 'haml'
 gem 'haml-rails'
 
 # ENV var management
-gem 'figaro'
+gem 'figaro', '~> 1.0.0.rc1'
 
 # XML parser
 gem 'nokogiri'
@@ -54,7 +54,6 @@ group :development do
   gem 'binding_of_caller'
   gem 'bullet'
   gem 'quiet_assets'
-  gem 'sprockets_better_errors'
   gem 'letter_opener'
   #gem 'rack-mini-profiler'
 end
@@ -67,9 +66,6 @@ group :test do
   # web mocking
   gem 'webmock'
   gem 'vcr'
-  # code coverage
-  gem 'simplecov'
-  gem 'coveralls'
 end
 
 group :development, :test do
