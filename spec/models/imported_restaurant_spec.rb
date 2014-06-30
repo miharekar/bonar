@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe ImportedRestaurant, vcr: { record: :new_episodes } do
   let(:aperitivo) { build(:imported_restaurant, name: :aperitivo) }
@@ -61,17 +61,17 @@ describe ImportedRestaurant, vcr: { record: :new_episodes } do
   it 'gets opening times' do
     expect(aperitivo.opening[:week]).to match_array(['08:00', '20:00'])
     expect(aperitivo.opening[:saturday]).to match_array(['08:00', '14:00'])
-    expect(aperitivo.opening[:sunday]).to be_false
+    expect(aperitivo.opening[:sunday]).to be_falsey
 
     expect(celica.opening[:week]).to match_array(['11:00', '16:00'])
-    expect(celica.opening[:saturday]).to be_false
-    expect(celica.opening[:sunday]).to be_false
+    expect(celica.opening[:saturday]).to be_falsey
+    expect(celica.opening[:sunday]).to be_falsey
 
     expect(klementina.opening[:week]).to match_array(['12:00', '20:00'])
     expect(klementina.opening[:saturday]).to match_array(['12:00', '20:00'])
     expect(klementina.opening[:sunday]).to match_array(['12:00', '20:00'])
     expect(klementina.opening[:notes]).to eq('Ponedeljek in torek ZAPRTO')
 
-    expect(damajanty.opening[:saturday]).to be_false
+    expect(damajanty.opening[:saturday]).to be_falsey
   end
 end

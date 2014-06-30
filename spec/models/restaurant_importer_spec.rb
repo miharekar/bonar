@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe RestaurantImporter, vcr: { record: :new_episodes } do
   before(:all) do
@@ -37,7 +37,7 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
     let(:updated) { @importer.update_restaurant(@importer.restaurants.first) }
 
     it 'updates Restaurant' do
-      expect(updated).to be_true
+      expect(updated).to be_truthy
     end
 
     it 'doesnt import same restaurant twice' do
