@@ -7,9 +7,10 @@ require 'rspec/rails'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
-# Checks for pending migrations before tests are run.
-# If you are not using ActiveRecord, you can remove this line.
-ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
+# Automigrate if needs migration
+if ActiveRecord::Migrator.needs_migration?
+  ActiveRecord::Migrator.migrate(ActiveRecord::Migrator.migrations_paths.first, nil)
+end
 
 # Disable any external requests
 WebMock.disable_net_connect!(allow_localhost: true)
