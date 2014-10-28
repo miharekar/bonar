@@ -1,4 +1,4 @@
-Bonar::Application.configure do
+Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -25,6 +25,11 @@ Bonar::Application.configure do
 
   # Debug mode disables concatenation and preprocessing of assets.
   config.assets.debug = true
+
+  # Adds additional error checking when serving assets at runtime.
+  # Checks for improperly declared sprockets dependencies.
+  # Raises helpful error messages.
+  config.assets.raise_runtime_errors = true
 
   # Temporarily enable caching in development (COMMENT OUT WHEN DONE!)
   # config.action_controller.perform_caching = true

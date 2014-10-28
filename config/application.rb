@@ -2,8 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-# Assets should be precompiled for production (so we don't need the gems loaded then)
-Bundler.require(*Rails.groups(assets: %w(development test)))
+Bundler.require(*Rails.groups)
 
 module Bonar
   class Application < Rails::Application
