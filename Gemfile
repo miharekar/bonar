@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.1.3'
 
-gem 'rails', '~> 4.1.2'
+gem 'rails', '~> 4.1.6'
 
 # Use postgres as the database for Active Record
 gem 'pg'
@@ -20,14 +20,14 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 
 # JSON serialization
-gem 'active_model_serializers', '~> 0.9.0.alpha1'
+gem 'active_model_serializers'
 
 # HAML
 gem 'haml'
 gem 'haml-rails'
 
 # ENV var management
-gem 'figaro', '~> 1.0.0.rc1'
+gem 'figaro'
 
 # XML parser
 gem 'nokogiri'
