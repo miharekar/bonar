@@ -31,7 +31,7 @@ Ko sem začenjal z izdelavo, sem se ravno začenjal učiti [Ruby on Rails](http:
 
 ##Unofficial API
 
-The API is in **no way** associated with official website [Študentska prehrana](http://www.studentska-prehrana.si/). It is simply one more thing I'm giving back to community as a part of [Open data.si project](http://opendata.si/).
+The API is in **no way** associated with official website [Študentska prehrana](https://www.studentska-prehrana.si/). It is simply one more thing I'm giving back to community as a part of [Open data.si project](http://opendata.si/).
 
 I scrape the data from the official site every day at 05:00 GMT. The updating process takes roughly 10 minutes.
 

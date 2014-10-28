@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://www.studentska-prehrana.si/Pages/Directory.aspx
+    uri: https://www.studentska-prehrana.si/Pages/Directory.aspx
     body:
       encoding: US-ASCII
       string: ''

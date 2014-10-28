@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://www.studentska-prehrana.si/Pages/RestaurantInfo.aspx?e_restaurant=CRK3PKZVD5HW2N2TPB8JZUE7RA&feature=0
+    uri: https://www.studentska-prehrana.si/Pages/RestaurantInfo.aspx?e_restaurant=CRK3PKZVD5HW2N2TPB8JZUE7RA&feature=0
     body:
       encoding: US-ASCII
       string: ''
@@ -347,7 +347,7 @@ http_interactions:
   recorded_at: Sun, 26 Jan 2014 17:35:37 GMT
 - request:
     method: get
-    uri: http://www.studentska-prehrana.si/Pages/RestaurantInfo.aspx?e_restaurant=D5HE9HE54UGNKDTALN9C8PQ722&feature=0
+    uri: https://www.studentska-prehrana.si/Pages/RestaurantInfo.aspx?e_restaurant=D5HE9HE54UGNKDTALN9C8PQ722&feature=0
     body:
       encoding: US-ASCII
       string: ''
@@ -682,7 +682,7 @@ http_interactions:
   recorded_at: Sun, 26 Jan 2014 17:35:37 GMT
 - request:
     method: get
-    uri: http://www.studentska-prehrana.si/Pages/RestaurantInfo.aspx?e_restaurant=8T8W26CAVLRWKC6TPZ7CDL5RHS&feature=0
+    uri: https://www.studentska-prehrana.si/Pages/RestaurantInfo.aspx?e_restaurant=8T8W26CAVLRWKC6TPZ7CDL5RHS&feature=0
     body:
       encoding: US-ASCII
       string: ''
@@ -1010,7 +1010,7 @@ http_interactions:
   recorded_at: Sun, 26 Jan 2014 17:35:38 GMT
 - request:
     method: get
-    uri: http://www.studentska-prehrana.si/Pages/RestaurantInfo.aspx?e_restaurant=SCPQ5CPX7CRRXX8G8AZVGB5VEA&feature=0
+    uri: https://www.studentska-prehrana.si/Pages/RestaurantInfo.aspx?e_restaurant=SCPQ5CPX7CRRXX8G8AZVGB5VEA&feature=0
     body:
       encoding: US-ASCII
       string: ''
@@ -1339,7 +1339,7 @@ http_interactions:
   recorded_at: Sun, 26 Jan 2014 17:35:39 GMT
 - request:
     method: get
-    uri: http://www.studentska-prehrana.si/Pages/RestaurantInfo.aspx?e_restaurant=JHY8ZLXM4RNBEVEPYQDV98CF33&feature=0
+    uri: https://www.studentska-prehrana.si/Pages/RestaurantInfo.aspx?e_restaurant=JHY8ZLXM4RNBEVEPYQDV98CF33&feature=0
     body:
       encoding: US-ASCII
       string: ''

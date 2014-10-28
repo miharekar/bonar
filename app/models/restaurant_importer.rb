@@ -1,5 +1,5 @@
 class RestaurantImporter
-  DIRECTORY_URL = 'http://www.studentska-prehrana.si/Pages/Directory.aspx'
+  DIRECTORY_URL = 'https://www.studentska-prehrana.si/Pages/Directory.aspx'
   attr_reader :report
 
   def initialize

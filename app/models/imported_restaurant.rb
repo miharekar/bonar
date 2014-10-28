@@ -1,5 +1,5 @@
 class ImportedRestaurant
-  RESTAURANT_URL = 'http://www.studentska-prehrana.si/Pages/RestaurantInfo.aspx?e_restaurant=%s&feature=%d'
+  RESTAURANT_URL = 'https://www.studentska-prehrana.si/Pages/RestaurantInfo.aspx?e_restaurant=%s&feature=%d'
 
   def initialize(restaurant_li)
     @restaurant_li = restaurant_li
