@@ -42,6 +42,7 @@ Rails.application.configure do
   config.assets.raise_production_errors = true
 
   BetterErrors.use_pry!
+  BetterErrors.editor = 'atm://open?url=file://%{file}&line=%{line}'
 
   config.after_initialize do
     Bullet.enable = true
