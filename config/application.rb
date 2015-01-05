@@ -18,7 +18,7 @@ module Bonar
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # Precompile additional assets.
-    # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
