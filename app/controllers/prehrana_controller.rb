@@ -5,7 +5,7 @@ class PrehranaController < ApplicationController
 
   def all_restaurants
     if stale?(Restaurant.active.first)
-      render json: ActiveModel::ArraySerializer.new(Restaurant.active, each_serializer: RestaurantSerializer, scope: :basic)
+      render json: Restaurant.active, scope: :basic, root: false
     end
   end
 
@@ -17,7 +17,7 @@ class PrehranaController < ApplicationController
   alias_method :content, :load_restaurant
 
   def search
-    restaurants = Restaurant.with_features(params[:features]).with_text(params[:search]).pluck(:id)
-    render json: restaurants
+    ids = Restaurant.with_features(params[:features]).with_text(params[:search]).pluck(:id)
+    render json: ids, root: false
   end
 end
