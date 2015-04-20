@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.2.0'
+ruby '2.2.2'
 
-gem 'rails', '~> 4.2.0'
+gem 'rails', '~> 4.2.1'
 
 # Use postgres as the database for Active Record
 gem 'pg'
@@ -57,7 +57,7 @@ group :development do
   gem 'bullet'
   gem 'quiet_assets'
   gem 'letter_opener'
-  #gem 'rack-mini-profiler'
+  # gem 'rack-mini-profiler'
 end
 
 group :development, :test do
