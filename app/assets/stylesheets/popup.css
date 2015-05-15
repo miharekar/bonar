@@ -1,0 +1,27 @@
+#popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#popup .inner {
+  position: absolute;
+  display: block;
+  padding: 48px;
+  line-height: 1.8;
+  width: 70%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.2);
+  background: white;
+  color: #34495E;
+}
+
+#popup .inner h2 { margin-top: 0; }
+
+#popup .inner code { font-weight: bold; }

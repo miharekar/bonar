@@ -194,3 +194,6 @@ $ ->
     isMobile = $(window).width() < 768
     showFeatureToggle()
     fitMarkers()
+
+  $('#popup').on 'click', ->
+    $('#popup').fadeOut()

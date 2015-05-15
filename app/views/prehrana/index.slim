@@ -12,6 +12,8 @@
       li
         = check_box_tag(feature.html_title, 1, false, data: { feature_id: feature.id }, class: 'feature-filter')
         = label_tag(feature.html_title, feature.title)
+
   #filter-shadow
 #main
   #map
+= render partial: 'popup'
