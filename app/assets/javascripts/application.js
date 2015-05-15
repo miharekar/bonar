@@ -13,4 +13,3 @@
 //= require jquery_ujs
 //= require prefixfree
 //= require prehrana
-//= require add2home
