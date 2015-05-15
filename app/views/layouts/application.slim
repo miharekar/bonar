@@ -1,0 +1,38 @@
+doctype html
+html lang='en'
+  head
+    title Bonar
+    meta charset='utf-8'
+    = csrf_meta_tags
+    meta content='initial-scale = 1.0, maximum-scale = 1.0' name='viewport'
+    meta content='Bonar' name='apple-mobile-web-app-title'
+    meta content='yes' name='apple-mobile-web-app-capable'
+    meta content='Ponudniki študentske prehrane na zemljevidu' name='description'
+    meta content='študentska prehrana, študentski boni, boni, bonar, prehrana, zemljevid, mapa, karta' name='keywords'
+    meta content='Miha Rekar' name='author'
+    meta content='Bonar' property='og:title'
+    meta content='Ponudniki študentske prehrane na zemljevidu' property='og:description'
+    meta content=image_path('icons/sb144.png') property='og:image'
+    link href='humans.txt' rel='author'
+    link href=image_path('icons/sb144.png') rel='apple-touch-icon-precomposed' sizes='144x144'
+    link href=image_path('icons/sb114.png') rel='apple-touch-icon-precomposed' sizes='114x114'
+    link href=image_path('icons/sb72.png') rel='apple-touch-icon-precomposed' sizes='72x72'
+    link href=image_path('icons/sb57.png') rel='apple-touch-icon-precomposed'
+    link href=image_path('icons/sb57.png') rel='shortcut icon'
+    link href=image_path('icons/favicon.ico') rel='shortcut icon'
+    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Roboto:400,300,500,700&subset=latin,latin-ext', rel: 'stylesheet prefetch', type: 'text/css'
+    = javascript_include_tag 'http://code.jquery.com/jquery-2.1.1.min.js'
+    = javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDu3RRrPsEbRwnt5GG2Q8mjX2nQvCo9L7g&sensor=true'
+    = javascript_include_tag 'application'
+  body
+    = yield
+    javascript:
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-356422-20']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();

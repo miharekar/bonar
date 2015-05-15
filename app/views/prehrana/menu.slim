@@ -1,4 +1,4 @@
 - cache @restaurant do
-  %ol.menu
+  ol.menu
     - @restaurant.menu.each do |menu_item|
-      %li= menu_item.join(', ')
+      li= menu_item.join(', ')

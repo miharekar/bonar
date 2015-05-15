@@ -22,9 +22,8 @@ gem 'jquery-rails'
 # JSON serialization
 gem 'active_model_serializers'
 
-# HAML
-gem 'haml'
-gem 'haml-rails'
+# Slim
+gem 'slim-rails'
 
 # ENV var management
 gem 'figaro'
@@ -47,7 +46,6 @@ group :production do
 end
 
 group :production, :development do
-  # Newrelic /newrelic
   gem 'newrelic_rpm'
 end
 
@@ -57,7 +55,7 @@ group :development do
   gem 'bullet'
   gem 'quiet_assets'
   gem 'letter_opener'
-  # gem 'rack-mini-profiler'
+  gem 'rack-mini-profiler'
 end
 
 group :development, :test do
@@ -80,7 +78,6 @@ group :test do
   gem 'factory_girl_rails'
   gem 'guard-rspec'
   gem 'terminal-notifier-guard'
-  # web mocking
   gem 'webmock'
   gem 'vcr'
 end
