@@ -35,6 +35,7 @@ class RestaurantImporter
         new_address: ir.address
       }
     end
+    restaurant
   rescue => e
     @report[:faulty] << { spid: ir.spid, error: e.message }
   end

@@ -6,6 +6,7 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
   end
 
   let(:aga) { build(:imported_restaurant, name: :aga) }
+  let(:aga_new_address) { build(:imported_restaurant, name: :aga_new_address) }
   let(:celica) { build(:imported_restaurant, name: :celica) }
   let(:feliks) { build(:imported_restaurant, name: :feliks) }
   let(:slovenj_gradec) { build(:imported_restaurant, name: :slovenj_gradec) }
@@ -76,17 +77,22 @@ describe RestaurantImporter, vcr: { record: :new_episodes } do
       expect(@importer.report).to include({ disabled: [feliks_spid] })
     end
 
-    it 'reports faulty update' do
+    it 'reports changed address' do
       allow(@importer).to receive(:restaurants).and_return([aga])
-      allow(@importer).to receive(:update_restaurant).and_return(false)
       @importer.import
-      expect(@importer.report).to include({ faulty: ['8T8W26CAVLRWKC6TPZ7CDL5RHS'] })
+      allow(@importer).to receive(:restaurants).and_return([aga_new_address])
+      @importer.import
+      expect(@importer.report).to include({ faulty: [{
+        spid: "8T8W26CAVLRWKC6TPZ7CDL5RHS",
+        old_address: "Čopova ulica 12, Ljubljana",
+        new_address: "Špikova ulica 12, Ljubljana"}
+      ]})
     end
 
     it 'reports errors as faulty updates' do
       allow(@importer).to receive(:restaurants).and_return([slovenj_gradec])
       @importer.import
-      expect(@importer.report).to include({ faulty: ['HRH7AHUGJKNT32BL83UK5M47CA'] })
+      expect(@importer.report).to include({ faulty: [{spid:'HRH7AHUGJKNT32BL83UK5M47CA', error: "undefined method `content' for nil:NilClass"}] })
     end
 
     it 'reports new features' do
