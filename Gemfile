@@ -38,7 +38,7 @@ gem 'geocoder'
 gem 'maildown'
 
 group :production do
-  gem 'unicorn'
+  gem 'puma'
   gem 'rails_12factor'
   # caching
   gem 'memcachier'
