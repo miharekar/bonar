@@ -1,8 +1,8 @@
 <% if @faulty.present? %>
 ## Faulty updates
 
-  <% @faulty.each do |spid| %>
-  - <%= spid %>
+  <% @faulty.each do |f| %>
+  - `<%= f.inspect.html_safe %>`
   <% end %>
 <% end %>
 

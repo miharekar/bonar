@@ -12,13 +12,15 @@ class RestaurantImporter
 
   def import
     @report = Hash.new{ |h,k| h[k] = [] }
-    update_restaurants
+    restaurants.each { |r| update_restaurant(r) }
     disable_nonpresent_restaurants
     @report
   end
 
   def update_restaurant(ir)
-    get_restaurant(ir).update(
+    restaurant = get_restaurant(ir)
+    restaurant.update!(
+      name: ir.name,
       price: ir.price,
       features_array: build_features_array(ir),
       telephones: ir.telephones,
@@ -26,26 +28,24 @@ class RestaurantImporter
       opening: ir.opening,
       disabled: false
     )
-  rescue
-    @report[:faulty] << ir.spid
+    if restaurant.address != ir.address
+      @report[:faulty] << {
+        spid: ir.spid,
+        old_address: restaurant.address,
+        new_address: ir.address
+      }
+    end
+  rescue => e
+    @report[:faulty] << { spid: ir.spid, error: e.message }
   end
 
   private
   def get_restaurant ir
     Restaurant.find_or_create_by(spid: ir.spid) do |r|
       @report[:new] << ir.spid
-      r.name = ir.name
+      r.address = ir.address
       r.latitude = ir.latitude
       r.longitude = ir.longitude
-      r.address = ir.address
-    end
-  end
-
-  def update_restaurants
-    restaurants.each do |restaurant|
-      unless update_restaurant(restaurant)
-        @report[:faulty] << restaurant.spid
-      end
     end
   end
 
