@@ -68,6 +68,8 @@ $ ->
   showGeoMarker = ->
     geoMarker = new GeolocationMarker map.map
     geoMarker.setMinimumAccuracy 100
+    google.maps.event.addListener geoMarker, 'geolocation_error', ->
+      alert 'Za optimalno delovanje Bonarja je potrebna geolokacija' if isMobile
     google.maps.event.addListenerOnce geoMarker, 'position_changed', ->
       addControlToMap('geo-marker', 'top_right', 'Kje sem?')
       if isMobile
