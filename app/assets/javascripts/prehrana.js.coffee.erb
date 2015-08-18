@@ -19,7 +19,7 @@ $ ->
     {url: image, scaledSize: new google.maps.Size(18,31)}
 
   displayRestaurants = ->
-    if !restaurants?.length then return
+    return if !restaurants?.length
     map.removeMarkers()
     filteredRestaurants = if filteredIDs then restaurants.filter (restaurant) -> restaurant['id'] in filteredIDs else restaurants
     for restaurant in filteredRestaurants
@@ -31,7 +31,7 @@ $ ->
         shadow: {url: '<%= asset_path("markers/shadow.png") %>', origin: new google.maps.Point(9,34), scaledSize: new google.maps.Size(31,34)}
       oms.addMarker marker
     fitMarkers()
-    if filteredRestaurants.length == 1 then google.maps.event.trigger(marker, 'click')
+    google.maps.event.trigger(marker, 'click') if filteredRestaurants.length == 1
 
   fitMarkers = ->
     clearTimeout fitMarkersTimer
@@ -41,7 +41,7 @@ $ ->
         , 300)
 
   searchForRestaurants = ->
-    if request? then request.abort()
+    request.abort() if request?
     if search?.length or features?.length
       request = $.getJSON '/search',
         search: search
@@ -124,7 +124,7 @@ $ ->
     showFeatureToggle()
     $('body').addClass('transitions');
 
-  if navigator.geolocation then showGeoMarker()
+  showGeoMarker() if navigator.geolocation
 
   # Events
 
@@ -142,7 +142,7 @@ $ ->
   $('#map').on 'click', '#geo-marker', () ->
     $('#adapt-bounds').prop('checked', false)
     map.panTo geoMarker.getPosition()
-    if map.getZoom() < 16 then map.setZoom 16
+    map.setZoom 16 if map.getZoom() < 16
 
   $('#map').on 'click', '#feature-toggle', () ->
     if $('body').hasClass('active-nav')
@@ -160,13 +160,12 @@ $ ->
     captureLength: 0
 
   $('#filter li').on 'click', (event) ->
-    if event.target == this
-      $(this).find('input').click()
+    $(this).find('input').click() if event.target == this
 
   $('.feature-filter').on 'change', () ->
     features = []
     $('.feature-filter').each ->
-      if $(this).is(':checked') then features.push $(this).data('feature-id')
+      features.push $(this).data('feature-id') if $(this).is(':checked')
     if features.length
       $('#all-switch').prop('checked', false).prop('disabled', false)
     else
@@ -184,8 +183,7 @@ $ ->
 
   $('#adapt-bounds').on 'change', () ->
     $this = $(this)
-    if $this.is(':checked')
-      fitMarkers()
+    fitMarkers() if $this.is(':checked')
 
   $(document).scroll ->
     if $(document).scrollLeft() > 100 and $('body').hasClass('active-nav')
