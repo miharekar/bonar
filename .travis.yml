@@ -1,7 +1,7 @@
 language: ruby
 bundler_args: --without production
 rvm:
-  - 2.2.2
+  - 2.2.3
 env:
   - CODECLIMATE_REPO_TOKEN=88b364a005f81a361fb08420cdd386f6167a695683c8c212ff240d84b5bf5d51
 before_script:
